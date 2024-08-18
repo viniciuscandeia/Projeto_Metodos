@@ -1,11 +1,10 @@
+import uuid
 from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.prompt import Prompt
 from src.features.users.entities.administrador_entity import Administrador
 from src.features.users.usuario_controller import UsuarioController
-from typing import List
-import uuid
 
 
 class GerenciamentoAdministradores:
@@ -28,7 +27,8 @@ class GerenciamentoAdministradores:
             self.console.print(table)
 
             opcao = Prompt.ask(
-                "[bold yellow]Escolha uma opção[/bold yellow]", choices=["1", "2", "3"], show_choices=False)
+                "[bold yellow]Escolha uma opção[/bold yellow]",
+                choices=["1", "2", "3"], show_choices=False)
 
             match opcao:
                 case "1":
@@ -46,24 +46,25 @@ class GerenciamentoAdministradores:
     def adicionar_administrador(self):
         self.console.print(
             Panel("ADICIONAR Administrador", style="bold cyan", expand=False))
-       
+
         nome = Prompt.ask(
             "[bold yellow]Digite o nome do Administrador[/bold yellow]")
         email = Prompt.ask(
             "[bold yellow]Digite o email do Administrador[/bold yellow]")
-        
-        admId = str(uuid.uuid4().int >> 64)
 
-        novoAdministrador = Administrador(admId, nome, email)
-        self.controller.adcionar_administrador(novoAdministrador=novoAdministrador)
+        adm_id = str(uuid.uuid4().int >> 64)
+
+        novo_administrador = Administrador(adm_id, nome, email)
+        self.controller.adicionar_administrador(
+            novo_administrador=novo_administrador)
         self.console.print(
             "[bold green]Administrador adicionado com sucesso![/bold green]")
-    
 
     def listar_administradores(self):
         self.console.print(
             Panel("LISTA DE ADMINISTRADORES", style="bold cyan", expand=False))
-        administradores:List[Administrador] = self.controller.listar_administradores()
+        administradores: list[Administrador] = self.controller.listar_administradores(
+        )
 
         if administradores:
             table = Table(show_header=True, header_style="bold")

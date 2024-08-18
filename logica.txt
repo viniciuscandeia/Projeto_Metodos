@@ -1,0 +1,6 @@
+Tentando explicar o que está acontecendo.
+
+Para realizar alguma interação com a ENTIDADE usuário, é necessário usar o módulo dele (UsuarioModule).
+Esse módulo será responsável por controlar os serviços disponíveis para o usuário.
+
+A fronteira - no nosso caso será o terminal - usará o módulo para manipular os usuários.
