@@ -1,9 +1,14 @@
+"""
+Este módulo define a classe Administrador, que herda de Usuario e
+representa um administrador no sistema.
+"""
+
 from src.features.users.entities.usuario_entity import Usuario
 
+
 class Administrador(Usuario):
-    def __init__(self, id_adm, name, email):
-        super().__init__(id_adm, name, email)
+    """
+    Classe que representa um administrador no sistema.
 
-
-    def __str__(self):
-        return super().__str__()
+    Herda da classe Usuario.
+    """
