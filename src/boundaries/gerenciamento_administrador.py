@@ -3,8 +3,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 from rich.prompt import Prompt
-from src.features.users.entities.administrador_entity import Administrador
-from src.features.users.usuario_controller import UsuarioController
+from src.entities.administrador_entity import Administrador
+from src.business.usuario_controller import UsuarioController
 
 
 class GerenciamentoAdministradores:
