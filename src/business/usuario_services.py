@@ -3,7 +3,7 @@ Este módulo define a classe UsuarioService, que gerencia as listas de administr
 vendedores e gerentes, e fornece métodos para adicionar e listar administradores.
 """
 
-from src.features.users.entities.administrador_entity import Administrador
+from src.entities.administrador_entity import Administrador
 
 
 class UsuarioService:

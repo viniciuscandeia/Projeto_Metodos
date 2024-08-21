@@ -3,7 +3,7 @@ Este módulo define a classe Manager, que herda de Usuario e
 representa um gerente associado a uma loja.
 """
 
-from src.features.users.entities.usuario_entity import Usuario
+from src.entities.usuario_entity import Usuario
 
 
 class Manager(Usuario):
