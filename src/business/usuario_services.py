@@ -4,7 +4,8 @@ vendedores e gerentes, e fornece métodos para adicionar e listar administradore
 """
 
 from src.entities.administrador_entity import Administrador
-
+from src.entities.gerente_entity import Manager
+from src.entities.vendedor_entity import Vendedor
 
 class UsuarioService:
     """
@@ -39,3 +40,15 @@ class UsuarioService:
         :return: Lista de instâncias de Administrador.
         """
         return self.administradores
+    
+    def adicionar_gerente(self, novo_gerente: Manager):
+        self.gerentes.append(novo_gerente)
+
+    def listar_gerentes(self):
+        return self.gerentes
+    
+    def adicionar_vendedor(self, novo_vendedor: Vendedor):
+        self.vendedores.append(novo_vendedor)
+    
+    def listar_vendedores(self):
+        return self.vendedores
