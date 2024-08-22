@@ -47,10 +47,10 @@ class UsuarioController:
         self.service.adicionar_gerente(novo_gerente)
     
     def listar_gerentes(self):
-        self.service.listar_gerentes()
+        return self.service.listar_gerentes()
 
     def adicionar_vendedor(self, novo_vendedor: Vendedor):
         self.service.adicionar_vendedor(novo_vendedor)
 
     def listar_vendedores(self):
-        self.service.listar_vendedores()
+        return self.service.listar_vendedores()
