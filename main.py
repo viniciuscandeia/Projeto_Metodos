@@ -1,5 +1,5 @@
 
-# * main
+# * main.
 
 from src.features.users.user_controller import ControleUsuarios
 from src.features.users.user_services import InterfaceUsuarios
