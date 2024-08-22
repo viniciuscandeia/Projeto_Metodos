@@ -3,8 +3,9 @@ Este módulo define a classe UsuarioController, que gerencia as operações
 relacionadas a administradores, utilizando os serviços fornecidos por UsuarioService.
 """
 
-from src.features.users.entities.administrador_entity import Administrador
-from src.features.users.usuario_services import UsuarioService
+from src.business.usuario_services import UsuarioService
+from src.entities.administrador_entity import Administrador
+
 
 class UsuarioController:
     """

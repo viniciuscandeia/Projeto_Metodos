@@ -4,9 +4,9 @@ Este módulo define a classe UsuarioModule, que integra os componentes relaciona
 de administradores.
 """
 
-from src.features.users.usuario_controller import UsuarioController
-from src.features.users.usuario_services import UsuarioService
-from src.features.users.boundaries.gerenciamento_administrador import GerenciamentoAdministradores
+from src.boundaries.gerenciamento_administrador import GerenciamentoAdministradores
+from src.business.usuario_controller import UsuarioController
+from src.business.usuario_services import UsuarioService
 
 
 class UsuarioModule:
@@ -28,7 +28,8 @@ class UsuarioModule:
         self.__controle_usuarios = UsuarioController(
             service=self.__usuario_service)
         self.__gerenciamento_administradores = GerenciamentoAdministradores(
-            controller=self.__controle_usuarios)
+            controller=self.__controle_usuarios
+        )
 
     def mostrar_menu_gerenciamento_administradores(self):
         """

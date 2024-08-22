@@ -2,6 +2,7 @@
 Este módulo define a classe Usuario, que representa um usuário com ID, nome e email.
 """
 
+
 class Usuario:
     """
     Classe que representa um usuário do sistema.
@@ -25,4 +26,4 @@ class Usuario:
 
         :return: String formatada com ID, nome e email.
         """
-        return f'ID: {self.id_usuario}, Nome: {self.nome}, Email: {self.email}'
+        return f"ID: {self.id_usuario}, Nome: {self.nome}, Email: {self.email}"

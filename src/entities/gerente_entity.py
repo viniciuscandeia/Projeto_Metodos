@@ -1,16 +1,16 @@
 """
-Este módulo define a classe Manager, que herda de Usuario e
+Este módulo define a classe Manager, que herda de Vendedor e
 representa um gerente associado a uma loja.
 """
 
-from src.features.users.entities.usuario_entity import Usuario
+from src.entities.vendedor_entity import Vendedor
 
 
-class Manager(Usuario):
+class Manager(Vendedor):
     """
     Classe que representa um gerente no sistema.
 
-    Herda da classe Usuario e adiciona o ID da loja ao qual o gerente está associado.
+    Herda da classe Vendedor e adiciona o ID da loja ao qual o gerente está associado.
     """
 
     def __init__(self, id_adm, nome, email, id_loja):

@@ -3,7 +3,8 @@ Este módulo define a classe Vendedor, que herda de Usuario e
 representa um vendedor associado a uma loja.
 """
 
-from src.features.users.entities.usuario_entity import Usuario
+from src.entities.usuario_entity import Usuario
+
 
 class Vendedor(Usuario):
     """
