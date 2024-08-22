@@ -13,14 +13,14 @@ class Manager(Usuario):
     Herda da classe Usuario e adiciona o ID da loja ao qual o gerente está associado.
     """
 
-    def __init__(self, id_adm, nome, email, id_loja):
+    def __init__(self, id_manager, nome, email, id_loja):
         """
         Inicializa um novo objeto Manager.
 
-        :param id_adm: ID do gerente.
+        :param id_manager: ID do gerente.
         :param nome: Nome do gerente.
         :param email: Email do gerente.
         :param id_loja: ID da loja associada ao gerente.
         """
-        super().__init__(id_adm, nome, email)
+        super().__init__(id_manager, nome, email)
         self.id_loja = id_loja

@@ -4,6 +4,8 @@ relacionadas a administradores, utilizando os serviços fornecidos por UsuarioSe
 """
 
 from src.entities.administrador_entity import Administrador
+from src.entities.gerente_entity import Manager
+from src.entities.vendedor_entity import Vendedor
 from src.business.usuario_services import UsuarioService
 
 class UsuarioController:
@@ -28,7 +30,7 @@ class UsuarioController:
 
         :param novo_administrador: Instância de Administrador a ser adicionada.
 
-        Nota: Futuramente será adicionada uma verificação para garantir que apenas administradores
+        TODO: Futuramente será adicionada uma verificação para garantir que apenas administradores
               possam acessar este método.
         """
         self.service.adicionar_administrador(novo_administrador)
@@ -40,3 +42,15 @@ class UsuarioController:
         :return: Lista de instâncias de Administrador.
         """
         return self.service.listar_administradores()
+    
+    def adicionar_gerente(self, novo_gerente: Manager):
+        self.service.adicionar_gerente(novo_gerente)
+    
+    def listar_gerentes(self):
+        return self.service.listar_gerentes()
+
+    def adicionar_vendedor(self, novo_vendedor: Vendedor):
+        self.service.adicionar_vendedor(novo_vendedor)
+
+    def listar_vendedores(self):
+        return self.service.listar_vendedores()

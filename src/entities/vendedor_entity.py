@@ -12,14 +12,14 @@ class Vendedor(Usuario):
     Herda da classe Usuario e adiciona o ID da loja ao qual o vendedor está associado.
     """
 
-    def __init__(self, id_seller, name, email, id_store):
+    def __init__(self, id_seller, name, email, id_loja):
         """
         Inicializa um novo objeto Vendedor.
 
         :param id_seller: ID do vendedor.
         :param name: Nome do vendedor.
         :param email: Email do vendedor.
-        :param id_store: ID da loja associada ao vendedor.
+        :param id_loja: ID da loja associada ao vendedor.
         """
         super().__init__(id_seller, name, email)
-        self.id_store = id_store
+        self.id_loja = id_loja
