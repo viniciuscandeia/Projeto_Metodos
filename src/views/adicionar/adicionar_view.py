@@ -6,7 +6,6 @@ Cadastrar Usuario
 * Cadastrar Gerente - 2
 * Cadastrar Vendedor - 3
 * Voltar - 9
-
     """
 
     print(mensagem)
