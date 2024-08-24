@@ -1,23 +1,47 @@
-import os
+"""
+Módulo para gerenciamento do fluxo principal do sistema.
 
-from .constructor.adicionar.adicionar_adm_constructor import adicionar_adm_constructor
-from .constructor.adicionar.adicionar_gerente_constructor import (
+Este módulo contém a função `start` que gerencia o fluxo principal do programa.
+A função exibe a tela inicial, captura comandos do usuário e redireciona para as
+funções de adicionar e listar itens com base nas entradas fornecidas. O loop
+principal continua até que o usuário escolha sair do programa.
+
+Funções:
+- start: Inicializa o sistema e gerencia o fluxo principal do programa.
+"""
+
+import sys
+
+from .constructor.adicionar_constructor.adicionar_adm_constructor import adicionar_adm_constructor
+from .constructor.adicionar_constructor.adicionar_gerente_constructor import (
     adicionar_gerente_constructor,
 )
-from .constructor.adicionar.adicionar_vendedor_constructor import (
+from .constructor.adicionar_constructor.adicionar_vendedor_constructor import (
     adicionar_vendedor_constructor,
 )
 from .constructor.adicionar_processo import adicionar_processo
 from .constructor.introducao_processo import introducao_processo
-from .constructor.listar.listar_adm_constructor import listar_adm_constructor
-from .constructor.listar.listar_gerente_constructor import listar_gerente_constructor
-from .constructor.listar.listar_vendedor_constructor import listar_vendedor_constructor
+from .constructor.listar_constructor.listar_adm_constructor import listar_adm_constructor
+from .constructor.listar_constructor.listar_gerente_constructor import listar_gerente_constructor
+from .constructor.listar_constructor.listar_vendedor_constructor import listar_vendedor_constructor
 from .constructor.listar_processo import listar_processo
 
 
 def start() -> None:
+    """
+    Inicializa o sistema e gerencia o fluxo principal do programa.
 
-    os.system("cls||clear")
+    Esta função é responsável por exibir a tela inicial, capturar comandos do usuário e
+    redirecionar para as funcionalidades de adicionar e listar itens com base nas entradas
+    fornecidas. O loop principal continua até que o usuário escolha sair do programa.
+
+    - Limpa a tela.
+    - Mostra a tela inicial e captura o comando do usuário.
+    - Navega para as funções de adicionar ou listar conforme o comando.
+    - Gerencia a saída do programa.
+
+    :return: None
+    """
 
     while True:
         comando = introducao_processo()
@@ -56,6 +80,6 @@ def start() -> None:
                             print("Comando invalido!")
 
             case "9":
-                exit()
+                sys.exit()
             case _:
                 print("Comando invalido!")
