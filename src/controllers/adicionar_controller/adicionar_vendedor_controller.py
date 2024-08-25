@@ -23,7 +23,7 @@ class AdicionarVendedorController(AdicionarUsuarioController):
     - _criar_entidade: Cria uma entidade de vendedor e a registra no repositório.
     """
 
-    def __criar_entidade(self, novo_vendedor: Dict) -> None:
+    def _criar_entidade(self, novo_vendedor: Dict) -> None:
         """
         Cria uma entidade de vendedor e a registra no repositório.
 

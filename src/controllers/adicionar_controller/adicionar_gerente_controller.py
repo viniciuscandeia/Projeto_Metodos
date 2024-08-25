@@ -23,7 +23,7 @@ class AdicionarGerenteController(AdicionarUsuarioController):
     - _criar_entidade: Cria uma entidade de gerente e a registra no repositório.
     """
 
-    def __criar_entidade(self, novo_gerente: Dict) -> None:
+    def _criar_entidade(self, novo_gerente: Dict) -> None:
         """
         Cria uma entidade de gerente e a registra no repositório.
 
