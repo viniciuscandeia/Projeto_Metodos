@@ -7,6 +7,7 @@ retorna o comando selecionado.
 
 import os
 
+
 def tela_inicial():
     """
     Exibe a tela inicial do sistema cadastral e retorna o comando selecionado pelo usuário.
@@ -16,7 +17,6 @@ def tela_inicial():
     """
 
     os.system("cls||clear")
-
 
     mensagem = """
 Sistema Cadastral

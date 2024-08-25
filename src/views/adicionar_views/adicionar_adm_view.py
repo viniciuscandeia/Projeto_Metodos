@@ -36,8 +36,7 @@ class AdicionarAdministradorView:
         _id = str(uuid.uuid4().int >> 64)
 
         # Criando dicionario do adm
-        novo_administrador = {"Nome": nome,
-                              "Email": email, "Id": _id, "Senha": senha}
+        novo_administrador = {"Nome": nome, "Email": email, "Id": _id, "Senha": senha}
 
         return novo_administrador
 

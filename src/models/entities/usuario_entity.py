@@ -2,6 +2,7 @@
 Este módulo define a classe Usuario, que representa um usuário com ID, nome, email e senha.
 """
 
+
 class Usuario:
     """
     Classe que representa um usuário do sistema.

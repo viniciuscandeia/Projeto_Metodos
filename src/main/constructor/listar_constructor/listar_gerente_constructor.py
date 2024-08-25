@@ -10,7 +10,9 @@ Funções:
   mensagem correspondente na interface do usuário.
 """
 
-from ....controllers.listar_controller.listar_gerente_controller import ListarGerentesController
+from ....controllers.listar_controller.listar_gerente_controller import (
+    ListarGerentesController,
+)
 from ....views.listar_views.listar_gerente_view import ListarGerentesView
 
 

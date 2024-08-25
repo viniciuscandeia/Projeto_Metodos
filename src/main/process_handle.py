@@ -12,7 +12,9 @@ Funções:
 
 import sys
 
-from .constructor.adicionar_constructor.adicionar_adm_constructor import adicionar_adm_constructor
+from .constructor.adicionar_constructor.adicionar_adm_constructor import (
+    adicionar_adm_constructor,
+)
 from .constructor.adicionar_constructor.adicionar_gerente_constructor import (
     adicionar_gerente_constructor,
 )
@@ -21,9 +23,15 @@ from .constructor.adicionar_constructor.adicionar_vendedor_constructor import (
 )
 from .constructor.adicionar_processo import adicionar_processo
 from .constructor.introducao_processo import introducao_processo
-from .constructor.listar_constructor.listar_adm_constructor import listar_adm_constructor
-from .constructor.listar_constructor.listar_gerente_constructor import listar_gerente_constructor
-from .constructor.listar_constructor.listar_vendedor_constructor import listar_vendedor_constructor
+from .constructor.listar_constructor.listar_adm_constructor import (
+    listar_adm_constructor,
+)
+from .constructor.listar_constructor.listar_gerente_constructor import (
+    listar_gerente_constructor,
+)
+from .constructor.listar_constructor.listar_vendedor_constructor import (
+    listar_vendedor_constructor,
+)
 from .constructor.listar_processo import listar_processo
 
 

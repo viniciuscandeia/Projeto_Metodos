@@ -2,7 +2,6 @@
 Este módulo contém a função construtora para adicionar um novo gerente.
 """
 
-
 from ....controllers.adicionar_controller.adicionar_gerente_controller import (
     AdicionarGerenteController,
 )
