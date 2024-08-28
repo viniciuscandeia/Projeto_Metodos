@@ -8,7 +8,8 @@ para registrar, remover e acessar instâncias de Administrador.
 from typing import List
 
 from ..entities.administrador_entity import Administrador
-
+from ..entities.usuario_entity import Usuario as UsuarioEntity
+from db import Usuario
 
 class AdministradorRepositorio:
     """
@@ -22,7 +23,7 @@ class AdministradorRepositorio:
         """
         Inicializa o repositório de administradores como uma lista vazia.
         """
-        self.__adm: List[Administrador] = []
+        self.usuario = Usuario
 
     def registrar_administrador(self, administrador: Administrador) -> None:
         """
@@ -31,7 +32,8 @@ class AdministradorRepositorio:
         :param administrador: Objeto do tipo Administrador a ser adicionado.
         :type administrador: Administrador
         """
-        self.__adm.append(administrador)
+        self.usuario.create(nome=administrador.nome, email=administrador.email, senha=administrador.senha, user_type="ADMINISTRADOR")
+
 
     def remover_administrador(self, _id: str) -> None:
         """
@@ -42,7 +44,7 @@ class AdministradorRepositorio:
         """
         for adm in self.__adm:
             if adm.id == _id:
-                self.__adm.remove(adm)
+                self.usuario.delete().where(self.usuario.id == _id).execute()
                 return
 
     def pegar_repositorio(self) -> List[Administrador]:
@@ -52,7 +54,7 @@ class AdministradorRepositorio:
         :return: Lista de objetos Administrador.
         :rtype: List[Administrador]
         """
-        return self.__adm
-
+        users_list = [ UsuarioEntity(id_usuario=user.id, nome=user.nome, email=user.email, senha=user.senha ) for user in self.usuario.select()]
+        return users_list
 
 adm_repositorio = AdministradorRepositorio()
