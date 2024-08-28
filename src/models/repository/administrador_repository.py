@@ -11,7 +11,6 @@ from peewee import DoesNotExist
 
 from ..entities.administrador_entity import Administrador
 from ..entities.usuario_db_entity import UsuarioBD
-from ..entities.usuario_entity import Usuario as UsuarioEntity
 from .usuario_db_repository import usuario_repositorio
 
 
@@ -24,6 +23,10 @@ class AdministradorRepositorio:
     """
 
     def __init__(self) -> None:
+        """
+        Inicializa um novo repositório de administradores.
+        """
+
         self.usuario = usuario_repositorio
 
     def registrar_administrador(self, administrador: Administrador) -> None:
@@ -33,19 +36,20 @@ class AdministradorRepositorio:
         :param administrador: Objeto do tipo Administrador a ser adicionado.
         :type administrador: Administrador
         """
+
         UsuarioBD.create(
             nome=administrador.nome,
             email=administrador.email,
             senha=administrador.senha,
-            user_type="ADMINISTRADOR",
+            user_type="VENDEDOR",
         )
 
     def remover_administrador(self, _id: str) -> None:
         """
         Remove um administrador do repositório com base no ID fornecido.
 
-        :param id: ID do administrador a ser removido.
-        :type id: str
+        :param _id: ID do administrador a ser removido.
+        :type _id: str
         """
 
         try:
@@ -61,11 +65,21 @@ class AdministradorRepositorio:
         :return: Lista de objetos Administrador.
         :rtype: List[Administrador]
         """
+        """
+        Retorna a lista atual de administradores no repositório.
+
+        :return: Lista de objetos Administrador.
+        :rtype: List[Administrador]
+        """
+
         lista_administradores = [
-            UsuarioEntity(
-                id_usuario=adm.id, nome=adm.nome, email=adm.email, senha=adm.senha
-            )
-            for adm in UsuarioBD.select()
+            Administrador(nome=adm.nome, email=adm.email, senha=adm.senha)
+            for adm in UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
+        ]
+        return lista_administradores
+        lista_administradores = [
+            Administrador(nome=adm.nome, email=adm.email, senha=adm.senha)
+            for adm in UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
         ]
         return lista_administradores
 

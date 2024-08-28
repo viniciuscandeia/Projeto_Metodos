@@ -6,7 +6,6 @@ para adicionar novos administradores e exibe mensagens de sucesso ou falha.
 """
 
 import os
-import uuid
 from typing import Dict
 
 
@@ -33,10 +32,9 @@ class AdicionarAdministradorView:
         nome = input("Digite o nome: ")
         email = input("Digite o email: ")
         senha = input("Digite a senha: ")
-        _id = str(uuid.uuid4().int >> 64)
 
         # Criando dicionario do adm
-        novo_administrador = {"Nome": nome, "Email": email, "Id": _id, "Senha": senha}
+        novo_administrador = {"Nome": nome, "Email": email, "Senha": senha}
 
         return novo_administrador
 
@@ -53,7 +51,6 @@ class AdicionarAdministradorView:
         mensagem_sucesso = f"""
 Administrador cadastrado com sucesso!
 
-\tID: {adm["Id"]}
 \tNome: {adm['Nome']}
 \tEmail: {adm['Email']}
 """

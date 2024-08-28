@@ -26,7 +26,7 @@ class ListarAdministradoresView:
         Exibe a lista de administradores quando a mesma não está vazia.
 
         A lista de administradores é obtida do repositório de administradores
-        e exibida no formato de ID e nome.
+        e exibida no formato de nome e email.
         """
 
         os.system("cls||clear")
@@ -40,7 +40,7 @@ Lista de Administradores
 
         # Usando join para eficiência na criação da string
         lista_adm: str = "\n".join(
-            [f"\t- {adm.id_usuario}: {adm.nome}" for adm in repositorio]
+            [f"\t- {adm.nome}: {adm.email}" for adm in repositorio]
         )
 
         print(mensagem + lista_adm)

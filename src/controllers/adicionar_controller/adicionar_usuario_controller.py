@@ -167,7 +167,7 @@ class AdicionarUsuarioController(ABC):
             novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
 
         Returns:
-            Dict: Dicionário formatado com o tipo de usuário, nome, email e ID.
+            Dict: Dicionário formatado com o tipo de usuário, nome e email.
         """
 
         return {
@@ -176,5 +176,4 @@ class AdicionarUsuarioController(ABC):
             ),
             "Nome": novo_usuario["Nome"],
             "Email": novo_usuario["Email"],
-            "Id": novo_usuario["Id"],
         }

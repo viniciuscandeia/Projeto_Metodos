@@ -7,7 +7,11 @@ para registrar, remover e acessar instâncias de Gerente.
 
 from typing import List
 
+from peewee import DoesNotExist
+
 from ..entities.gerente_entity import Gerente
+from ..entities.usuario_db_entity import UsuarioBD
+from .usuario_db_repository import usuario_repositorio
 
 
 class GerenteRepositorio:
@@ -22,7 +26,7 @@ class GerenteRepositorio:
         """
         Inicializa o repositório de gerentes como uma lista vazia.
         """
-        self.__gerentes: List[Gerente] = []
+        self.__gerentes = usuario_repositorio
 
     def registrar_gerente(self, gerente: Gerente) -> None:
         """
@@ -31,7 +35,12 @@ class GerenteRepositorio:
         :param gerente: Objeto do tipo Gerente a ser adicionado.
         :type gerente: Gerente
         """
-        self.__gerentes.append(gerente)
+        UsuarioBD.create(
+            nome=gerente.nome,
+            email=gerente.email,
+            senha=gerente.senha,
+            user_type="GERENTE",
+        )
 
     def remover_gerente(self, _id: str) -> None:
         """
@@ -40,10 +49,11 @@ class GerenteRepositorio:
         :param _id: ID do gerente a ser removido.
         :type _id: str
         """
-        for gerente in self.__gerentes:
-            if gerente.id == _id:
-                self.__gerentes.remove(gerente)
-                return
+        try:
+            usuario = UsuarioBD.get_by_id(_id)
+            usuario.delete_instance()
+        except DoesNotExist:
+            return None
 
     def pegar_repositorio(self) -> List[Gerente]:
         """
@@ -52,7 +62,12 @@ class GerenteRepositorio:
         :return: Lista de objetos Gerente.
         :rtype: List[Gerente]
         """
-        return self.__gerentes
+        lista_gerentes = [
+            Gerente(nome=gerente.nome, email=gerente.email,
+                    senha=gerente.senha, id_store=0)
+            for gerente in UsuarioBD.select().where(UsuarioBD.user_type == "GERENTE")
+        ]
+        return lista_gerentes
 
 
 gerente_repositorio = GerenteRepositorio()

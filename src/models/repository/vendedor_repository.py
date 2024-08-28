@@ -7,7 +7,11 @@ para registrar, remover e acessar instâncias de Vendedor.
 
 from typing import List
 
+from peewee import DoesNotExist
+
+from ..entities.usuario_db_entity import UsuarioBD
 from ..entities.vendedor_entity import Vendedor
+from .usuario_db_repository import usuario_repositorio
 
 
 class VendedorRepositorio:
@@ -22,7 +26,7 @@ class VendedorRepositorio:
         """
         Inicializa o repositório de vendedores como uma lista vazia.
         """
-        self.__vendedores: List[Vendedor] = []
+        self.__vendedores = usuario_repositorio
 
     def registrar_vendedor(self, vendedor: Vendedor) -> None:
         """
@@ -31,7 +35,13 @@ class VendedorRepositorio:
         :param vendedor: Objeto do tipo Vendedor a ser adicionado.
         :type vendedor: Vendedor
         """
-        self.__vendedores.append(vendedor)
+
+        UsuarioBD.create(
+            nome=vendedor.nome,
+            email=vendedor.email,
+            senha=vendedor.senha,
+            user_type="VENDEDOR",
+        )
 
     def remover_vendedor(self, _id: str) -> None:
         """
@@ -40,10 +50,12 @@ class VendedorRepositorio:
         :param _id: ID do vendedor a ser removido.
         :type _id: str
         """
-        for vendedor in self.__vendedores:
-            if vendedor.id == _id:
-                self.__vendedores.remove(vendedor)
-                return
+
+        try:
+            usuario = UsuarioBD.get_by_id(_id)
+            usuario.delete_instance()
+        except DoesNotExist:
+            return None
 
     def pegar_repositorio(self) -> List[Vendedor]:
         """
@@ -52,7 +64,15 @@ class VendedorRepositorio:
         :return: Lista de objetos Vendedor.
         :rtype: List[Vendedor]
         """
-        return self.__vendedores
+
+        lista_vendedores = [
+            Vendedor(nome=vendedor.nome, email=vendedor.email,
+                     senha=vendedor.senha, id_store=0)
+            for vendedor in UsuarioBD.select().where(
+                UsuarioBD.user_type == "VENDEDOR"
+            )
+        ]
+        return lista_vendedores
 
 
 vendedor_repositorio = VendedorRepositorio()

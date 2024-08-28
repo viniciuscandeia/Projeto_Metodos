@@ -33,9 +33,8 @@ class AdicionarGerenteController(AdicionarUsuarioController):
 
         nome: str = novo_gerente["Nome"]
         email: str = novo_gerente["Email"]
-        _id: str = novo_gerente["Id"]
         senha: str = novo_gerente["Senha"]
         _id_loja: str = novo_gerente["Id_loja"]
 
-        objeto_gerente = Gerente(_id, nome, email, senha, _id_loja)
+        objeto_gerente = Gerente(nome, email, senha, _id_loja)
         gerente_repositorio.registrar_gerente(objeto_gerente)

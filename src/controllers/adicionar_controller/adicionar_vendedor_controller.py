@@ -33,9 +33,8 @@ class AdicionarVendedorController(AdicionarUsuarioController):
 
         nome: str = novo_vendedor["Nome"]
         email: str = novo_vendedor["Email"]
-        _id: str = novo_vendedor["Id"]
         senha: str = novo_vendedor["Senha"]
         _id_loja: str = novo_vendedor["Id_loja"]
 
-        objeto_vendedor = Vendedor(_id, nome, email, senha, _id_loja)
+        objeto_vendedor = Vendedor(nome, email, senha, _id_loja)
         vendedor_repositorio.registrar_vendedor(objeto_vendedor)

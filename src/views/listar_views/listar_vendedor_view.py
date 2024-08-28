@@ -26,7 +26,7 @@ class ListarVendedoresView:
         Exibe a lista de vendedores quando a mesma não está vazia.
 
         A lista de vendedores é obtida do repositório de vendedores
-        e exibida no formato de ID e nome.
+        e exibida no formato de nome e email.
         """
 
         os.system("cls||clear")
@@ -40,7 +40,7 @@ Lista de Vendedores
 
         # Usando join para eficiência na criação da string
         lista_vendedor: str = "\n".join(
-            [f"\t- {vendedor.id_usuario}: {vendedor.nome}" for vendedor in repositorio]
+            [f"\t- {vendedor.nome}: {vendedor.email}" for vendedor in repositorio]
         )
 
         print(mensagem + lista_vendedor)
