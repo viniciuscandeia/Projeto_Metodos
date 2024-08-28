@@ -8,7 +8,7 @@ para registrar, remover e acessar instâncias de Gerente.
 from typing import List
 
 from ..entities.gerente_entity import Gerente
-
+from db import Usuario
 
 class GerenteRepositorio:
     """
@@ -22,7 +22,8 @@ class GerenteRepositorio:
         """
         Inicializa o repositório de gerentes como uma lista vazia.
         """
-        self.__gerentes: List[Gerente] = []
+        self.usuario = Usuario
+        #TODO (joão Victor[27/08]): apagar: self.__gerentes: List[Gerente] = []
 
     def registrar_gerente(self, gerente: Gerente) -> None:
         """
@@ -31,7 +32,8 @@ class GerenteRepositorio:
         :param gerente: Objeto do tipo Gerente a ser adicionado.
         :type gerente: Gerente
         """
-        self.__gerentes.append(gerente)
+        self.usuario.create(nome=Gerente.nome, email=Gerente.email, senha=Gerente.senha, user_type="GERENTE")
+        #TODO (joão Victor[27/08]): apagar: self.__gerentes.append(gerente)
 
     def remover_gerente(self, _id: str) -> None:
         """
@@ -40,6 +42,7 @@ class GerenteRepositorio:
         :param _id: ID do gerente a ser removido.
         :type _id: str
         """
+        #TODO (joão Victor[27/08]): Atualizar para interagir com o banco de dados
         for gerente in self.__gerentes:
             if gerente.id == _id:
                 self.__gerentes.remove(gerente)
@@ -52,6 +55,7 @@ class GerenteRepositorio:
         :return: Lista de objetos Gerente.
         :rtype: List[Gerente]
         """
+        #TODO (joão Victor[27/08]): Atualizar para interagir com o banco de dados
         return self.__gerentes
 
 
