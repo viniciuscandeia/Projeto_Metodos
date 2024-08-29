@@ -32,13 +32,11 @@ class AdicionarVendedorView:
         nome = input("Digite o nome: ")
         email = input("Digite o email: ")
         senha = input("Digite a senha: ")
-        _id = str(uuid.uuid4().int >> 64)
         _id_loja = str(uuid.uuid4().int >> 64)
 
         novo_vendedor = {
             "Nome": nome,
             "Email": email,
-            "Id": _id,
             "Senha": senha,
             "Id_loja": _id_loja,
         }
@@ -58,7 +56,6 @@ class AdicionarVendedorView:
         mensagem_sucesso = f"""
 Vendedor cadastrado com sucesso!
 
-\tID: {adm["Id"]}
 \tNome: {adm['Nome']}
 \tEmail: {adm['Email']}
             """

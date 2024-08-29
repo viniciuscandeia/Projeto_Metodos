@@ -1,0 +1,41 @@
+.
+├── docs
+├── __pycache__
+└── src
+    ├── controllers
+    │   ├── adicionar_controller
+    │   │   └── __pycache__
+    │   ├── listar_controller
+    │   │   └── __pycache__
+    │   └── __pycache__
+    ├── data
+    ├── features
+    │   ├── products
+    │   ├── __pycache__
+    │   ├── stores
+    │   ├── users
+    │   │   └── __pycache__
+    │   └── warehouses
+    ├── main
+    │   ├── constructor
+    │   │   ├── adicionar_constructor
+    │   │   │   └── __pycache__
+    │   │   ├── listar_constructor
+    │   │   │   └── __pycache__
+    │   │   └── __pycache__
+    │   └── __pycache__
+    ├── models
+    │   ├── entities
+    │   │   └── __pycache__
+    │   ├── __pycache__
+    │   └── repository
+    │       └── __pycache__
+    ├── __pycache__
+    └── views
+        ├── adicionar_views
+        │   └── __pycache__
+        ├── listar_views
+        │   └── __pycache__
+        └── __pycache__
+
+39 directories

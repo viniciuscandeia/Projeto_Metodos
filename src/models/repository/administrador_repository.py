@@ -1,15 +1,23 @@
 """
 Módulo que define o repositório para gerenciar objetos do tipo Administrador.
 
-Este módulo contém a classe AdministradorRepositorio, que oferece métodos
-para registrar, remover e acessar instâncias de Administrador.
+Este módulo contém a classe `AdministradorRepositorio`, que oferece métodos
+para registrar, remover e acessar instâncias de `Administrador`.
 """
 
 from typing import List
 
+from peewee import DoesNotExist, IntegrityError
+
 from ..entities.administrador_entity import Administrador
-from ..entities.usuario_entity import Usuario as UsuarioEntity
-from db import Usuario
+from ..entities.usuario_db_entity import UsuarioBD
+from ..exceptions import (
+    UsuarioErroInesperado,
+    UsuarioIntegridadeError,
+    UsuarioNaoEncontrado,
+    UsuarioRegistroError,
+)
+
 
 class AdministradorRepositorio:
     """
@@ -17,44 +25,101 @@ class AdministradorRepositorio:
 
     Esta classe oferece métodos para registrar, remover e acessar administradores
     dentro do sistema.
+
+    Métodos:
+    - registrar_administrador: Registra um novo administrador no repositório.
+    - remover_administrador: Remove um administrador do repositório com base no ID fornecido.
+    - pegar_repositorio: Retorna a lista atual de administradores no repositório.
     """
 
     def __init__(self) -> None:
         """
-        Inicializa o repositório de administradores como uma lista vazia.
+        Inicializa um novo repositório de administradores.
         """
-        self.usuario = Usuario
 
     def registrar_administrador(self, administrador: Administrador) -> None:
         """
         Registra um novo administrador no repositório.
 
-        :param administrador: Objeto do tipo Administrador a ser adicionado.
-        :type administrador: Administrador
-        """
-        self.usuario.create(nome=administrador.nome, email=administrador.email, senha=administrador.senha, user_type="ADMINISTRADOR")
+        Este método cria uma nova entrada na base de dados para o administrador
+        fornecido. Se ocorrer um erro de integridade ou outro erro inesperado,
+        uma exceção será lançada.
 
+        Args:
+            administrador (Administrador): Objeto do tipo `Administrador` a ser adicionado.
+
+        Levanta:
+            Exception: Se ocorrer um erro de integridade ao registrar o administrador
+            ou um erro inesperado.
+        """
+
+        try:
+            UsuarioBD.create(
+                nome=administrador.nome,
+                email=administrador.email,
+                senha=administrador.senha,
+                user_type="ADMINISTRADOR",
+            )
+        except IntegrityError as e:
+            # Mensagem de erro mais específica para integridade dos dados
+            raise UsuarioIntegridadeError(f"Erro ao registrar administrador: {
+                str(e)}") from None
+        except Exception as e:
+            # Captura qualquer outra exceção não esperada
+            raise UsuarioRegistroError(f"Erro inesperado ao registrar administrador: {
+                str(e)}") from None
 
     def remover_administrador(self, _id: str) -> None:
         """
         Remove um administrador do repositório com base no ID fornecido.
 
-        :param id: ID do administrador a ser removido.
-        :type id: str
+        Este método tenta encontrar o administrador pelo ID e, se encontrado,
+        remove-o do repositório. Se o administrador não for encontrado ou ocorrer
+        um erro inesperado, uma exceção será lançada.
+
+        Args:
+            _id (str): ID do administrador a ser removido.
+
+        Levanta:
+            Exception: Se o administrador com o ID fornecido não for encontrado
+            ou se ocorrer um erro inesperado ao remover o administrador.
         """
-        for adm in self.__adm:
-            if adm.id == _id:
-                self.usuario.delete().where(self.usuario.id == _id).execute()
-                return
+
+        try:
+            usuario = UsuarioBD.get_by_id(_id)
+            usuario.delete_instance()
+        except DoesNotExist:
+            raise UsuarioNaoEncontrado(f"Administrador com ID {
+                _id} não encontrado.") from None
+        except Exception as e:
+            raise UsuarioErroInesperado(f"Erro inesperado ao remover administrador: {
+                str(e)}") from None
 
     def pegar_repositorio(self) -> List[Administrador]:
         """
         Retorna a lista atual de administradores no repositório.
 
-        :return: Lista de objetos Administrador.
-        :rtype: List[Administrador]
+        Este método consulta o banco de dados e retorna uma lista de objetos `Administrador`
+        que representam os administradores armazenados no repositório.
+
+        Returns:
+            List[Administrador]: Lista de objetos `Administrador`.
+
+        Levanta:
+            Exception: Se ocorrer um erro ao acessar o banco de dados.
         """
-        users_list = [ UsuarioEntity(id_usuario=user.id, nome=user.nome, email=user.email, senha=user.senha ) for user in self.usuario.select()]
-        return users_list
+
+        try:
+            lista_administradores = [
+                Administrador(nome=adm.nome, email=adm.email, senha=adm.senha)
+                for adm in UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
+            ]
+        except Exception as e:
+            # Captura qualquer exceção ao acessar o banco de dados
+            print(
+                f"Erro ao acessar o repositório de administradores: {str(e)}")
+            return []
+        return lista_administradores
+
 
 adm_repositorio = AdministradorRepositorio()

@@ -26,7 +26,7 @@ class ListarGerentesView:
         Exibe a lista de gerentes quando a mesma não está vazia.
 
         A lista de gerentes é obtida do repositório de gerentes
-        e exibida no formato de ID e nome.
+        e exibida no formato de nome e email.
         """
 
         os.system("cls||clear")
@@ -40,7 +40,7 @@ Lista de Gerentes
 
         # Usando join para eficiência na criação da string
         lista_gerentes: str = "\n".join(
-            [f"\t- {gerente.id_usuario}: {gerente.nome}" for gerente in repositorio]
+            [f"\t- {gerente.nome}: {gerente.email}" for gerente in repositorio]
         )
 
         print(mensagem + lista_gerentes)
