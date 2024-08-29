@@ -1,17 +1,22 @@
 """
 Módulo que define o repositório para gerenciar objetos do tipo Vendedor.
 
-Este módulo contém a classe VendedorRepositorio, que oferece métodos
-para registrar, remover e acessar instâncias de Vendedor.
+Este módulo contém a classe `VendedorRepositorio`, que oferece métodos
+para registrar, remover e acessar instâncias de `Vendedor`.
 """
 
 from typing import List
 
-from peewee import DoesNotExist
+from peewee import DoesNotExist, IntegrityError
 
 from ..entities.usuario_db_entity import UsuarioBD
 from ..entities.vendedor_entity import Vendedor
-from .usuario_db_repository import usuario_repositorio
+from ..exceptions import (
+    UsuarioErroInesperado,
+    UsuarioIntegridadeError,
+    UsuarioNaoEncontrado,
+    UsuarioRegistroError,
+)
 
 
 class VendedorRepositorio:
@@ -20,58 +25,105 @@ class VendedorRepositorio:
 
     Esta classe oferece métodos para registrar, remover e acessar vendedores
     dentro do sistema.
+
+    Métodos:
+    - registrar_vendedor: Registra um novo vendedor no repositório.
+    - remover_vendedor: Remove um vendedor do repositório com base no ID fornecido.
+    - pegar_repositorio: Retorna a lista atual de vendedores no repositório.
     """
 
     def __init__(self) -> None:
         """
         Inicializa o repositório de vendedores como uma lista vazia.
         """
-        self.__vendedores = usuario_repositorio
 
     def registrar_vendedor(self, vendedor: Vendedor) -> None:
         """
         Registra um novo vendedor no repositório.
 
-        :param vendedor: Objeto do tipo Vendedor a ser adicionado.
-        :type vendedor: Vendedor
+        Este método cria uma nova entrada na base de dados para o vendedor
+        fornecido.
+
+        Args:
+            vendedor (Vendedor): Objeto do tipo `Vendedor` a ser adicionado.
+
+        Levanta:
+            Exception: Se ocorrer um erro ao registrar o vendedor.
         """
 
-        UsuarioBD.create(
-            nome=vendedor.nome,
-            email=vendedor.email,
-            senha=vendedor.senha,
-            user_type="VENDEDOR",
-        )
+        try:
+            UsuarioBD.create(
+                nome=vendedor.nome,
+                email=vendedor.email,
+                senha=vendedor.senha,
+                user_type="VENDEDOR",
+            )
+        except IntegrityError as e:
+            # Mensagem de erro mais específica para integridade dos dados
+            raise UsuarioIntegridadeError(f"Erro ao registrar vendedor: {
+                str(e)}") from None
+        except Exception as e:
+            # Captura qualquer outra exceção não esperada
+            raise UsuarioRegistroError(f"Erro inesperado ao registrar vendedor: {
+                str(e)}") from None
+
 
     def remover_vendedor(self, _id: str) -> None:
         """
         Remove um vendedor do repositório com base no ID fornecido.
 
-        :param _id: ID do vendedor a ser removido.
-        :type _id: str
+        Este método tenta encontrar o vendedor pelo ID e, se encontrado,
+        remove-o do repositório. Se o vendedor não for encontrado ou ocorrer
+        um erro inesperado, uma exceção será lançada.
+
+        Args:
+            _id (str): ID do vendedor a ser removido.
+
+        Levanta:
+            Exception: Se o vendedor com o ID fornecido não for encontrado
+            ou se ocorrer um erro inesperado ao remover o vendedor.
         """
 
         try:
             usuario = UsuarioBD.get_by_id(_id)
             usuario.delete_instance()
         except DoesNotExist:
-            return None
+            raise UsuarioNaoEncontrado(f"Vendedor com ID {
+                _id} não encontrado.") from None
+        except Exception as e:
+            raise UsuarioErroInesperado(f"Erro inesperado ao remover vendedor: {
+                str(e)}") from None
+
 
     def pegar_repositorio(self) -> List[Vendedor]:
         """
         Retorna a lista atual de vendedores no repositório.
 
-        :return: Lista de objetos Vendedor.
-        :rtype: List[Vendedor]
+        Este método consulta o banco de dados e retorna uma lista de objetos `Vendedor`
+        que representam os vendedores armazenados no repositório.
+
+        Returns:
+            List[Vendedor]: Lista de objetos `Vendedor`.
+
+        Levanta:
+            Exception: Se ocorrer um erro ao acessar o banco de dados.
         """
 
-        lista_vendedores = [
-            Vendedor(nome=vendedor.nome, email=vendedor.email,
-                     senha=vendedor.senha, id_store=0)
-            for vendedor in UsuarioBD.select().where(
-                UsuarioBD.user_type == "VENDEDOR"
-            )
-        ]
+        try:
+            lista_vendedores = [
+                Vendedor(
+                    nome=vendedor.nome,
+                    email=vendedor.email,
+                    senha=vendedor.senha,
+                    id_store=0,
+                )
+                for vendedor in UsuarioBD.select().where(UsuarioBD.user_type == "VENDEDOR")
+            ]
+        except Exception as e:
+            # Captura qualquer exceção ao acessar o banco de dados
+            print(
+                f"Erro ao acessar o repositório de vendedores: {str(e)}")
+            return []
         return lista_vendedores
 
 

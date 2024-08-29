@@ -1,7 +1,7 @@
 """
 Módulo para gerenciamento da adição de usuários.
 
-Este módulo define a classe base `AdicionarUsuarioController` que fornece uma estrutura
+Este módulo define a classe base `AdicionarUsuarioController`, que fornece uma estrutura
 para a adição de novos usuários em um sistema. Ele inclui métodos para validar campos
 do usuário, criar entidades de usuários (que devem ser implementadas em subclasses) e
 formatar a resposta após a adição do usuário.
@@ -24,8 +24,8 @@ class AdicionarUsuarioController(ABC):
     Classe base para adicionar um novo usuário.
 
     Esta classe define o esqueleto para adicionar novos usuários, fornecendo
-    métodos para validar os dados de entrada,
-    criar a entidade de usuário e formatar a resposta após a adição do usuário.
+    métodos para validar os dados de entrada, criar a entidade de usuário e formatar
+    a resposta após a adição do usuário.
 
     Métodos:
     - adicionar: Adiciona um novo usuário após validar e criar a entidade.
@@ -33,7 +33,7 @@ class AdicionarUsuarioController(ABC):
     - __validar_nome: Valida o campo 'Nome' do usuário.
     - __validar_email: Valida o campo 'Email' do usuário.
     - __validar_senha: Valida o campo 'Senha' do usuário.
-    - __criar_entidade: Método abstrato para criar uma entidade de usuário.
+    - _criar_entidade: Método abstrato para criar uma entidade de usuário.
     - __formatar_resposta: Formata a resposta de confirmação após a adição do usuário.
     """
 
@@ -41,11 +41,15 @@ class AdicionarUsuarioController(ABC):
         """
         Adiciona um novo usuário após validar os campos e criar a entidade.
 
+        Este método valida os dados do usuário, cria a entidade correspondente e
+        retorna um dicionário com o resultado da operação, indicando sucesso ou erro.
+
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
 
         Returns:
-            Dict: Dicionário contendo o resultado da operação, indicando sucesso ou erro.
+            Dict[str, str]: Dicionário contendo o resultado da operação, com campos
+            "Sucesso" e "Mensagem" indicando o status da adição.
         """
 
         try:
@@ -53,15 +57,20 @@ class AdicionarUsuarioController(ABC):
             self._criar_entidade(novo_usuario)
             resposta = self.__formatar_resposta(novo_usuario)
             return {"Sucesso": True, "Mensagem": resposta}
-        except ValueError as exception:
+        except ValueError as erro:
+            return {"Sucesso": False, "ERROR": str(erro)}
+        except Exception as exception:
             return {"Sucesso": False, "ERROR": str(exception)}
 
     def __validar_campos(self, novo_usuario: Dict) -> None:
         """
         Valida todos os campos do usuário fornecido.
 
+        Este método verifica se os campos 'Nome', 'Email' e 'Senha' estão corretos e
+        seguem as regras definidas.
+
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
 
         Raises:
             ValueError: Se qualquer campo não for válido.
@@ -78,8 +87,10 @@ class AdicionarUsuarioController(ABC):
         """
         Valida o campo 'Nome' do usuário.
 
+        Este método verifica se o nome é uma string não vazia.
+
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
 
         Raises:
             ValueError: Se o nome estiver vazio ou não for uma string.
@@ -92,12 +103,15 @@ class AdicionarUsuarioController(ABC):
         """
         Valida o campo 'Email' do usuário.
 
+        Este método verifica se o email é uma string, não está vazio, não contém números
+        e não excede o limite de 12 caracteres.
+
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
 
         Raises:
-            ValueError: Se o email estiver incorreto, contiver números ou
-            exceder o limite de 12 caracteres.
+            ValueError: Se o email estiver incorreto, contiver números ou exceder o limite
+            de 12 caracteres.
         """
 
         if (
@@ -116,12 +130,16 @@ class AdicionarUsuarioController(ABC):
         """
         Valida o campo 'Senha' do usuário.
 
+        Este método verifica se a senha atende aos requisitos de comprimento, contém letras
+        maiúsculas e minúsculas, números e caracteres especiais, e não é igual ao nome
+        ou email.
+
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
 
         Raises:
-            ValueError: Se a senha não cumprir os requisitos de comprimento,
-            letras maiúsculas, minúsculas, números e caracteres especiais.
+            ValueError: Se a senha não cumprir os requisitos de comprimento, letras maiúsculas,
+            minúsculas, números e caracteres especiais.
         """
 
         senha = novo_usuario["Senha"]
@@ -156,18 +174,20 @@ class AdicionarUsuarioController(ABC):
         lógica de criação de entidades específicas.
 
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
         """
 
     def __formatar_resposta(self, novo_usuario: Dict) -> Dict:
         """
         Formata a resposta de confirmação após a adição do usuário.
 
+        Este método cria um dicionário formatado com o tipo de usuário, nome e email.
+
         Args:
-            novo_usuario (Dict): Dicionário contendo os dados do novo usuário.
+            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
 
         Returns:
-            Dict: Dicionário formatado com o tipo de usuário, nome e email.
+            Dict[str, str]: Dicionário formatado com o tipo de usuário, nome e email.
         """
 
         return {
