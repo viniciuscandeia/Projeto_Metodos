@@ -33,7 +33,9 @@ from .constructor.listar_constructor.listar_vendedor_constructor import (
     listar_vendedor_constructor,
 )
 from .constructor.listar_processo import listar_processo
+from ..models.inicializar_db import inicializar_database
 
+USAR_MEMORIA = False
 
 def start() -> None:
     """
@@ -50,6 +52,7 @@ def start() -> None:
 
     :return: None
     """
+    inicializar_database(USAR_MEMORIA)
 
     while True:
         comando = introducao_processo()

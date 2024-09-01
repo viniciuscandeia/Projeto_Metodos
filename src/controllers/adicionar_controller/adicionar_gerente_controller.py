@@ -8,7 +8,7 @@ os dados de um novo gerente, criar a entidade gerente e registr√°-la no reposit√
 from typing import Dict
 
 from ...models.entities.gerente_entity import Gerente
-from ...models.exceptions import (
+from ...models.excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,

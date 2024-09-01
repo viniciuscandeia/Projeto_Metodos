@@ -8,7 +8,7 @@ criar e registrar novos administradores no sistema.
 from typing import Dict
 
 from ...models.entities.administrador_entity import Administrador
-from ...models.exceptions import (
+from ...models.excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,

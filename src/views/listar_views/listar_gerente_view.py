@@ -40,7 +40,7 @@ Lista de Gerentes
 
         # Usando join para eficiência na criação da string
         lista_gerentes: str = "\n".join(
-            [f"\t- {gerente.nome}: {gerente.email}" for gerente in repositorio]
+            [f"\t- [{gerente.id}] {gerente.nome}: {gerente.email}" for gerente in repositorio]
         )
 
         print(mensagem + lista_gerentes)

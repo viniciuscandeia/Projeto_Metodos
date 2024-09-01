@@ -11,7 +11,7 @@ from peewee import DoesNotExist, IntegrityError
 
 from ..entities.administrador_entity import Administrador
 from ..entities.usuario_db_entity import UsuarioBD
-from ..exceptions import (
+from ..excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,
@@ -62,12 +62,24 @@ class AdministradorRepositorio:
             )
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
-            raise UsuarioIntegridadeError(f"Erro ao registrar administrador: {
-                str(e)}") from None
+            raise UsuarioIntegridadeError(f'Erro ao registrar administrador: { str(e)}') from None
         except Exception as e:
             # Captura qualquer outra exceção não esperada
-            raise UsuarioRegistroError(f"Erro inesperado ao registrar administrador: {
-                str(e)}") from None
+            raise UsuarioRegistroError(f"Erro inesperado ao registrar administrador: { str(e)}") from None
+        
+    def editar_administrador(self, _id, novoAdministrador:Administrador) -> None:
+        try:
+            UsuarioBD.select()
+
+            UsuarioBD.update(
+                nome=novoAdministrador.nome,
+                email=novoAdministrador.email).where(id=novoAdministrador.id)
+        except IntegrityError as e:
+            # Mensagem de erro mais específica para integridade dos dados
+            raise UsuarioIntegridadeError(f'Erro ao editar administrador: { str(e)}') from None
+        except Exception as e:
+            # Captura qualquer outra exceção não esperada
+            raise UsuarioRegistroError(f"Erro inesperado ao editar administrador: { str(e)}") from None
 
     def remover_administrador(self, _id: str) -> None:
         """
@@ -89,13 +101,11 @@ class AdministradorRepositorio:
             usuario = UsuarioBD.get_by_id(_id)
             usuario.delete_instance()
         except DoesNotExist:
-            raise UsuarioNaoEncontrado(f"Administrador com ID {
-                _id} não encontrado.") from None
+            raise UsuarioNaoEncontrado(f"Administrador com ID {_id} não encontrado.") from None
         except Exception as e:
-            raise UsuarioErroInesperado(f"Erro inesperado ao remover administrador: {
-                str(e)}") from None
+            raise UsuarioErroInesperado(f"Erro inesperado ao remover administrador: {str(e)}") from None
 
-    def pegar_repositorio(self) -> List[Administrador]:
+    def pegar_repositorio(self) -> List[UsuarioBD]:
         """
         Retorna a lista atual de administradores no repositório.
 
@@ -110,10 +120,7 @@ class AdministradorRepositorio:
         """
 
         try:
-            lista_administradores = [
-                Administrador(nome=adm.nome, email=adm.email, senha=adm.senha)
-                for adm in UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
-            ]
+            lista_administradores = UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
             print(

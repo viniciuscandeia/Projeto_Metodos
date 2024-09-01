@@ -8,7 +8,7 @@ criar e registrar novos vendedores no sistema.
 from typing import Dict
 
 from ...models.entities.vendedor_entity import Vendedor
-from ...models.exceptions import (
+from ...models.excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,
