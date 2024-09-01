@@ -9,14 +9,14 @@ import os
 from typing import Dict
 
 
-class AdicionarAdministradorView:
+class EditarAdmView:
     """
     Classe de interface para adicionar administradores no sistema.
 
     Esta classe lida com a entrada de dados do usuário e exibe mensagens de sucesso ou falha.
     """
 
-    def adicionar_administrador_view(self) -> Dict:
+    def editar_administrador_view(self) -> Dict:
         """
         Coleta os dados necessários para adicionar um novo administrador e
         os retorna como um dicionário.
@@ -28,18 +28,26 @@ class AdicionarAdministradorView:
         os.system("cls||clear")
 
         # Coletando dados
-        print("Adicionar novo administrador \n")
+        print("Editar administrador \n")
+        print('(Caso nao queira editar um campo, apenas deixe em branco)')
+        selectedId = input('Selectione id do usuario para editar: ')
         nome = input("Digite o nome: ")
         username = input("Digite o username: ")
         email = input("Digite o email: ")
-        senha = input("Digite a senha: ")
 
-        # Criando dicionario do adm
-        novo_administrador = {"Nome": nome, "Email": email, "Senha": senha, "Username": username}
+        novo_administrador = {
+            'id': selectedId,
+            'Nome': nome,
+            'Username': username,
+            'Email': email
+        }
+
+        # Filtrando para remover itens onde o valor é vazio
+        novo_administrador = {k: v for k, v in novo_administrador.items() if v}
 
         return novo_administrador
 
-    def adicionar_administrador_sucesso(self, adm: Dict) -> None:
+    def editar_administrador_sucesso(self) -> None:
         """
         Exibe uma mensagem de sucesso ao adicionar um administrador.
 
@@ -50,14 +58,12 @@ class AdicionarAdministradorView:
         os.system("cls||clear")
 
         mensagem_sucesso = f"""
-Administrador cadastrado com sucesso!
+Administrador editado com sucesso
 
-\tNome: {adm['Nome']}
-\tEmail: {adm['Email']}
 """
         print(mensagem_sucesso)
 
-    def adicionar_administrador_falha(self, error: str) -> None:
+    def editar_administrador_falha(self, error: str) -> None:
         """
         Exibe uma mensagem de erro ao falhar na adição de um administrador.
 
@@ -65,10 +71,10 @@ Administrador cadastrado com sucesso!
         :type error: str
         """
 
-        os.system("cls||clear")
+        # os.system("cls||clear")
 
         mensagem_falha = f"""
-Falha ao cadastrar administrador!
+Falha ao editar administrador!
 
 \tErro: {error}
 """

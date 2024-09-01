@@ -8,7 +8,7 @@ criar e registrar novos vendedores no sistema.
 from typing import Dict
 
 from ...models.entities.vendedor_entity import Vendedor
-from ...models.exceptions import (
+from ...models.excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,
@@ -45,6 +45,7 @@ class AdicionarVendedorController(AdicionarUsuarioController):
         """
 
         nome: str = novo_vendedor["Nome"]
+        username:str = novo_vendedor['Username']
         email: str = novo_vendedor["Email"]
         senha: str = novo_vendedor["Senha"]
         _id_loja: str = novo_vendedor["Id_loja"]

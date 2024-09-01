@@ -32,6 +32,7 @@ class AdicionarVendedorView:
         nome = input("Digite o nome: ")
         email = input("Digite o email: ")
         senha = input("Digite a senha: ")
+        username = input('Digite o username: ')
         _id_loja = str(uuid.uuid4().int >> 64)
 
         novo_vendedor = {
@@ -39,6 +40,7 @@ class AdicionarVendedorView:
             "Email": email,
             "Senha": senha,
             "Id_loja": _id_loja,
+            "Username": username,
         }
 
         return novo_vendedor

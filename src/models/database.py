@@ -8,6 +8,10 @@ operações de leitura e escrita no banco de dados.
 """
 
 from peewee import SqliteDatabase
-
 # Criação da instância do banco de dados SQLite
-database = SqliteDatabase("./src/data/database.db")
+
+
+database_persistente = SqliteDatabase("./src/data/database.db")
+database_memoria = SqliteDatabase(':memory:')
+
+

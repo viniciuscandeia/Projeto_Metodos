@@ -40,7 +40,7 @@ Lista de Administradores
 
         # Usando join para eficiência na criação da string
         lista_adm: str = "\n".join(
-            [f"\t- {adm.nome}: {adm.email}" for adm in repositorio]
+            [f"\t- {adm.id} {adm.nome}: {adm.email}" for adm in repositorio]
         )
 
         print(mensagem + lista_adm)

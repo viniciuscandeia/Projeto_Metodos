@@ -11,7 +11,7 @@ class Usuario:
     informações comuns como nome, email e senha.
     """
 
-    def __init__(self, nome, email, senha):
+    def __init__(self, nome, username, email, senha,):
         """
         Inicializa um novo objeto Usuario.
 
@@ -25,6 +25,7 @@ class Usuario:
         self.nome = nome
         self.email = email
         self.senha = senha
+        self.username = username
 
     def __str__(self) -> str:
         """
