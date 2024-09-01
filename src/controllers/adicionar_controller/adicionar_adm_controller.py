@@ -49,8 +49,9 @@ class AdicionarAdministradorController(AdicionarUsuarioController):
         nome: str = novo_administrador["Nome"]
         email: str = novo_administrador["Email"]
         senha: str = novo_administrador["Senha"]
+        username: str = novo_administrador['Username']
 
-        objeto_adm = Administrador(nome, email, senha)
+        objeto_adm = Administrador(nome, email, senha, username)
 
         try:
             adm_repositorio.registrar_administrador(objeto_adm)

@@ -56,6 +56,7 @@ class VendedorRepositorio:
                 nome=vendedor.nome,
                 email=vendedor.email,
                 senha=vendedor.senha,
+                username=vendedor.username,
                 user_type="VENDEDOR",
             )
         except IntegrityError as e:

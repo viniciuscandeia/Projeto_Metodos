@@ -57,3 +57,6 @@ class UsuarioErroInesperado(UsuarioErro):
     durante operações relacionadas a usuários que não se enquadram em categorias
     específicas de erro.
     """
+
+class UsuarioNaoEncontrado():
+    """"""

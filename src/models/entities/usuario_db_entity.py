@@ -24,6 +24,7 @@ class UsuarioBD(Model):
     """
 
     nome = CharField()
+    username = CharField()
     email = CharField()
     senha = CharField()
     user_type = CharField(
