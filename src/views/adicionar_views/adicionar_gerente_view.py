@@ -31,6 +31,7 @@ class AdicionarGerenteView:
         print("Adicionar novo gerente \n")
         nome = input("Digite o nome: ")
         email = input("Digite o email: ")
+        username = input('Digite o username: ')
         senha = input("Digite a senha: ")
         _id_loja = str(uuid.uuid4().int >> 64)
         # Criando dicionario do adm
@@ -38,6 +39,7 @@ class AdicionarGerenteView:
             "Nome": nome,
             "Email": email,
             "Senha": senha,
+            "Username": username,
             "Id_loja": _id_loja,
         }
 

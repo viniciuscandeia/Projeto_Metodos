@@ -23,6 +23,7 @@ Sistema Cadastral
 
 * Cadastrar Usuario - 1
 * Listar Usuario - 2
+* Editar Usuario - 3
 * Sair - 9
     """
 

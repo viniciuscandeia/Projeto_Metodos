@@ -45,6 +45,7 @@ class AdicionarVendedorController(AdicionarUsuarioController):
         """
 
         nome: str = novo_vendedor["Nome"]
+        username:str = novo_vendedor['Username']
         email: str = novo_vendedor["Email"]
         senha: str = novo_vendedor["Senha"]
         _id_loja: str = novo_vendedor["Id_loja"]

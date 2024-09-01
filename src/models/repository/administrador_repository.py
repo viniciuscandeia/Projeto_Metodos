@@ -58,6 +58,7 @@ class AdministradorRepositorio:
                 nome=administrador.nome,
                 email=administrador.email,
                 senha=administrador.senha,
+                username=administrador.username,
                 user_type="ADMINISTRADOR",
             )
         except IntegrityError as e:
@@ -67,13 +68,19 @@ class AdministradorRepositorio:
             # Captura qualquer outra exceção não esperada
             raise UsuarioRegistroError(f"Erro inesperado ao registrar administrador: { str(e)}") from None
         
-    def editar_administrador(self, _id, novoAdministrador:Administrador) -> None:
+    def editar_administrador(self, novoAdministrador:dict) -> None:
         try:
-            UsuarioBD.select()
+                administrador = UsuarioBD.get(UsuarioBD.id == int(novoAdministrador.get('id')))
+                update_data = { 
+                    'nome': novoAdministrador.get('Nome') if novoAdministrador.get('Nome') else administrador.nome,
+                    'email': novoAdministrador.get('Email') if novoAdministrador.get('Email') else administrador.email,
+                    'username':novoAdministrador.get('Username') if novoAdministrador.get('Username') else administrador.username,
+                }
 
-            UsuarioBD.update(
-                nome=novoAdministrador.nome,
-                email=novoAdministrador.email).where(id=novoAdministrador.id)
+        # Remover chaves com valor None (ou não fornecidas)
+                update_data = {k: v for k, v in update_data.items() if v is not None}
+                UsuarioBD.update(**update_data).where(UsuarioBD.id == administrador.id).execute()
+                return update_data
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
             raise UsuarioIntegridadeError(f'Erro ao editar administrador: { str(e)}') from None

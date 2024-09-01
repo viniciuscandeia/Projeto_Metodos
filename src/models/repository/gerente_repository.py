@@ -59,6 +59,7 @@ class GerenteRepositorio:
                 email=gerente.email,
                 senha=gerente.senha,
                 user_type="GERENTE",
+                username=gerente.username,
             )
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
