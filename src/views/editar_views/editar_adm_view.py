@@ -30,13 +30,13 @@ class EditarAdmView:
         # Coletando dados
         print("Editar administrador \n")
         print('(Caso nao queira editar um campo, apenas deixe em branco)')
-        selectedId = input('Selectione id do usuario para editar: ')
+        id_usuario = input('Digite o id do usuario para editar: ')
         nome = input("Digite o nome: ")
         username = input("Digite o username: ")
         email = input("Digite o email: ")
 
         novo_administrador = {
-            'id': selectedId,
+            'id': id_usuario,
             'Nome': nome,
             'Username': username,
             'Email': email
@@ -57,8 +57,8 @@ class EditarAdmView:
 
         os.system("cls||clear")
 
-        mensagem_sucesso = f"""
-Administrador editado com sucesso
+        mensagem_sucesso = """
+Administrador editado com sucesso!
 
 """
         print(mensagem_sucesso)

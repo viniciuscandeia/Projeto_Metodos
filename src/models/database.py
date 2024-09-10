@@ -13,5 +13,3 @@ from peewee import SqliteDatabase
 
 database_persistente = SqliteDatabase("./src/data/database.db")
 database_memoria = SqliteDatabase(':memory:')
-
-

@@ -19,6 +19,7 @@ from abc import ABC, abstractmethod
 from typing import Dict
 from ...lib.validar_inputs import ValidarInputs
 
+
 class AdicionarUsuarioController(ABC):
     """
     Classe base para adicionar um novo usuário.
@@ -56,7 +57,7 @@ class AdicionarUsuarioController(ABC):
             self.__validar_campos(novo_usuario)
             self._criar_entidade(novo_usuario)
             resposta = self.__formatar_resposta(novo_usuario)
-            
+
             return {"Sucesso": True, "Mensagem": resposta}
         except ValueError as erro:
             return {"Sucesso": False, "ERROR": str(erro)}
@@ -84,7 +85,6 @@ class AdicionarUsuarioController(ABC):
             ValidarInputs.validar_username(novo_usuario)
         except ValueError as erro:
             raise ValueError(str(erro)) from None
-
 
     @abstractmethod
     def _criar_entidade(self, novo_usuario: Dict) -> None:

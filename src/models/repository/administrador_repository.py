@@ -67,20 +67,41 @@ class AdministradorRepositorio:
         except Exception as e:
             # Captura qualquer outra exceção não esperada
             raise UsuarioRegistroError(f"Erro inesperado ao registrar administrador: { str(e)}") from None
-        
-    def editar_administrador(self, novoAdministrador:dict) -> None:
+
+    def editar_administrador(self, novo_administrador:dict) -> None:
+        """
+        Edita as informações de um administrador no repositório.
+
+        Este método atualiza as informações de um administrador existente com base
+        nos dados fornecidos no dicionário `novo_administrador`. Somente os campos
+        presentes no dicionário serão atualizados, mantendo os valores anteriores
+        para os campos não informados.
+
+        Args:
+            novo_administrador (dict): Dicionário contendo os novos dados do administrador.
+                                       Deve incluir o campo 'id' para identificar o administrador
+                                       a ser editado, e pode conter os campos 'Nome', 'Email' e
+                                       'Username' para atualização.
+
+        Returns:
+            dict: Dicionário com os dados atualizados do administrador.
+
+        Levanta:
+            UsuarioIntegridadeError: Se ocorrer um erro de integridade ao tentar editar o administrador.
+            UsuarioRegistroError: Se ocorrer qualquer outro erro inesperado ao editar o administrador.
+        """
         try:
-                administrador = UsuarioBD.get(UsuarioBD.id == int(novoAdministrador.get('id')))
-                update_data = { 
-                    'nome': novoAdministrador.get('Nome') if novoAdministrador.get('Nome') else administrador.nome,
-                    'email': novoAdministrador.get('Email') if novoAdministrador.get('Email') else administrador.email,
-                    'username':novoAdministrador.get('Username') if novoAdministrador.get('Username') else administrador.username,
-                }
+            administrador = UsuarioBD.get(UsuarioBD.id == int(novo_administrador.get('id')))
+            update_data = {
+                'nome': novo_administrador.get('Nome') if novo_administrador.get('Nome') else administrador.nome,
+                'email': novo_administrador.get('Email') if novo_administrador.get('Email') else administrador.email,
+                'username':novo_administrador.get('Username') if novo_administrador.get('Username') else administrador.username,
+            }
 
         # Remover chaves com valor None (ou não fornecidas)
-                update_data = {k: v for k, v in update_data.items() if v is not None}
-                UsuarioBD.update(**update_data).where(UsuarioBD.id == administrador.id).execute()
-                return update_data
+            update_data = {k: v for k, v in update_data.items() if v is not None}
+            UsuarioBD.update(**update_data).where(UsuarioBD.id == administrador.id).execute()
+            return update_data
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
             raise UsuarioIntegridadeError(f'Erro ao editar administrador: { str(e)}') from None
@@ -130,8 +151,7 @@ class AdministradorRepositorio:
             lista_administradores = UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
-            print(
-                f"Erro ao acessar o repositório de administradores: {str(e)}")
+            print(f"Erro ao acessar o repositório de administradores: {str(e)}")
             return []
         return lista_administradores
 

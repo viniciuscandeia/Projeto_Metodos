@@ -29,7 +29,7 @@ class AdicionarAdministradorController(AdicionarUsuarioController):
     - `_criar_entidade`: Cria uma entidade de administrador e a registra no repositório.
     """
 
-    def _criar_entidade(self, novo_administrador: Dict) -> None:
+    def _criar_entidade(self, novo_usuario: Dict) -> None:
         """
         Cria uma entidade de administrador e a registra no repositório.
 
@@ -38,7 +38,7 @@ class AdicionarAdministradorController(AdicionarUsuarioController):
         de administradores.
 
         Parâmetros:
-            novo_administrador (Dict[str, str]): Um dicionário contendo os dados do
+            novo_usuario (Dict[str, str]): Um dicionário contendo os dados do
             novo administrador,
             com as chaves "Nome", "Email" e "Senha".
 
@@ -46,12 +46,12 @@ class AdicionarAdministradorController(AdicionarUsuarioController):
             Exception: Se ocorrer um erro ao tentar registrar o administrador no repositório.
         """
 
-        nome: str = novo_administrador["Nome"]
-        email: str = novo_administrador["Email"]
-        senha: str = novo_administrador["Senha"]
-        username: str = novo_administrador['Username']
+        nome: str = novo_usuario["Nome"]
+        email: str = novo_usuario["Email"]
+        senha: str = novo_usuario["Senha"]
+        username: str = novo_usuario['Username']
 
-        objeto_adm = Administrador(nome, email, senha, username)
+        objeto_adm = Administrador(nome, username, email, senha)
 
         try:
             adm_repositorio.registrar_administrador(objeto_adm)

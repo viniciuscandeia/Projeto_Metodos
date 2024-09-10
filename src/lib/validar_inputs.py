@@ -1,7 +1,8 @@
 from typing import Dict
 import re
 
-class ValidarInputs: 
+
+class ValidarInputs:
     def validar_nome(novo_usuario: Dict) -> None:
         """
         Valida o campo 'Nome' do usuário.
@@ -18,17 +19,17 @@ class ValidarInputs:
         if not isinstance(novo_usuario["Nome"], str) or len(novo_usuario["Nome"]) == 0:
             raise ValueError("O campo 'Nome' esta vazio!")
 
-    def validar_id(novo_usuario:Dict) -> None:
+    def validar_id(novo_usuario: Dict) -> None:
         if 'id' not in novo_usuario:
-                raise ValueError("O campo 'id' esta vazio!")
-        
-    def validar_username(novo_usuario:Dict) -> None:
+            raise ValueError("O campo 'id' esta vazio!")
 
-         if not isinstance(novo_usuario["Username"], str) or len(novo_usuario["Username"]) == 0:
+    def validar_username(novo_usuario: Dict) -> None:
+
+        if not isinstance(novo_usuario["Username"], str) or len(novo_usuario["Username"]) == 0:
             raise ValueError("O campo 'username' esta vazio!")
-         
-         if (len(novo_usuario['Username']) > 12):
-             raise ValueError("O campo 'username' tem mais de 12 caracteres")
+
+        if (len(novo_usuario['Username']) > 12):
+            raise ValueError("O campo 'username' tem mais de 12 caracteres")
 
     def validar_email(novo_usuario: Dict) -> None:
         """
@@ -46,22 +47,18 @@ class ValidarInputs:
         """
         email_regex = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
 
-
         if (
             not isinstance(novo_usuario["Email"], str)
-            or len(novo_usuario["Email"]) == 0 
+            or len(novo_usuario["Email"]) == 0
         ):
             raise ValueError(
                 "O campo 'Email' esta vazio"
             )
 
-        if(not re.match(email_regex, novo_usuario['Email'])):
+        if (not re.match(email_regex, novo_usuario['Email'])):
             raise ValueError(
                 "O campo 'Email' nao é um email"
             )
-
-        # if any(char.isdigit() for char in novo_usuario["Email"]):
-        #     raise ValueError("O campo 'Email' nao pode conter numeros!")
 
     def validar_senha(novo_usuario: Dict) -> None:
         """
@@ -81,7 +78,8 @@ class ValidarInputs:
 
         senha = novo_usuario["Senha"]
         if len(senha) < 8 or len(senha) > 128:
-            raise ValueError("O campo 'Senha' deve ter entre 8 e 128 caracteres!")
+            raise ValueError(
+                "O campo 'Senha' deve ter entre 8 e 128 caracteres!")
         if senha in novo_usuario["Nome"] or senha in novo_usuario["Email"]:
             raise ValueError(
                 "O campo 'Senha' nao pode ser igual ao campo 'Nome' ou 'Email'!"

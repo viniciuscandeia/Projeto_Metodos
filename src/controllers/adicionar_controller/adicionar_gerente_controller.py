@@ -29,7 +29,7 @@ class AdicionarGerenteController(AdicionarUsuarioController):
     - `_criar_entidade`: Cria uma entidade de gerente e a registra no repositório.
     """
 
-    def _criar_entidade(self, novo_gerente: Dict) -> None:
+    def _criar_entidade(self, novo_usuario: Dict) -> None:
         """
         Cria uma entidade de gerente e a registra no repositório.
 
@@ -37,20 +37,20 @@ class AdicionarGerenteController(AdicionarUsuarioController):
         cria uma instância da entidade `Gerente` e a registra no repositório de gerentes.
 
         Parâmetros:
-            novo_gerente (Dict[str, str]): Um dicionário contendo os dados do novo gerente,
+            novo_usuario (Dict[str, str]): Um dicionário contendo os dados do novo gerente,
             com as chaves "Nome", "Email", "Senha" e "Id_loja".
 
         Levanta:
             Exception: Se ocorrer um erro ao tentar registrar o gerente no repositório.
         """
 
-        nome: str = novo_gerente["Nome"]
-        email: str = novo_gerente["Email"]
-        senha: str = novo_gerente["Senha"]
-        username: str = novo_gerente["Username"]
-        _id_loja: str = novo_gerente["Id_loja"]
+        nome: str = novo_usuario["Nome"]
+        email: str = novo_usuario["Email"]
+        senha: str = novo_usuario["Senha"]
+        username: str = novo_usuario["Username"]
+        _id_loja: str = novo_usuario["Id_loja"]
 
-        objeto_gerente = Gerente(nome, email, senha, username, _id_loja)
+        objeto_gerente = Gerente(nome, username, email, senha, _id_loja)
 
         try:
             gerente_repositorio.registrar_gerente(objeto_gerente)

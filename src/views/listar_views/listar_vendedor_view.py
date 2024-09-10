@@ -53,6 +53,6 @@ Lista de Vendedores
         os.system("cls||clear")
 
         mensagem = """
-Lista vazia de Vendedores
+Lista vazia de Vendedores.
 """
         print(mensagem)

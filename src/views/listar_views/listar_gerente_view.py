@@ -53,6 +53,6 @@ Lista de Gerentes
         os.system("cls||clear")
 
         mensagem = """
-Lista vazia de Gerentes
+Lista vazia de Gerentes.
 """
         print(mensagem)
