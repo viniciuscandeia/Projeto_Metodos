@@ -3,7 +3,7 @@ import re
 
 
 class ValidarInputs:
-    def validar_nome(novo_usuario: Dict) -> None:
+    def validar_nome(self, novo_usuario: Dict) -> None:
         """
         Valida o campo 'Nome' do usuário.
 
@@ -19,11 +19,11 @@ class ValidarInputs:
         if not isinstance(novo_usuario["Nome"], str) or len(novo_usuario["Nome"]) == 0:
             raise ValueError("O campo 'Nome' esta vazio!")
 
-    def validar_id(novo_usuario: Dict) -> None:
+    def validar_id(self, novo_usuario: Dict) -> None:
         if 'id' not in novo_usuario:
             raise ValueError("O campo 'id' esta vazio!")
 
-    def validar_username(novo_usuario: Dict) -> None:
+    def validar_username(self, novo_usuario: Dict) -> None:
 
         if not isinstance(novo_usuario["Username"], str) or len(novo_usuario["Username"]) == 0:
             raise ValueError("O campo 'username' esta vazio!")
@@ -31,7 +31,7 @@ class ValidarInputs:
         if (len(novo_usuario['Username']) > 12):
             raise ValueError("O campo 'username' tem mais de 12 caracteres")
 
-    def validar_email(novo_usuario: Dict) -> None:
+    def validar_email(self, novo_usuario: Dict) -> None:
         """
         Valida o campo 'Email' do usuário.
 
@@ -60,7 +60,7 @@ class ValidarInputs:
                 "O campo 'Email' nao é um email"
             )
 
-    def validar_senha(novo_usuario: Dict) -> None:
+    def validar_senha(self, novo_usuario: Dict) -> None:
         """
         Valida o campo 'Senha' do usuário.
 
