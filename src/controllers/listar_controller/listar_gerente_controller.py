@@ -7,7 +7,7 @@ por verificar a existência de gerentes cadastrados no repositório.
 
 from typing import List
 
-from ...models.entities.gerente_entity import Gerente
+from ...models.entities.usuario_db_entity import UsuarioBD
 from ...models.repository.gerente_repository import gerente_repositorio
 
 
@@ -26,7 +26,7 @@ class ListarGerentesController:
         Retorna:
             bool: True se houver pelo menos um gerente, False caso contrário.
         """
-        repositorio: List[Gerente] = gerente_repositorio.pegar_repositorio()
+        repositorio: List[UsuarioBD] = gerente_repositorio.pegar_repositorio()
         if repositorio:
             return True
         return False

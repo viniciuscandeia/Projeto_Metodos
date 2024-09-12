@@ -7,7 +7,7 @@ por verificar a existência de administradores cadastrados no repositório.
 
 from typing import List
 
-from ...models.entities.administrador_entity import Administrador
+from ...models.entities.usuario_db_entity import UsuarioBD
 from ...models.repository.administrador_repository import adm_repositorio
 
 
@@ -26,7 +26,7 @@ class ListarAdministradoresController:
         Retorna:
             bool: True se houver pelo menos um administrador, False caso contrário.
         """
-        repositorio: List[Administrador] = adm_repositorio.pegar_repositorio()
+        repositorio: List[UsuarioBD] = adm_repositorio.pegar_repositorio()
         if repositorio:
             return True
         return False

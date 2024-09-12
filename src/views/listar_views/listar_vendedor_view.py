@@ -40,7 +40,7 @@ Lista de Vendedores
 
         # Usando join para eficiência na criação da string
         lista_vendedor: str = "\n".join(
-            [f"\t- {vendedor.nome}: {vendedor.email}" for vendedor in repositorio]
+            [f"\t- [{vendedor.id}] {vendedor.nome}: {vendedor.email}" for vendedor in repositorio]
         )
 
         print(mensagem + lista_vendedor)
@@ -53,6 +53,6 @@ Lista de Vendedores
         os.system("cls||clear")
 
         mensagem = """
-Lista vazia de Vendedores
+Lista vazia de Vendedores.
 """
         print(mensagem)

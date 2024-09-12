@@ -11,7 +11,7 @@ from peewee import DoesNotExist, IntegrityError
 
 from ..entities.usuario_db_entity import UsuarioBD
 from ..entities.vendedor_entity import Vendedor
-from ..exceptions import (
+from ..excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,
@@ -56,16 +56,15 @@ class VendedorRepositorio:
                 nome=vendedor.nome,
                 email=vendedor.email,
                 senha=vendedor.senha,
+                username=vendedor.username,
                 user_type="VENDEDOR",
             )
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
-            raise UsuarioIntegridadeError(f"Erro ao registrar vendedor: {
-                str(e)}") from None
+            raise UsuarioIntegridadeError(f"Erro ao registrar vendedor: {str(e)}") from None
         except Exception as e:
             # Captura qualquer outra exceção não esperada
-            raise UsuarioRegistroError(f"Erro inesperado ao registrar vendedor: {
-                str(e)}") from None
+            raise UsuarioRegistroError(f"Erro inesperado ao registrar vendedor: {str(e)}") from None
 
 
     def remover_vendedor(self, _id: str) -> None:
@@ -88,11 +87,9 @@ class VendedorRepositorio:
             usuario = UsuarioBD.get_by_id(_id)
             usuario.delete_instance()
         except DoesNotExist:
-            raise UsuarioNaoEncontrado(f"Vendedor com ID {
-                _id} não encontrado.") from None
+            raise UsuarioNaoEncontrado(f"Vendedor com ID {_id} não encontrado.") from None
         except Exception as e:
-            raise UsuarioErroInesperado(f"Erro inesperado ao remover vendedor: {
-                str(e)}") from None
+            raise UsuarioErroInesperado(f"Erro inesperado ao remover vendedor: {str(e)}") from None
 
 
     def pegar_repositorio(self) -> List[Vendedor]:
@@ -110,15 +107,7 @@ class VendedorRepositorio:
         """
 
         try:
-            lista_vendedores = [
-                Vendedor(
-                    nome=vendedor.nome,
-                    email=vendedor.email,
-                    senha=vendedor.senha,
-                    id_store=0,
-                )
-                for vendedor in UsuarioBD.select().where(UsuarioBD.user_type == "VENDEDOR")
-            ]
+            lista_vendedores = UsuarioBD.select().where(UsuarioBD.user_type == "VENDEDOR")
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
             print(

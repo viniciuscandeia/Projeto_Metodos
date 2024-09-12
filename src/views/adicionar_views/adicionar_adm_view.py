@@ -30,11 +30,12 @@ class AdicionarAdministradorView:
         # Coletando dados
         print("Adicionar novo administrador \n")
         nome = input("Digite o nome: ")
+        username = input("Digite o username: ")
         email = input("Digite o email: ")
         senha = input("Digite a senha: ")
 
         # Criando dicionario do adm
-        novo_administrador = {"Nome": nome, "Email": email, "Senha": senha}
+        novo_administrador = {"Nome": nome, "Email": email, "Senha": senha, "Username": username}
 
         return novo_administrador
 

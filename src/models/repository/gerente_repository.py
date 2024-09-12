@@ -11,7 +11,7 @@ from peewee import DoesNotExist, IntegrityError
 
 from ..entities.gerente_entity import Gerente
 from ..entities.usuario_db_entity import UsuarioBD
-from ..exceptions import (
+from ..excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
     UsuarioNaoEncontrado,
@@ -59,15 +59,14 @@ class GerenteRepositorio:
                 email=gerente.email,
                 senha=gerente.senha,
                 user_type="GERENTE",
+                username=gerente.username,
             )
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
-            raise UsuarioIntegridadeError(f"Erro ao registrar gerente: {
-                str(e)}") from None
+            raise UsuarioIntegridadeError(f"Erro ao registrar gerente: { str(e)}") from None
         except Exception as e:
             # Captura qualquer outra exceção não esperada
-            raise UsuarioRegistroError(f"Erro inesperado ao registrar gerente: {
-                str(e)}") from None
+            raise UsuarioRegistroError(f"Erro inesperado ao registrar gerente: { str(e)}") from None
 
 
     def remover_gerente(self, _id: str) -> None:
@@ -89,11 +88,9 @@ class GerenteRepositorio:
             usuario = UsuarioBD.get_by_id(_id)
             usuario.delete_instance()
         except DoesNotExist:
-            raise UsuarioNaoEncontrado(f"Gerente com ID {
-                _id} não encontrado.") from None
+            raise UsuarioNaoEncontrado(f"Gerente com ID {_id} não encontrado.") from None
         except Exception as e:
-            raise UsuarioErroInesperado(f"Erro inesperado ao remover gerente: {
-                str(e)}") from None
+            raise UsuarioErroInesperado(f"Erro inesperado ao remover gerente: {str(e)}") from None
 
 
     def pegar_repositorio(self) -> List[Gerente]:
@@ -111,16 +108,10 @@ class GerenteRepositorio:
         """
 
         try:
-            lista_gerentes = [
-                Gerente(
-                    nome=gerente.nome, email=gerente.email, senha=gerente.senha, id_store=0
-                )
-                for gerente in UsuarioBD.select().where(UsuarioBD.user_type == "GERENTE")
-            ]
+            lista_gerentes = UsuarioBD.select().where(UsuarioBD.user_type == "GERENTE")
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
-            print(
-                f"Erro ao acessar o repositório de gerentes: {str(e)}")
+            print(f"Erro ao acessar o repositório de gerentes: {str(e)}")
             return []
         return lista_gerentes
 
