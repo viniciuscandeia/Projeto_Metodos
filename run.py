@@ -1,4 +1,4 @@
-"""
+""">
 Este módulo serve como ponto de entrada para a execução do sistema.
 
 Ele importa e executa a função 'start' do módulo 'process_handle'.
