@@ -35,11 +35,20 @@ from .constructor.listar_constructor.listar_gerente_constructor import (
 from .constructor.listar_constructor.listar_vendedor_constructor import (
     listar_vendedor_constructor,
 )
-from .constructor.listar_processo import listar_processo
-from .constructor.editar_processo import editar_processo
+from .constructor.loja_constructor import (
+    loja_constructor,
+)
+from .constructor.listar_processo import listar_processo, ListarProcessoLoja
+from .constructor.editar_processo import editar_processo, EditarProcessoLoja
 from ..models.inicializar_db import inicializar_database
+from .constructor.listar_processo import ListarProcessoLoja
+from .constructor.process_helpers import processo_helpers
+from .constructor.excluir_processo import ExcluirProcessoLoja
+import os 
 
 USAR_MEMORIA = False
+
+
 
 def start() -> None:
     """
@@ -57,6 +66,21 @@ def start() -> None:
     :return: None
     """
     inicializar_database(USAR_MEMORIA)
+
+    # registrarLojaController = RegistrarLojaController()
+    # # registrarLojaController.registrarLoja(id_usuario=2, loja=Loja(endereco='Rua mauricio', nome='maganize'))
+    # listarLojaController = ListarLojaController()
+    # editarLojaController = EditarLojaController()
+    # editarLojaController.editar_loja_adm(id_adm=2, id_loja=4, nova_loja={'Endereco': 'Rua gama filho'})
+    # excluirLojaController = ExcluirLojaController()
+    # excluirLojaController.excluir_loja(id_adm=2,id_loja=9)
+
+    # print(listarLojaController.list_lojas_adm(id_usuario=2))
+ 
+    
+
+    os.system("cls||clear")
+
 
     while True:
         comando = introducao_processo()
@@ -94,7 +118,6 @@ def start() -> None:
                         case _:
                             print("Comando invalido!")
             case "3":
-
                 while True:
                     retorno = editar_processo()
                     match retorno:
@@ -105,7 +128,125 @@ def start() -> None:
                         case _:
                             print("Comando invalido!")
 
+            case "4":
+                while True:
+                   id_administrador = processo_helpers.getIdUsuario()
+
+                   if id_administrador == None:
+                       break
+
+                   nova_loja = processo_helpers.getDataToCreateLoja()
+
+                   if nova_loja == None:
+                       break
+                   
+                   if nova_loja:
+                       loja_constructor.registrar_loja(id_admnistrador=id_administrador, loja=nova_loja)
+                       break
+            case "5":
+                while True:
+                    retorno = ListarProcessoLoja.executar()
+                    match retorno:
+                        case "1":
+                            id_adm = processo_helpers.getIdUsuario()
+
+                            if(id_adm):
+                                loja_constructor.listar_adm(id_adm=id_adm)
+                        case "2":
+                            id_adm = processo_helpers.getIdUsuario()
+
+                            if id_adm == None:
+                                break
+
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja == None:
+                                break
+
+
+                            loja_constructor.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
+                        case "3":
+                            id_gerente = processo_helpers.getIdUsuario()
+
+                            if id_gerente == None:
+                                break
+                            
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja == None:
+                                break
+
+                            loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+                        
+                        case _:
+                            break
+            case "6":
+                while True:
+                    retorno = EditarProcessoLoja.executar()
+
+                    match retorno:
+                        case "1":
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja == None:
+                                break
+
+                            id_adm = processo_helpers.getIdUsuario()
+
+                            if id_adm == None:
+                                break
+
+
+                            loja = loja_constructor.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
+
+                            if loja:
+                                nova_loja = processo_helpers.getDataToEditLoja()
+                                    
+                                loja_constructor.editar_loja_adm(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+
+                        case "2":
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja == None:
+                                break
+                            
+                            id_gerente = processo_helpers.getIdUsuario()
+                            
+                            if id_gerente == None:
+                                break
+
+
+                            loja = loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+                            
+                            if loja:
+                                nova_loja = processo_helpers.getNewLoja()
+
+                                loja_constructor.editar_loja_gerente(id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
+                        case _:
+                            print('Comando Invalido')
+                            break
+
+            case "7":
+                while True:
+                    comando = ExcluirProcessoLoja.executar()
+
+                    match comando:
+                        case "1": 
+                            id_adm = processo_helpers.getIdUsuario()
+
+                            if id_adm == None:
+                                break
+                            
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja == None:
+                                break
+
+                            loja_constructor.excluir_loja(id_administrador=id_adm, id_loja=id_loja)
+                        case "9":
+                            break
             case "9":
                 sys.exit()
+                break
             case _:
                 print("Comando invalido!")

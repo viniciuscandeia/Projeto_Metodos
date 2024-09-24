@@ -57,3 +57,66 @@ class UsuarioErroInesperado(UsuarioErro):
     durante operações relacionadas a usuários que não se enquadram em categorias
     específicas de erro.
     """
+class LojaRegistroError(Exception):
+    """
+    Exceção específica para erros ao registrar um usuário.
+
+    Esta exceção é lançada quando ocorre um erro durante o processo de registro
+    de um usuário no sistema.
+    """
+
+class LojaExclusaoError(Exception):
+    """
+    Exceção específica para erros ao registrar um usuário.
+
+    Esta exceção é lançada quando ocorre um erro durante o processo de registro
+    de um usuário no sistema.
+    """
+
+class LojaIntegridadeError(LojaRegistroError):
+    """
+    Exceção específica para erros de integridade de dados ao registrar um usuário.
+
+    Esta exceção é lançada quando há problemas relacionados à integridade dos dados,
+    como violações de restrições de unicidade ou erros de validação ao registrar um usuário.
+    """
+
+
+class LojaErro(Exception):
+    """
+    Exceção base para erros relacionados ao usuário.
+
+    Esta é a classe base para todas as exceções relacionadas a operações e
+    problemas que envolvem usuários no sistema.
+    """
+
+
+class LojaNaoEncontrado(LojaErro):
+    """
+    Exceção para quando um usuário não é encontrado.
+
+    Esta exceção é lançada quando uma operação falha devido à ausência de um
+    usuário específico no sistema.
+    """
+
+
+class LojaErroInesperado(LojaErro):
+    """
+    Exceção para erros inesperados ao lidar com usuários.
+
+    Esta exceção é lançada para capturar e tratar erros inesperados que ocorrem
+    durante operações relacionadas a usuários que não se enquadram em categorias
+    específicas de erro.
+    """
+
+class UsuarioNaoAdministrador(Exception):
+    pass
+
+class UsuarioNaoGerente(Exception):
+    pass
+
+class UsuarioNaoVendedor(Exception):
+    pass
+
+class CampoInvalido(Exception):
+    pass

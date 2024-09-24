@@ -10,17 +10,35 @@ Funções:
 """
 
 from ...views.listar_views.listar_view import listar_view
-
+from .processo import Processo
 
 def listar_processo():
     """
     Solicita a entrada do usuário para listar itens e retorna o comando escolhido.
 
-    Esta função utiliza a view `listar_view` para obter o comando de listagem desejado pelo
-    usuário e retorna esse comando para processamento adicional.
+        Esta função utiliza a view `listar_view` para obter o comando de listagem desejado pelo
+        usuário e retorna esse comando para processamento adicional.
 
-    :return: Comando escolhido pelo usuário para listar itens.
-    :rtype: str
-    """
+        :return: Comando escolhido pelo usuário para listar itens.
+        :rtype: str
+        """
     comando = listar_view()
-    return comando
+    return comando 
+
+class ListarProcessoLoja(Processo):
+    def executar():
+        mensagem = """
+        Listar Lojas
+
+        * 1 - Listar Lojas como adm 
+        * 2 - Buscar uma loja como adm 
+        * 3 - Bucar uma loja como gerente
+        * Voltar - 9
+            """
+
+        print(mensagem)
+        comando = input("Comando: ")
+
+        return comando
+    
+    
