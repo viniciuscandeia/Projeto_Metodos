@@ -1,2 +1,4 @@
 __pycache__
 saida.txt
+__pycache__/
+*.py[cod]

@@ -155,5 +155,17 @@ class AdministradorRepositorio:
             return []
         return lista_administradores
 
+    def get_one_administrador(self, id:int) -> UsuarioBD:
+        try:
+            administrador = UsuarioBD.get(UsuarioBD.id == id, 
+                                                             UsuarioBD.user_type == "ADMINISTRADOR",)
+        except UsuarioBD.DoesNotExist:
+            print(f"Administrador com ID {id} não encontrado.")
+            return None
+        except Exception as e:
+            print(f"Erro ao acessar o repositório de administradores: {str(e)}")
+            return []
+        return administrador
+
 
 adm_repositorio = AdministradorRepositorio()

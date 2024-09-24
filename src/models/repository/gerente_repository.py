@@ -108,12 +108,24 @@ class GerenteRepositorio:
         """
 
         try:
-            lista_gerentes = UsuarioBD.select().where(UsuarioBD.user_type == "GERENTE")
+            lista_gerentes = UsuarioBD.get(UsuarioBD.user_type == "GERENTE")
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
             print(f"Erro ao acessar o repositório de gerentes: {str(e)}")
             return []
         return lista_gerentes
 
+
+    def get_one_gerente(self, id:int) -> UsuarioBD:
+            try:
+                gerente = UsuarioBD.select().where(UsuarioBD.id == id, 
+                                                                UsuarioBD.user_type == "GERENTE",)
+            except UsuarioBD.DoesNotExist:
+                print(f"Gerente com ID {id} não encontrado.")
+                return None
+            except Exception as e:
+                print(f"Erro ao acessar o repositório de Gerentes: {str(e)}")
+                return []
+            return gerente
 
 gerente_repositorio = GerenteRepositorio()
