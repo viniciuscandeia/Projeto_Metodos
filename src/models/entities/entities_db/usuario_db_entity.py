@@ -8,7 +8,7 @@ persistir os dados.
 
 from peewee import CharField, Check, Model, AutoField
 
-from ..database import database_persistente
+from ...database import database_persistente
 
 
 class UsuarioBD(Model):

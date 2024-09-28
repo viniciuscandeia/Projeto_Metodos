@@ -9,7 +9,7 @@ from typing import List
 
 from peewee import DoesNotExist, IntegrityError
 
-from ..entities.usuario_db_entity import UsuarioBD
+from ..entities.entities_db.usuario_db_entity import UsuarioBD
 from ..entities.vendedor_entity import Vendedor
 from ..excecoes import (
     UsuarioErroInesperado,

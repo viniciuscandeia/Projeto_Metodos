@@ -7,7 +7,7 @@ por verificar a existência de administradores cadastrados no repositório.
 
 from typing import List
 
-from ...models.entities.usuario_db_entity import UsuarioBD
+from ...models.entities.entities_db.usuario_db_entity import UsuarioBD
 from ...models.repository.administrador_repository import adm_repositorio
 
 

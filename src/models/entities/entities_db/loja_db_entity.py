@@ -1,6 +1,6 @@
 from peewee import Model
 from peewee import CharField, Model, AutoField
-from ..database import database_persistente
+from ...database import database_persistente
 
 class LojaDB(Model):
     id = AutoField()

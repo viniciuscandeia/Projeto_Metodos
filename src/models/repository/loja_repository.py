@@ -1,8 +1,8 @@
 from ..entities.usuario_entity import Usuario
-from ..entities.usuario_db_entity import UsuarioBD
+from ..entities.entities_db.usuario_db_entity import UsuarioBD
 from ..entities.administrador_entity import Administrador
 from ..entities.gerente_entity import Gerente
-from ..entities.loja_db_entity import LojaDB
+from ..entities.entities_db.loja_db_entity import LojaDB
 from ..entities.loja_entity import Loja
 from ..excecoes import LojaIntegridadeError, LojaRegistroError, LojaExclusaoError, UsuarioNaoAdministrador
 from peewee import IntegrityError

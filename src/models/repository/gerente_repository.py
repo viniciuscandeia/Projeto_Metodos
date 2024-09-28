@@ -10,7 +10,7 @@ from typing import List
 from peewee import DoesNotExist, IntegrityError
 
 from ..entities.gerente_entity import Gerente
-from ..entities.usuario_db_entity import UsuarioBD
+from ..entities.entities_db.usuario_db_entity import UsuarioBD
 from ..excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,

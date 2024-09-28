@@ -1,4 +1,4 @@
-from ...models.entities.loja_db_entity import LojaDB
+from ...models.entities.entities_db.loja_db_entity import LojaDB
 from ...models.repository.loja_repository import LojaRepository
 from ...models.repository.gerente_repository import GerenteRepositorio
 from ...models.repository.administrador_repository import AdministradorRepositorio

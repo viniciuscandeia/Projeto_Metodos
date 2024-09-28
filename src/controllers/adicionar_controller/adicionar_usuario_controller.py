@@ -17,7 +17,7 @@ Dependências:
 
 from abc import ABC, abstractmethod
 from typing import Dict
-from ...lib.validar_inputs import ValidarInputs
+from ...lib.validar_inputs import ValidadorInputs
 
 
 class AdicionarUsuarioController(ABC):
@@ -77,12 +77,11 @@ class AdicionarUsuarioController(ABC):
         Raises:
             ValueError: Se qualquer campo não for válido.
         """
-
         try:
-            ValidarInputs.validar_nome(novo_usuario)
-            ValidarInputs.validar_email(novo_usuario)
-            ValidarInputs.validar_senha(novo_usuario)
-            ValidarInputs.validar_username(novo_usuario)
+            ValidadorInputs.validar_nome(novo_usuario)
+            ValidadorInputs.validar_email(novo_usuario)
+            ValidadorInputs.validar_senha(novo_usuario)
+            ValidadorInputs.validar_username(novo_usuario)
         except ValueError as erro:
             raise ValueError(str(erro)) from None
 
