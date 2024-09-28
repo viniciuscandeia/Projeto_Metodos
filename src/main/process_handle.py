@@ -219,7 +219,7 @@ def start() -> None:
                             loja = loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
                             
                             if loja:
-                                nova_loja = processo_helpers.getNewLoja()
+                                nova_loja = processo_helpers.getDataToEditLoja()
 
                                 loja_constructor.editar_loja_gerente(id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
                         case _:

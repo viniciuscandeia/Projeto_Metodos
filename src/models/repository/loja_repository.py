@@ -1,7 +1,3 @@
-from ..entities.usuario_entity import Usuario
-from ..entities.usuario_db_entity import UsuarioBD
-from ..entities.administrador_entity import Administrador
-from ..entities.gerente_entity import Gerente
 from ..entities.loja_db_entity import LojaDB
 from ..entities.loja_entity import Loja
 from ..excecoes import LojaIntegridadeError, LojaRegistroError, LojaExclusaoError, UsuarioNaoAdministrador
@@ -114,7 +110,7 @@ class LojaRepository:
                 }
 
                 nova_loja_data = {k: v for k, v in nova_loja_data.items() if v is not None}
-                UsuarioBD.update(**nova_loja_data).where(LojaDB.id == id_loja).execute()
+                LojaDB.update(**nova_loja_data).where(LojaDB.id == id_loja).execute()
                 return LojaDB.get(LojaDB.id == id_loja)
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
