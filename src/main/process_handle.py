@@ -12,6 +12,8 @@ Funções:
 
 import sys
 
+
+from src.controllers.adicionar_controller.adicionar_adm_controller import AdicionarAdministradorController
 from .constructor.adicionar_constructor.adicionar_adm_constructor import (
     adicionar_adm_constructor,
 )
@@ -38,13 +40,17 @@ from .constructor.listar_constructor.listar_vendedor_constructor import (
 from .constructor.loja_constructor import (
     loja_constructor,
 )
+import os 
 from .constructor.listar_processo import listar_processo, ListarProcessoLoja
 from .constructor.editar_processo import editar_processo, EditarProcessoLoja
 from ..models.inicializar_db import inicializar_database
 from .constructor.listar_processo import ListarProcessoLoja
 from .constructor.process_helpers import processo_helpers
 from .constructor.excluir_processo import ExcluirProcessoLoja
-import os 
+from src.models.entities.loja_db_entity import LojaDB
+from src.lib.notificator_api import NotificatorApi
+from src.adapters.database_adapter_notificator_api import database_adapter_notificator_api
+from src.adapters.firebase_adapter_notificator_api import firebase_adapter_notificator_api
 
 USAR_MEMORIA = False
 
@@ -66,6 +72,7 @@ def start() -> None:
     :return: None
     """
     inicializar_database(USAR_MEMORIA)
+    os.system("cls||clear")
 
     # registrarLojaController = RegistrarLojaController()
     # # registrarLojaController.registrarLoja(id_usuario=2, loja=Loja(endereco='Rua mauricio', nome='maganize'))
@@ -76,11 +83,36 @@ def start() -> None:
     # excluirLojaController.excluir_loja(id_adm=2,id_loja=9)
 
     # print(listarLojaController.list_lojas_adm(id_usuario=2))
- 
+
     
 
-    os.system("cls||clear")
-
+    # class Controller():
+    #     def __init__(self, notificator_api:NotificatorApi) -> None:
+    #         self.notificator_api = notificator_api
+    #
+    #     def basic_controller(self, id_loja:int, id_adm:int):
+    #         #...
+    #         self.notificator_api.send(id_loja=id_loja, id_adm=id_adm, mensagem='Essa é uma notificacao')
+    #         #...
+    #
+    #     def basic_receive(self, id_usuario:int, id_loja:int):
+    #         return self.notificator_api.receive(id_usuario=id_usuario, id_loja=id_loja)
+    #
+    # # controller_use = Controller(notificator_api=database_adapter_notificator_api)
+    # controller_use = Controller(notificator_api=firebase_adapter_notificator_api)
+    # controller_use.basic_controller(2, 2)
+    # controller_use.basic_controller(1, 2)
+    # list = controller_use.basic_receive(id_usuario=1, id_loja=2)
+    #
+    # print('Recebendo notificacao')
+    # for item in list:
+    #     print(item)
+    #
+    # list = controller_use.basic_receive(id_usuario=4, id_loja=1)
+    #
+    # print('Recebendo notificacao')
+    # for item in list:
+    #     print(item)
 
     while True:
         comando = introducao_processo()
@@ -231,7 +263,7 @@ def start() -> None:
                     comando = ExcluirProcessoLoja.executar()
 
                     match comando:
-                        case "1": 
+                        case "1":
                             id_adm = processo_helpers.getIdUsuario()
 
                             if id_adm == None:
