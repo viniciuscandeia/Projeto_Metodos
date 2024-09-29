@@ -1,7 +1,7 @@
 """
 Módulo para controle da listagem de vendedores no sistema.
 
-Este módulo contém o controlador `ListarVendedoresController` que é responsável
+Este módulo contém o controlador `VendedoresListController` que é responsável
 por verificar a existência de vendedores cadastrados no repositório.
 """
 
@@ -11,7 +11,7 @@ from ...models.entities.vendedor_entity import Vendedor
 from ...models.repository.vendedor_repository import vendedor_repositorio
 
 
-class ListarVendedoresController:
+class VendedoresListController:
     """
     Controller para listar vendedores.
 

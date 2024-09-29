@@ -1,7 +1,7 @@
 """
 Módulo para a visualização da listagem de vendedores.
 
-Este módulo define a classe `ListarVendedoresView`, que contém métodos para
+Este módulo define a classe `VendedoresListagemView`, que contém métodos para
 exibir a lista de vendedores do sistema, seja em um formato preenchido ou
 informando que a lista está vazia.
 """
@@ -13,7 +13,7 @@ from ...models.entities.vendedor_entity import Vendedor
 from ...models.repository.vendedor_repository import vendedor_repositorio
 
 
-class ListarVendedoresView:
+class VendedoresListagemView:
     """
     Classe de interface para listar vendedores do sistema.
 

@@ -1,7 +1,7 @@
 """
 Módulo para a visualização de adição de gerentes no sistema.
 
-Este módulo define a classe `AdicionarGerenteView`, que lida com a entrada de dados do usuário
+Este módulo define a classe `GerenteAdicaoView`, que lida com a entrada de dados do usuário
 para adicionar novos gerentes e exibe mensagens de sucesso ou falha.
 """
 
@@ -10,7 +10,7 @@ import uuid
 from typing import Dict
 
 
-class AdicionarGerenteView:
+class GerenteAdicaoView:
     """
     Classe de interface para adicionar gerentes no sistema.
 

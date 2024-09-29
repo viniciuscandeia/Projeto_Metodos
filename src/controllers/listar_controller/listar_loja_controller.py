@@ -5,7 +5,7 @@ from ...models.repository.administrador_repository import AdministradorRepositor
 
 from typing import List
 
-class ListarLojaController:
+class LojasListController:
     def __init__(self, gerenteRepository:GerenteRepositorio, administradorRepository:AdministradorRepositorio) -> None:
         self.lojaRepository = LojaRepository(adm_repositorio=administradorRepository, gerente_repositorio=gerenteRepository)
    

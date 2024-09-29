@@ -3,9 +3,9 @@ Este módulo contém a função construtora para adicionar um novo vendedor.
 """
 
 from ....controllers.adicionar_controller.adicionar_vendedor_controller import (
-    AdicionarVendedorController,
+    VendedorAdicaoController,
 )
-from ....views.adicionar_views.adicionar_vendedor_view import AdicionarVendedorView
+from ....views.adicionar_views.adicionar_vendedor_view import AdicaoVendedorView
 
 
 def adicionar_vendedor_constructor():
@@ -21,8 +21,8 @@ def adicionar_vendedor_constructor():
     - Tenta adicionar o novo vendedor utilizando o controller.
     - Exibe uma mensagem de sucesso ou falha com base no resultado.
     """
-    adicionar_vendedor_view = AdicionarVendedorView()
-    adicionar_vendedor_controller = AdicionarVendedorController()
+    adicionar_vendedor_view = AdicaoVendedorView()
+    adicionar_vendedor_controller = VendedorAdicaoController()
 
     novo_vendedor_informacoes = adicionar_vendedor_view.adicionar_vendedor_view()
     resposta = adicionar_vendedor_controller.adicionar(novo_vendedor_informacoes)

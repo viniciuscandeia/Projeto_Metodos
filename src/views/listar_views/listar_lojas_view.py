@@ -1,10 +1,10 @@
 import os
-from .listar_view_interface import ListarView
-from src.controllers.listar_controller.listar_loja_controller import ListarLojaController
+from .listar_view_interface import AbstractListView
+from src.controllers.listar_controller.listar_loja_controller import LojasListController
 from src.models.entities.entities_db.loja_db_entity import LojaDB
 from typing import List
 
-class ListarLojasView(ListarView): 
+class LojasListagemView(AbstractListView): 
     def listar(self, list:List[LojaDB]):
         if len(list) > 0:
             self._lista_preenchida(list=list)

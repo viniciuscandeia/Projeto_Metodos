@@ -1,4 +1,4 @@
-from ..editar_controller.editar_usuario_controller import EditarUsuarioController
+from ..editar_controller.editar_usuario_controller import UsuarioEdicaoController
 from ...models.repository.administrador_repository import adm_repositorio
 from ...models.excecoes import (
     UsuarioErroInesperado,
@@ -8,7 +8,7 @@ from ...models.excecoes import (
 )
 from typing import Dict
 
-class EditarAdministradorController(EditarUsuarioController):
+class AdministradorEdicaoController(UsuarioEdicaoController):
     def _editar_entidade(self, administrador_editado: Dict) -> None:
         try:
             adm_repositorio.editar_administrador(administrador_editado )

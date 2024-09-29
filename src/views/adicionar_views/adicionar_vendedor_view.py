@@ -1,7 +1,7 @@
 """
 Módulo para a visualização de adição de vendedores no sistema.
 
-Este módulo define a classe `AdicionarVendedorView`, que lida com a entrada de dados do usuário
+Este módulo define a classe `AdicaoVendedorView`, que lida com a entrada de dados do usuário
 para adicionar novos vendedores e exibe mensagens de sucesso ou falha.
 """
 
@@ -10,7 +10,7 @@ import uuid
 from typing import Dict
 
 
-class AdicionarVendedorView:
+class AdicaoVendedorView:
     """
     Classe de interface para adicionar vendedores no sistema.
 

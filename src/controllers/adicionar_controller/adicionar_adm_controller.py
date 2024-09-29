@@ -1,7 +1,7 @@
 """
 Módulo que controla a adição de novos administradores ao sistema.
 
-Este módulo define a classe `AdicionarAdministradorController`, que é responsável por validar,
+Este módulo define a classe `AdministradorAdicaoController`, que é responsável por validar,
 criar e registrar novos administradores no sistema.
 """
 
@@ -15,14 +15,14 @@ from ...models.excecoes import (
     UsuarioRegistroError,
 )
 from ...models.repository.administrador_repository import adm_repositorio
-from .adicionar_usuario_controller import AdicionarUsuarioController
+from .adicionar_usuario_controller import AbstractUsuarioAdicaoController
 
 
-class AdicionarAdministradorController(AdicionarUsuarioController):
+class AdministradorAdicaoController(AbstractUsuarioAdicaoController):
     """
     Controller para adicionar um novo administrador.
 
-    Esta classe herda de `AdicionarUsuarioController` e implementa o método abstrato
+    Esta classe herda de `AbstractUsuarioAdicaoController` e implementa o método abstrato
     necessário para criar uma entidade de administrador e registrá-la no repositório.
 
     Métodos:

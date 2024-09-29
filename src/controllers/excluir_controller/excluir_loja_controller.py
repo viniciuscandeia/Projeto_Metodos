@@ -4,7 +4,7 @@ from ...models.repository.gerente_repository import GerenteRepositorio
 from ...models.repository.administrador_repository import AdministradorRepositorio
 
 
-class ExcluirLojaController:
+class ExclusaoLojaController:
     def __init__(self, administradorRepository:AdministradorRepositorio, 
                        gerenteRepository:GerenteRepositorio ):
         self.lojaRepository = LojaRepository(adm_repositorio=administradorRepository, 

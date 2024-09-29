@@ -1,7 +1,7 @@
 """
 Módulo para a visualização da listagem de gerentes.
 
-Este módulo define a classe `ListarGerentesView`, que contém métodos para
+Este módulo define a classe `GerentesListagemView`, que contém métodos para
 exibir a lista de gerentes do sistema, seja em um formato preenchido ou
 informando que a lista está vazia.
 """
@@ -13,7 +13,7 @@ from ...models.entities.gerente_entity import Gerente
 from ...models.repository.gerente_repository import gerente_repositorio
 
 
-class ListarGerentesView:
+class GerentesListagemView:
     """
     Classe de interface para listar gerentes do sistema.
 
@@ -40,7 +40,7 @@ Lista de Gerentes
 
         # Usando join para eficiência na criação da string
         lista_gerentes: str = "\n".join(
-            [f"\t- [{gerente.id}] {gerente.nome}: {gerente.email}" for gerente in repositorio]
+            [f"\t- {gerente.id} {gerente.nome}: {gerente.email}" for gerente in repositorio]
         )
 
         print(mensagem + lista_gerentes)

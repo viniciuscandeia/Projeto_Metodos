@@ -11,9 +11,9 @@ Funções:
 """
 
 from ....controllers.listar_controller.listar_vendedor_controller import (
-    ListarVendedoresController,
+    VendedoresListController,
 )
-from ....views.listar_views.listar_vendedor_view import ListarVendedoresView
+from ....views.listar_views.listar_vendedor_view import VendedoresListagemView
 
 
 def listar_vendedor_constructor():
@@ -28,8 +28,8 @@ def listar_vendedor_constructor():
     - Verifica a existência de vendedores no repositório.
     - Exibe uma mensagem indicando se a lista de vendedores está vazia ou preenchida.
     """
-    listar_vendedor_view = ListarVendedoresView()
-    listar_vendedor_controller = ListarVendedoresController()
+    listar_vendedor_view = VendedoresListagemView()
+    listar_vendedor_controller = VendedoresListController()
 
     resposta: bool = listar_vendedor_controller.listar()
 

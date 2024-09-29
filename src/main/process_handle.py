@@ -38,12 +38,11 @@ from .constructor.listar_constructor.listar_vendedor_constructor import (
 from .constructor.loja_constructor import (
     loja_constructor,
 )
-from .constructor.listar_processo import listar_processo, ListarProcessoLoja
-from .constructor.editar_processo import editar_processo, EditarProcessoLoja
+from .constructor.listar_processo import listar_processo, LojaListaProcessos
+from .constructor.editar_processo import editar_processo, ProcessoEdicaoLoja
 from ..models.inicializar_db import inicializar_database
-from .constructor.listar_processo import ListarProcessoLoja
 from .constructor.process_helpers import processo_helpers
-from .constructor.excluir_processo import ExcluirProcessoLoja
+from .constructor.excluir_processo import ProcessoExclusaoLoja
 import os 
 
 USAR_MEMORIA = False
@@ -67,15 +66,15 @@ def start() -> None:
     """
     inicializar_database(USAR_MEMORIA)
 
-    # registrarLojaController = RegistrarLojaController()
-    # # registrarLojaController.registrarLoja(id_usuario=2, loja=Loja(endereco='Rua mauricio', nome='maganize'))
-    # listarLojaController = ListarLojaController()
-    # editarLojaController = EditarLojaController()
-    # editarLojaController.editar_loja_adm(id_adm=2, id_loja=4, nova_loja={'Endereco': 'Rua gama filho'})
-    # excluirLojaController = ExcluirLojaController()
-    # excluirLojaController.excluir_loja(id_adm=2,id_loja=9)
+    # LojaAdicaoController = LojaAdicaoController()
+    # # LojaAdicaoController.registrarLoja(id_usuario=2, loja=Loja(endereco='Rua mauricio', nome='maganize'))
+    # LojasListController = LojasListController()
+    # LojaEdicaoController = LojaEdicaoController()
+    # LojaEdicaoController.editar_loja_adm(id_adm=2, id_loja=4, nova_loja={'Endereco': 'Rua gama filho'})
+    # ExclusaoLojaController = ExclusaoLojaController()
+    # ExclusaoLojaController.excluir_loja(id_adm=2,id_loja=9)
 
-    # print(listarLojaController.list_lojas_adm(id_usuario=2))
+    # print(LojasListController.list_lojas_adm(id_usuario=2))
  
     
 
@@ -145,7 +144,7 @@ def start() -> None:
                        break
             case "5":
                 while True:
-                    retorno = ListarProcessoLoja.executar()
+                    retorno = LojaListaProcessos.executar()
                     match retorno:
                         case "1":
                             id_adm = processo_helpers.getIdUsuario()
@@ -182,7 +181,7 @@ def start() -> None:
                             break
             case "6":
                 while True:
-                    retorno = EditarProcessoLoja.executar()
+                    retorno = ProcessoEdicaoLoja.executar()
 
                     match retorno:
                         case "1":
@@ -225,10 +224,11 @@ def start() -> None:
                         case _:
                             print('Comando Invalido')
                             break
+                        #TODO case 3 (buscar loja como gerente)
 
             case "7":
                 while True:
-                    comando = ExcluirProcessoLoja.executar()
+                    comando = ProcessoExclusaoLoja.executar()
 
                     match comando:
                         case "1": 

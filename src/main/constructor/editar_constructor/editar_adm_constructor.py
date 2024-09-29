@@ -3,9 +3,9 @@ Este módulo contém a função construtora para adicionar um novo administrador
 """
 
 from ....controllers.editar_controller.editar_adm_controller import (
-    EditarAdministradorController,
+    AdministradorEdicaoController,
 )
-from ....views.editar_views.editar_adm_view import EditarAdmView
+from ....views.editar_views.editar_adm_view import AdmEdicaoView
 
 
 def editar_adm_constructor():
@@ -21,8 +21,8 @@ def editar_adm_constructor():
     - Tenta adicionar o novo administrador utilizando o controller.
     - Exibe uma mensagem de sucesso ou falha com base no resultado.
     """
-    editar_adm_view = EditarAdmView()
-    editar_adm_controller = EditarAdministradorController()
+    editar_adm_view = AdmEdicaoView()
+    editar_adm_controller = AdministradorEdicaoController()
 
     novo_administrador_informacoes = editar_adm_view.editar_administrador_view()
     resposta = editar_adm_controller.editar(novo_administrador_informacoes)

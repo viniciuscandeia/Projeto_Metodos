@@ -1,24 +1,24 @@
 from src.main.constructor.listar_constructor.listar_constructor import ListarConstructor
-from src.views.listar_views.listar_lojas_view import ListarLojasView
-from src.controllers.listar_controller.listar_loja_controller import ListarLojaController
-from src.controllers.editar_controller.editar_loja_controller import EditarLojaController
+from src.views.listar_views.listar_lojas_view import LojasListagemView
+from src.controllers.listar_controller.listar_loja_controller import LojasListController
+from src.controllers.editar_controller.editar_loja_controller import LojaEdicaoController
 from src.models.repository.gerente_repository import GerenteRepositorio
 from src.models.repository.administrador_repository import AdministradorRepositorio
-from src.controllers.excluir_controller.excluir_loja_controller import ExcluirLojaController
-from src.controllers.adicionar_controller.adicionar_loja_controller import RegistrarLojaController
+from src.controllers.excluir_controller.excluir_loja_controller import ExclusaoLojaController
+from src.controllers.adicionar_controller.adicionar_loja_controller import LojaAdicaoController
 from src.models.entities.loja_entity import Loja
 
-class LojaConstructor(ListarConstructor):
+class LojaFacade(ListarConstructor):
     def __init__(self,gerenteRepository:GerenteRepositorio, administradorRepository:AdministradorRepositorio) -> None:
         super().__init__()
-        self.listar_loja_view = ListarLojasView()
-        self.listar_loja_controller = ListarLojaController(administradorRepository=administradorRepository, 
+        self.listar_loja_view = LojasListagemView()
+        self.listar_loja_controller = LojasListController(administradorRepository=administradorRepository, 
                                                            gerenteRepository=gerenteRepository)
-        self.editar_loja_controller = EditarLojaController(administradorRepository=administradorRepository, 
+        self.editar_loja_controller = LojaEdicaoController(administradorRepository=administradorRepository, 
                                                            gerenteRepository=gerenteRepository)
-        self.excluir_loja_controller = ExcluirLojaController(administradorRepository=administradorRepository, 
+        self.excluir_loja_controller = ExclusaoLojaController(administradorRepository=administradorRepository, 
                                                            gerenteRepository=gerenteRepository)
-        self.registrar_loja_controller = RegistrarLojaController(administradorRepository=administradorRepository, 
+        self.registrar_loja_controller = LojaAdicaoController(administradorRepository=administradorRepository, 
                                                            gerenteRepository=gerenteRepository)
     
     def registrar_loja(self, id_admnistrador:int, loja:Loja):
@@ -82,6 +82,6 @@ class LojaConstructor(ListarConstructor):
         except Exception as error:
             print(error)
         
-
-loja_constructor = LojaConstructor(administradorRepository=AdministradorRepositorio(), 
+#TODO è necessário mudar esse loja_constuctor para loja_facade?
+loja_constructor = LojaFacade(administradorRepository=AdministradorRepositorio(), 
                                                 gerenteRepository=GerenteRepositorio(),)

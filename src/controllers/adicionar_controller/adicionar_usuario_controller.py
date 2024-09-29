@@ -1,13 +1,13 @@
 """
 Módulo para gerenciamento da adição de usuários.
 
-Este módulo define a classe base `AdicionarUsuarioController`, que fornece uma estrutura
+Este módulo define a classe base `AbstractUsuarioAdicaoController`, que fornece uma estrutura
 para a adição de novos usuários em um sistema. Ele inclui métodos para validar campos
 do usuário, criar entidades de usuários (que devem ser implementadas em subclasses) e
 formatar a resposta após a adição do usuário.
 
 Classes:
-- AdicionarUsuarioController: Classe abstrata para adicionar novos usuários,
+- AbstractUsuarioAdicaoController: Classe abstrata para adicionar novos usuários,
 com métodos para validação e criação de entidades.
 
 Dependências:
@@ -20,7 +20,7 @@ from typing import Dict
 from ...lib.validar_inputs import ValidadorInputs
 
 
-class AdicionarUsuarioController(ABC):
+class AbstractUsuarioAdicaoController(ABC):
     """
     Classe base para adicionar um novo usuário.
 

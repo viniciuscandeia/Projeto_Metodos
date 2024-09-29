@@ -1,6 +1,6 @@
 from .processo import Processo
 
-class ExcluirProcessoLoja(Processo):
+class ProcessoExclusaoLoja(Processo):
     def executar():
         mensagem = """
         Excluir Loja

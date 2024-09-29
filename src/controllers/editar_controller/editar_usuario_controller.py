@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Dict
 from ...lib.validar_inputs import ValidadorInputs
 
-class EditarUsuarioController(ABC):
+class UsuarioEdicaoController(ABC):
     def editar(self, usuario_editado:Dict) -> Dict:
         try:
             self.__validar_campos(usuario_editado)

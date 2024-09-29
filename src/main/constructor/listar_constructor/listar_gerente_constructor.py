@@ -11,9 +11,9 @@ Funções:
 """
 
 from ....controllers.listar_controller.listar_gerente_controller import (
-    ListarGerentesController,
+    GerentesListController,
 )
-from ....views.listar_views.listar_gerente_view import ListarGerentesView
+from ....views.listar_views.listar_gerente_view import GerentesListagemView
 
 
 def listar_gerente_constructor():
@@ -28,8 +28,8 @@ def listar_gerente_constructor():
     - Verifica a existência de gerentes no repositório.
     - Exibe uma mensagem indicando se a lista de gerentes está vazia ou preenchida.
     """
-    listar_gerente_view = ListarGerentesView()
-    listar_gerente_controller = ListarGerentesController()
+    listar_gerente_view = GerentesListagemView()
+    listar_gerente_controller = GerentesListController()
 
     resposta: bool = listar_gerente_controller.listar()
 

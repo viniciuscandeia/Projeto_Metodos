@@ -3,9 +3,9 @@ Este módulo contém a função construtora para adicionar um novo gerente.
 """
 
 from ....controllers.adicionar_controller.adicionar_gerente_controller import (
-    AdicionarGerenteController,
+    GerenteAdicaoController,
 )
-from ....views.adicionar_views.adicionar_gerente_view import AdicionarGerenteView
+from ....views.adicionar_views.adicionar_gerente_view import GerenteAdicaoView
 
 
 def adicionar_gerente_constructor():
@@ -21,8 +21,8 @@ def adicionar_gerente_constructor():
     - Tenta adicionar o novo gerente utilizando o controller.
     - Exibe uma mensagem de sucesso ou falha com base no resultado.
     """
-    adicionar_gerente_view = AdicionarGerenteView()
-    adicionar_gerente_controller = AdicionarGerenteController()
+    adicionar_gerente_view = GerenteAdicaoView()
+    adicionar_gerente_controller = GerenteAdicaoController()
 
     novo_gerente_informacoes = adicionar_gerente_view.adicionar_gerente_view()
     resposta = adicionar_gerente_controller.adicionar(novo_gerente_informacoes)

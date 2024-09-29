@@ -1,7 +1,7 @@
 """
 Módulo para a visualização de adição de administradores no sistema.
 
-Este módulo define a classe `AdicionarAdministradorView`, que lida com a entrada de dados do usuário
+Este módulo define a classe `AdmEdicaoView`, que lida com a entrada de dados do usuário
 para adicionar novos administradores e exibe mensagens de sucesso ou falha.
 """
 
@@ -9,7 +9,7 @@ import os
 from typing import Dict
 
 
-class EditarAdmView:
+class AdmEdicaoView:
     """
     Classe de interface para adicionar administradores no sistema.
 

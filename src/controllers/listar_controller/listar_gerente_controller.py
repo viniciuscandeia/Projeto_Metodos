@@ -1,7 +1,7 @@
 """
 Módulo para controle da listagem de gerentes no sistema.
 
-Este módulo contém o controlador `ListarGerentesController` que é responsável
+Este módulo contém o controlador `GerentesListController` que é responsável
 por verificar a existência de gerentes cadastrados no repositório.
 """
 
@@ -11,7 +11,7 @@ from ...models.entities.entities_db.usuario_db_entity import UsuarioBD
 from ...models.repository.gerente_repository import gerente_repositorio
 
 
-class ListarGerentesController:
+class GerentesListController:
     """
     Controller para listar gerentes.
 

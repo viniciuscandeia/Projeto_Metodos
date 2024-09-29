@@ -1,7 +1,7 @@
 """
 Módulo para controle de adição de novos gerentes ao sistema.
 
-Este módulo contém a classe `AdicionarGerenteController`, responsável por validar
+Este módulo contém a classe `GerenteAdicaoController`, responsável por validar
 os dados de um novo gerente, criar a entidade gerente e registrá-la no repositório.
 """
 
@@ -15,14 +15,14 @@ from ...models.excecoes import (
     UsuarioRegistroError,
 )
 from ...models.repository.gerente_repository import gerente_repositorio
-from .adicionar_usuario_controller import AdicionarUsuarioController
+from .adicionar_usuario_controller import AbstractUsuarioAdicaoController
 
 
-class AdicionarGerenteController(AdicionarUsuarioController):
+class GerenteAdicaoController(AbstractUsuarioAdicaoController):
     """
     Controller para adicionar um novo gerente.
 
-    Esta classe herda de `AdicionarUsuarioController` e implementa o método abstrato
+    Esta classe herda de `AbstractUsuarioAdicaoController` e implementa o método abstrato
     necessário para criar uma entidade de gerente e registrá-la no repositório.
 
     Métodos:

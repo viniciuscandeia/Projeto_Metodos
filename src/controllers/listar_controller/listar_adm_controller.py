@@ -1,7 +1,7 @@
 """
 Módulo para controle da listagem de administradores no sistema.
 
-Este módulo contém o controlador `ListarAdministradoresController` que é responsável
+Este módulo contém o controlador `AdministradoresListController` que é responsável
 por verificar a existência de administradores cadastrados no repositório.
 """
 
@@ -11,7 +11,7 @@ from ...models.entities.entities_db.usuario_db_entity import UsuarioBD
 from ...models.repository.administrador_repository import adm_repositorio
 
 
-class ListarAdministradoresController:
+class AdministradoresListController:
     """
     Controller para listar administradores.
 

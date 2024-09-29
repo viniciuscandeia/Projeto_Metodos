@@ -1,7 +1,7 @@
 """
 Módulo para a visualização da listagem de administradores.
 
-Este módulo define a classe `ListarAdministradoresView`, que contém métodos para
+Este módulo define a classe `AdministradoresListagemView`, que contém métodos para
 exibir a lista de administradores do sistema, seja em um formato preenchido ou
 informando que a lista está vazia.
 """
@@ -13,7 +13,7 @@ from ...models.entities.administrador_entity import Administrador
 from ...models.repository.administrador_repository import adm_repositorio
 
 
-class ListarAdministradoresView:
+class AdministradoresListagemView:
     """
     Classe de interface para listar administradores do sistema.
 

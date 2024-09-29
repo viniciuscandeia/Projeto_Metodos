@@ -27,7 +27,7 @@ def editar_processo():
     comando = editar_view()
     return comando
 
-class EditarProcessoLoja(Processo):
+class ProcessoEdicaoLoja(Processo):
     def executar():
         mensagem = """
         Editar Loja

@@ -4,7 +4,7 @@ from ...models.repository.gerente_repository import GerenteRepositorio
 from ...models.repository.administrador_repository import AdministradorRepositorio
 
 
-class RegistrarLojaController: 
+class LojaAdicaoController: 
     def __init__(self, administradorRepository:AdministradorRepositorio,  
                 gerenteRepository:GerenteRepositorio) -> None:
         self.lojaRepository = LojaRepository(adm_repositorio=administradorRepository, gerente_repositorio=gerenteRepository)

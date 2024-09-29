@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-class ListarView(ABC):
+class AbstractListView(ABC):
     @abstractmethod
     def listar(self)->None:
         pass

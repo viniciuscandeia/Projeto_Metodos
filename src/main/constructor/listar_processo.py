@@ -25,7 +25,7 @@ def listar_processo():
     comando = listar_view()
     return comando 
 
-class ListarProcessoLoja(Processo):
+class LojaListaProcessos(Processo):
     def executar():
         mensagem = """
         Listar Lojas

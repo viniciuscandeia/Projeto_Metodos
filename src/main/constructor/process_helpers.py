@@ -1,5 +1,6 @@
 from ...models.excecoes import CampoInvalido
 
+# TODO Ao relaizar a alteração nesta classe, recomendações de nomes são: LojaDataHelpers e LojaInputHelper (aplicando também para a parte de usuários)
 class ProcessoHelpers:  
 
     def __init__(self) -> None:

@@ -11,9 +11,9 @@ Funções:
 """
 
 from ....controllers.listar_controller.listar_adm_controller import (
-    ListarAdministradoresController,
+    AdministradoresListController,
 )
-from ....views.listar_views.listar_adm_view import ListarAdministradoresView
+from ....views.listar_views.listar_adm_view import AdministradoresListagemView
 
 
 def listar_adm_constructor():
@@ -28,8 +28,8 @@ def listar_adm_constructor():
     - Verifica a existência de administradores no repositório.
     - Exibe uma mensagem indicando se a lista de administradores está vazia ou preenchida.
     """
-    listar_administrador_view = ListarAdministradoresView()
-    listar_administrador_controller = ListarAdministradoresController()
+    listar_administrador_view = AdministradoresListagemView()
+    listar_administrador_controller = AdministradoresListController()
 
     resposta: bool = listar_administrador_controller.listar()
 

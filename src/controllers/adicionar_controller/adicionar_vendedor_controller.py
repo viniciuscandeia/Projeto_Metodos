@@ -1,7 +1,7 @@
 """
 Módulo que controla a adição de novos vendedores ao sistema.
 
-Este módulo define a classe `AdicionarVendedorController`, responsável por validar,
+Este módulo define a classe `VendedorAdicaoController`, responsável por validar,
 criar e registrar novos vendedores no sistema.
 """
 
@@ -15,14 +15,14 @@ from ...models.excecoes import (
     UsuarioRegistroError,
 )
 from ...models.repository.vendedor_repository import vendedor_repositorio
-from .adicionar_usuario_controller import AdicionarUsuarioController
+from .adicionar_usuario_controller import AbstractUsuarioAdicaoController
 
 
-class AdicionarVendedorController(AdicionarUsuarioController):
+class VendedorAdicaoController(AbstractUsuarioAdicaoController):
     """
     Controller para adicionar um novo vendedor.
 
-    Esta classe herda de `AdicionarUsuarioController` e implementa o método abstrato
+    Esta classe herda de `AbstractUsuarioAdicaoController` e implementa o método abstrato
     necessário para criar uma entidade de vendedor e registrá-la no repositório.
 
     Métodos:
