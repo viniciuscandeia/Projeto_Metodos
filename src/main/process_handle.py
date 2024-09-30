@@ -13,7 +13,6 @@ Funções:
 import sys
 
 
-from src.controllers.adicionar_controller.adicionar_adm_controller import AdicionarAdministradorController
 from .constructor.adicionar_constructor.adicionar_adm_constructor import (
     adicionar_adm_constructor,
 )
@@ -40,9 +39,12 @@ from .constructor.listar_constructor.listar_vendedor_constructor import (
 from .constructor.loja_constructor import (
     loja_constructor,
 )
-import os 
+import os
 from .constructor.listar_processo import listar_processo, ListarProcessoLoja
 from .constructor.editar_processo import editar_processo, EditarProcessoLoja
+from ..controllers.relatorios.relatorio import Relatorio
+from ..controllers.relatorios.relatorio_html import RelatorioHTML
+from ..controllers.relatorios.relatorio_pdf import RelatorioPdf
 from ..models.inicializar_db import inicializar_database
 from .constructor.listar_processo import ListarProcessoLoja
 from .constructor.process_helpers import processo_helpers
@@ -51,6 +53,9 @@ from src.models.entities.loja_db_entity import LojaDB
 from src.lib.notificator_api import NotificatorApi
 from src.adapters.database_adapter_notificator_api import database_adapter_notificator_api
 from src.adapters.firebase_adapter_notificator_api import firebase_adapter_notificator_api
+from ..models.repository.administrador_repository import AdministradorRepositorio
+from ..models.repository.gerente_repository import GerenteRepositorio
+from ..models.repository.vendedor_repository import VendedorRepositorio
 
 USAR_MEMORIA = False
 
@@ -74,6 +79,20 @@ def start() -> None:
     inicializar_database(USAR_MEMORIA)
     os.system("cls||clear")
 
+
+    #
+    # #TEMPLATE METHOD
+    # relatorio = RelatorioPdf(adm_repositorio=AdministradorRepositorio(),
+    #                          gerente_repositorio=GerenteRepositorio(),
+    #                          vendedores_repositorio=VendedorRepositorio(),)
+    # relatoriohtml = RelatorioHTML(adm_repositorio=AdministradorRepositorio(),
+    #                          gerente_repositorio=GerenteRepositorio(),
+    #                          vendedores_repositorio=VendedorRepositorio())
+    #
+    # relatorio.gerar_relatorio()
+
+
+    #LOJA FACADE TEST
     # registrarLojaController = RegistrarLojaController()
     # # registrarLojaController.registrarLoja(id_usuario=2, loja=Loja(endereco='Rua mauricio', nome='maganize'))
     # listarLojaController = ListarLojaController()
@@ -84,8 +103,7 @@ def start() -> None:
 
     # print(listarLojaController.list_lojas_adm(id_usuario=2))
 
-    
-
+    #ADAPTER
     # class Controller():
     #     def __init__(self, notificator_api:NotificatorApi) -> None:
     #         self.notificator_api = notificator_api
@@ -97,8 +115,8 @@ def start() -> None:
     #
     #     def basic_receive(self, id_usuario:int, id_loja:int):
     #         return self.notificator_api.receive(id_usuario=id_usuario, id_loja=id_loja)
-    #
-    # # controller_use = Controller(notificator_api=database_adapter_notificator_api)
+
+    # controller_use = Controller(notificator_api=database_adapter_notificator_api)
     # controller_use = Controller(notificator_api=firebase_adapter_notificator_api)
     # controller_use.basic_controller(2, 2)
     # controller_use.basic_controller(1, 2)
@@ -171,7 +189,7 @@ def start() -> None:
 
                    if nova_loja == None:
                        break
-                   
+
                    if nova_loja:
                        loja_constructor.registrar_loja(id_admnistrador=id_administrador, loja=nova_loja)
                        break
@@ -202,14 +220,14 @@ def start() -> None:
 
                             if id_gerente == None:
                                 break
-                            
+
                             id_loja = processo_helpers.getIdLoja()
 
                             if id_loja == None:
                                 break
 
                             loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
-                        
+
                         case _:
                             break
             case "6":
@@ -233,7 +251,7 @@ def start() -> None:
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
-                                    
+
                                 loja_constructor.editar_loja_adm(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
 
                         case "2":
@@ -241,15 +259,15 @@ def start() -> None:
 
                             if id_loja == None:
                                 break
-                            
+
                             id_gerente = processo_helpers.getIdUsuario()
-                            
+
                             if id_gerente == None:
                                 break
 
 
                             loja = loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
-                            
+
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
@@ -268,7 +286,7 @@ def start() -> None:
 
                             if id_adm == None:
                                 break
-                            
+
                             id_loja = processo_helpers.getIdLoja()
 
                             if id_loja == None:
