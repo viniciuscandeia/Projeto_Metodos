@@ -3,3 +3,4 @@ saida.txt
 __pycache__/
 *.py[cod]
 *.pyc
+.idea/workspace.xml

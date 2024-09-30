@@ -5,11 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e5e67228-b889-4d73-a0b8-3bb42597855e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024-09-29_21-33-59.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/2024-09-29_21-34-57.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/relatorios/relatorio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/relatorios/relatorio_html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controllers/relatorios/relatorio_pdf.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Projeto_Metodos.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Projeto_Metodos.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/database.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/process_handle.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/process_handle.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/models/repository/gerente_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/repository/gerente_repository.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/repository/loja_repository.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/repository/loja_repository.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +39,9 @@
   &quot;associatedIndex&quot;: 4
 }</component>
   <component name="ProjectId" id="2mlSNLJdvSRGJbUh1beel3g5cE7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -37,16 +49,16 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.python run.executor": "Run",
-    "Python.run.executor": "Debug",
+    "Python.run.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "feat-(adapter)-notifications",
-    "last_opened_file_path": "C:/Users/franc/dev/Projeto_Metodos/src",
+    "git-widget-placeholder": "feat-(relatorios)-template-method",
+    "last_opened_file_path": "C:/Users/franc/dev/Projeto_Metodos",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.editor",
+    "settings.editor.selected.configurable": "com.intellij.pycharm.community.ide.impl.configuration.PythonContentEntriesConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -93,6 +105,9 @@
       <updated>1727649629908</updated>
       <workItem from="1727649631017" duration="320000" />
       <workItem from="1727649961458" duration="1019000" />
+      <workItem from="1727725333978" duration="356000" />
+      <workItem from="1727725701054" duration="287000" />
+      <workItem from="1727726007762" duration="220000" />
     </task>
     <servers />
   </component>
@@ -100,7 +115,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Projeto_Metodos$run.coverage" NAME="run Coverage Results" MODIFIED="1727650523435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\franc\dev\Projeto_Metodos" />
+    <SUITE FILE_PATH="coverage/Projeto_Metodos$run.coverage" NAME="run Coverage Results" MODIFIED="1727726159170" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\franc\dev\Projeto_Metodos" />
     <SUITE FILE_PATH="coverage/Projeto_Metodos$python_run.coverage" NAME="run Coverage Results" MODIFIED="1727649902523" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="C:\Users\franc\dev\Projeto_Metodos" />
   </component>
 </project>
