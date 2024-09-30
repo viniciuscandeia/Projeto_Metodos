@@ -108,7 +108,7 @@ class GerenteRepositorio:
         """
 
         try:
-            lista_gerentes = UsuarioBD.get(UsuarioBD.user_type == "GERENTE")
+            lista_gerentes = UsuarioBD.select().where(UsuarioBD.user_type == "GERENTE")
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
             print(f"Erro ao acessar o repositório de gerentes: {str(e)}")
