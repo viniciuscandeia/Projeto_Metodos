@@ -164,7 +164,7 @@ class AdministradorRepositorio:
             return None
         except Exception as e:
             print(f"Erro ao acessar o repositório de administradores: {str(e)}")
-            return []
+            return None
         return administrador
 
 

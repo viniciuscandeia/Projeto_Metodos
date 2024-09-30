@@ -6,7 +6,7 @@ senha e tipo de usuário. O banco de dados SQLite é utilizado para
 persistir os dados.
 """
 
-from peewee import CharField, Check, Model, AutoField
+from peewee import CharField, Check, Model, AutoField, IntegerField
 
 from ..database import database_persistente
 
@@ -32,6 +32,7 @@ class UsuarioBD(Model):
     user_type = CharField(
         constraints=[Check("user_type in ('ADMINISTRADOR', 'GERENTE', 'VENDEDOR')")]
     )
+    id_loja = IntegerField(null=True)
 
     class Meta:
         """

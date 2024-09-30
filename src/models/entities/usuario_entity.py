@@ -11,7 +11,7 @@ class Usuario:
     informações comuns como nome, username, email e senha.
     """
 
-    def __init__(self, nome, username, email, senha,):
+    def __init__(self, nome, username, email, senha, user_type, id_loja):
         """
         Inicializa um novo objeto Usuario.
 
@@ -28,6 +28,8 @@ class Usuario:
         self.username = username
         self.email = email
         self.senha = senha
+        self.id_loja = id_loja
+        self.user_type = user_type
 
     def __str__(self) -> str:
         """

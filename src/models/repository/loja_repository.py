@@ -100,10 +100,9 @@ class LojaRepository:
         try:
             usuario = self.gerente_repositorio.get_one_gerente(id_gerente)
             loja = self.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+            #TODO:VERIFICAR SE A LOJA PERTENCE AO USUARIO
 
-            #TODO:VERIFICAR SE A LOJA PERTERNCE AO USUARIO
-
-            if usuario: 
+            if usuario is not None:
                 nova_loja_data = {
                     'nome': nova_loja.get('Nome') if nova_loja.get('Nome') else loja.nome,
                     'endereco': nova_loja.get('Endereco') if nova_loja.get('Endereco') else loja.endereco

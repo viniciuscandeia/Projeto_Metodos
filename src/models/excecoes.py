@@ -120,3 +120,9 @@ class UsuarioNaoVendedor(Exception):
 
 class CampoInvalido(Exception):
     pass
+
+class NotificacaoNaoEnviada(Exception):
+    pass
+
+class NotificacaoNaoRecebida(Exception):
+    pass
