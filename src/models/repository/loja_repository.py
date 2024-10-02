@@ -1,4 +1,4 @@
-from ..entities.loja_db_entity import LojaDB
+from ..entities_db.loja_db_entity import LojaDB
 from ..entities.loja_entity import Loja
 from ..excecoes import LojaIntegridadeError, LojaRegistroError, LojaExclusaoError, UsuarioNaoAdministrador
 from peewee import IntegrityError
@@ -14,7 +14,7 @@ class LojaRepository:
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
-            if usuario: 
+            if usuario:
                 loja = LojaDB.get(LojaDB.id == id_loja)
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
@@ -22,9 +22,9 @@ class LojaRepository:
         except Exception as e:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao retornar loja: { str(e)}") from None
-        
+
         return loja
-    
+
     def get_loja_gerente(self, id_gerente: int, id_loja: int)->Loja:
         try:
             loja = LojaDB.get(LojaDB.id==id_loja)
@@ -36,15 +36,15 @@ class LojaRepository:
         except Exception as e:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao retornar loja: { str(e)}") from None
-        
-        return loja         
+
+        return loja
 
 
     def registrar_loja(self, id_administrador:int, loja: Loja)->LojaDB:
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_administrador)
 
-            if usuario: 
+            if usuario:
                 LojaDB.create(
                     nome = loja['Nome'],
                     endereco=loja['Endereco'],
@@ -56,30 +56,30 @@ class LojaRepository:
         except Exception as e:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao registrar loja: { str(e)}") from None
-        
+
         return loja
-        
-    
+
+
     def listar_lojas_adm(self,id_adm:int):
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
-            if usuario: 
+            if usuario:
                 lista_lojas = LojaDB.select()
                 return lista_lojas
-            
+
             raise UsuarioNaoAdministrador(f'Usuario de id {id_adm} não é um vendedor')
         except Exception as e:
             # Captura qualquer exceção ao acessar o banco de dados
             print(f"Erro ao acessar o repositório de lojas: {str(e)}")
             return []
-        
-    
+
+
     def editar_loja_administrador(self, id_adm:int, id_loja:int, nova_loja:dict):
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
-            if usuario: 
+            if usuario:
                 loja = self.get_loja_adm(id_adm==id_adm, id_loja=id_loja)
                 nova_loja_data = {
                     'nome': nova_loja.get('Nome') if nova_loja.get('Nome') else loja.nome,
@@ -95,7 +95,7 @@ class LojaRepository:
         except Exception as e:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao editar loja: { str(e)}") from None
-        
+
     def editar_loja_gerente(self, id_gerente:int, id_loja:int, nova_loja:dict):
         try:
             usuario = self.gerente_repositorio.get_one_gerente(id_gerente)
@@ -117,7 +117,7 @@ class LojaRepository:
         except Exception as e:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao editar loja: { str(e)}") from None
-        
+
     def excluir_loja(self, id_loja:int, id_adm):
         try:
             loja = self.get_loja_adm(id_loja=id_loja,id_adm=id_adm)

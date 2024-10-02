@@ -12,33 +12,17 @@ Funções:
 
 import sys
 
+from .facade.adicionar_facade.adicionar_adm_facade import adicionar_adm_facade
+from .facade.adicionar_facade.adicionar_gerente_facade import adicionar_gerente_facade
+from .facade.adicionar_facade.adicionar_vendedor_facade import adicionar_vendedor_facade
 
-from .facade.adicionar_facade.adicionar_adm_facade import (
-    adicionar_adm_facade,
-)
-from .facade.adicionar_facade.adicionar_gerente_facade import (
-    adicionar_gerente_facade,
-)
-from .facade.adicionar_facade.adicionar_vendedor_facade import (
-    adicionar_vendedor_facade,
-)
-from .facade.editar_facade.editar_adm_facade import (
-    editar_adm_facade,
-)
+from .facade.editar_facade.editar_adm_facade import editar_adm_facade
 from .facade.adicionar_processo import adicionar_processo
 from .facade.introducao_processo import introducao_processo
-from .facade.listar_facade.listar_adm_facade import (
-    listar_adm_facade,
-)
-from .facade.listar_facade.listar_gerente_facade import (
-    listar_gerente_facade,
-)
-from .facade.listar_facade.listar_vendedor_facade import (
-    listar_vendedor_facade,
-)
-from .facade.loja_facade import (
-    loja_facade,
-)
+from .facade.listar_facade.listar_adm_facade import listar_adm_facade
+from .facade.listar_facade.listar_gerente_facade import listar_gerente_facade
+from .facade.listar_facade.listar_vendedor_facade import listar_vendedor_facade
+from .facade.loja_facade import loja_facade
 import os
 from .facade.listar_processo import listar_processo, ListarProcessoLoja
 from .facade.editar_processo import editar_processo, EditarProcessoLoja
@@ -49,7 +33,7 @@ from ..models.inicializar_db import inicializar_database
 from .facade.listar_processo import ListarProcessoLoja
 from .facade.process_helpers import processo_helpers
 from .facade.excluir_processo import ExcluirProcessoLoja
-from src.models.entities.loja_db_entity import LojaDB
+from src.models.entities_db.loja_db_entity import LojaDB
 from src.lib.notificator_api import NotificatorApi
 from src.adapters.database_adapter_notificator_api import database_adapter_notificator_api
 from src.adapters.firebase_adapter_notificator_api import firebase_adapter_notificator_api
@@ -58,7 +42,6 @@ from ..models.repository.gerente_repository import GerenteRepositorio
 from ..models.repository.vendedor_repository import VendedorRepositorio
 
 USAR_MEMORIA = False
-
 
 
 def start() -> None:
@@ -79,7 +62,6 @@ def start() -> None:
     inicializar_database(USAR_MEMORIA)
     os.system("cls||clear")
 
-
     #
     # #TEMPLATE METHOD
     # relatorio = RelatorioPdf(adm_repositorio=AdministradorRepositorio(),
@@ -91,8 +73,7 @@ def start() -> None:
     #
     # relatorio.gerar_relatorio()
 
-
-    #LOJA FACADE TEST
+    # LOJA FACADE TEST
     # registrarLojaController = RegistrarLojaController()
     # # registrarLojaController.registrarLoja(id_usuario=2, loja=Loja(endereco='Rua mauricio', nome='maganize'))
     # listarLojaController = ListarLojaController()
@@ -103,7 +84,7 @@ def start() -> None:
 
     # print(listarLojaController.list_lojas_adm(id_usuario=2))
 
-    #ADAPTER
+    # ADAPTER
     # class Controller():
     #     def __init__(self, notificator_api:NotificatorApi) -> None:
     #         self.notificator_api = notificator_api
@@ -180,19 +161,20 @@ def start() -> None:
 
             case "4":
                 while True:
-                   id_administrador = processo_helpers.getIdUsuario()
+                    id_administrador = processo_helpers.getIdUsuario()
 
-                   if id_administrador == None:
-                       break
+                    if id_administrador == None:
+                        break
 
-                   nova_loja = processo_helpers.getDataToCreateLoja()
+                    nova_loja = processo_helpers.getDataToCreateLoja()
 
-                   if nova_loja == None:
-                       break
+                    if nova_loja == None:
+                        break
 
-                   if nova_loja:
-                       loja_facade.registrar_loja(id_admnistrador=id_administrador, loja=nova_loja)
-                       break
+                    if nova_loja:
+                        loja_facade.registrar_loja(
+                            id_admnistrador=id_administrador, loja=nova_loja)
+                        break
             case "5":
                 while True:
                     retorno = ListarProcessoLoja.executar()
@@ -200,7 +182,7 @@ def start() -> None:
                         case "1":
                             id_adm = processo_helpers.getIdUsuario()
 
-                            if(id_adm):
+                            if (id_adm):
                                 loja_facade.listar_adm(id_adm=id_adm)
                         case "2":
                             id_adm = processo_helpers.getIdUsuario()
@@ -213,8 +195,8 @@ def start() -> None:
                             if id_loja == None:
                                 break
 
-
-                            loja_facade.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
+                            loja_facade.get_loja_adm(
+                                id_adm=id_adm, id_loja=id_loja)
                         case "3":
                             id_gerente = processo_helpers.getIdUsuario()
 
@@ -226,7 +208,8 @@ def start() -> None:
                             if id_loja == None:
                                 break
 
-                            loja_facade.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+                            loja_facade.get_loja_gerente(
+                                id_gerente=id_gerente, id_loja=id_loja)
 
                         case _:
                             break
@@ -246,13 +229,14 @@ def start() -> None:
                             if id_adm == None:
                                 break
 
-
-                            loja = loja_facade.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
+                            loja = loja_facade.get_loja_adm(
+                                id_adm=id_adm, id_loja=id_loja)
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
-                                loja_facade.editar_loja_adm(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+                                loja_facade.editar_loja_adm(
+                                    id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
 
                         case "2":
                             id_loja = processo_helpers.getIdLoja()
@@ -265,13 +249,14 @@ def start() -> None:
                             if id_gerente == None:
                                 break
 
-
-                            loja = loja_facade.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+                            loja = loja_facade.get_loja_gerente(
+                                id_gerente=id_gerente, id_loja=id_loja)
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
-                                loja_facade.editar_loja_gerente(id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
+                                loja_facade.editar_loja_gerente(
+                                    id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
                         case _:
                             print('Comando Invalido')
                             break
@@ -292,7 +277,8 @@ def start() -> None:
                             if id_loja == None:
                                 break
 
-                            loja_facade.excluir_loja(id_administrador=id_adm, id_loja=id_loja)
+                            loja_facade.excluir_loja(
+                                id_administrador=id_adm, id_loja=id_loja)
                         case "9":
                             break
             case "9":

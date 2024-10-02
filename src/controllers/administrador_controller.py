@@ -7,7 +7,7 @@ from ..models.excecoes import (
 )
 
 from ..models.entities.administrador_entity import Administrador
-from ..models.entities.usuario_db_entity import UsuarioBD
+from ..models.entities_db.usuario_db_entity import UsuarioBD
 from ..lib.validar_inputs import ValidarInputs
 
 class AdministradorController:
