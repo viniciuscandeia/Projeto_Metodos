@@ -20,12 +20,6 @@ class ListarVendedoresController:
     """
 
     def listar(self) -> bool:
-        """
-        Verifica se existem vendedores cadastrados no repositório.
-
-        Retorna:
-            bool: True se houver pelo menos um vendedor, False caso contrário.
-        """
         repositorio: List[Vendedor] = vendedor_repositorio.pegar_repositorio()
         if repositorio:
             return True

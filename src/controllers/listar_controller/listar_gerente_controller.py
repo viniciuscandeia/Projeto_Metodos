@@ -20,12 +20,6 @@ class ListarGerentesController:
     """
 
     def listar(self) -> bool:
-        """
-        Verifica se existem gerentes cadastrados no repositório.
-
-        Retorna:
-            bool: True se houver pelo menos um gerente, False caso contrário.
-        """
         repositorio: List[UsuarioBD] = gerente_repositorio.pegar_repositorio()
         if repositorio:
             return True

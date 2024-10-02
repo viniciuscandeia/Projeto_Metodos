@@ -8,7 +8,6 @@ class EditarUsuarioController(ABC):
         try:
             self.__validar_campos(usuario_editado)
             entidade_editada = self._editar_entidade(usuario_editado)
-
             return {"Sucesso": True, "Mensagem": entidade_editada}
         except ValueError as erro:
             return {"Sucesso": False, "ERROR": str(erro)}

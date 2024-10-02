@@ -39,20 +39,6 @@ class AdicionarUsuarioController(ABC):
     """
 
     def adicionar(self, novo_usuario: Dict) -> Dict:
-        """
-        Adiciona um novo usuário após validar os campos e criar a entidade.
-
-        Este método valida os dados do usuário, cria a entidade correspondente e
-        retorna um dicionário com o resultado da operação, indicando sucesso ou erro.
-
-        Args:
-            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
-
-        Returns:
-            Dict[str, str]: Dicionário contendo o resultado da operação, com campos
-            "Sucesso" e "Mensagem" indicando o status da adição.
-        """
-
         try:
             self.__validar_campos(novo_usuario)
             self._criar_entidade(novo_usuario)
@@ -65,19 +51,6 @@ class AdicionarUsuarioController(ABC):
             return {"Sucesso": False, "ERROR": str(exception)}
 
     def __validar_campos(self, novo_usuario: Dict) -> None:
-        """
-        Valida todos os campos do usuário fornecido.
-
-        Este método verifica se os campos 'Nome', 'Email' e 'Senha' estão corretos e
-        seguem as regras definidas.
-
-        Args:
-            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
-
-        Raises:
-            ValueError: Se qualquer campo não for válido.
-        """
-
         try:
             ValidarInputs.validar_nome(novo_usuario)
             ValidarInputs.validar_email(novo_usuario)
@@ -99,18 +72,6 @@ class AdicionarUsuarioController(ABC):
         """
 
     def __formatar_resposta(self, novo_usuario: Dict) -> Dict:
-        """
-        Formata a resposta de confirmação após a adição do usuário.
-
-        Este método cria um dicionário formatado com o tipo de usuário, nome e email.
-
-        Args:
-            novo_usuario (Dict[str, str]): Dicionário contendo os dados do novo usuário.
-
-        Returns:
-            Dict[str, str]: Dicionário formatado com o tipo de usuário, nome e email.
-        """
-
         return {
             "Tipo": self.__class__.__name__.replace("Adicionar", "").replace(
                 "Controller", ""

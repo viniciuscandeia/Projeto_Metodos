@@ -1,12 +1,12 @@
 """
 Módulo para o processo de listagem de vendedores.
 
-Este módulo contém a função `listar_vendedor_constructor`, que coordena a listagem de vendedores
+Este módulo contém a função `listar_vendedor_facade`, que coordena a listagem de vendedores
 no sistema. A função cria instâncias da view e do controller responsáveis pela
 exibição e verificação da lista de vendedores.
 
 Funções:
-- listar_vendedor_constructor: Cria as instâncias necessárias para listar vendedores e exibe a
+- listar_vendedor_facade: Cria as instâncias necessárias para listar vendedores e exibe a
   mensagem correspondente na interface do usuário.
 """
 
@@ -16,7 +16,7 @@ from ....controllers.listar_controller.listar_vendedor_controller import (
 from ....views.listar_views.listar_vendedor_view import ListarVendedoresView
 
 
-def listar_vendedor_constructor():
+def listar_vendedor_facade():
     """
     Função construtora para listar vendedores.
 

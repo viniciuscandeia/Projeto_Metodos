@@ -20,12 +20,6 @@ class ListarAdministradoresController:
     """
 
     def listar(self) -> bool:
-        """
-        Verifica se existem administradores cadastrados no repositório.
-
-        Retorna:
-            bool: True se houver pelo menos um administrador, False caso contrário.
-        """
         repositorio: List[UsuarioBD] = adm_repositorio.pegar_repositorio()
         if repositorio:
             return True
