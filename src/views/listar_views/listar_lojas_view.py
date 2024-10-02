@@ -1,18 +1,17 @@
 import os
-from .listar_view_interface import ListarView
 from src.models.entities_db.loja_db_entity import LojaDB
-from typing import List
 
-class ListarLojasView(ListarView):
-    def listar(self, list:List[LojaDB]):
-        if len(list) > 0:
-            self._lista_preenchida(list=list)
+
+class ListarLojasView:
+    def listar(self, lista: list[LojaDB]):
+        if len(lista) > 0:
+            self.__lista_preenchida(lista=lista)
             return
 
-        self._lista_vazia()
+        self.__lista_vazia()
         return
 
-    def _lista_vazia(self) -> None:
+    def __lista_vazia(self) -> None:
         os.system('cls||clear')
         mensagem = """
 Lista vazia de Lojas.
@@ -21,12 +20,13 @@ Lista vazia de Lojas.
 
         return
 
-    def _lista_preenchida(self, list: List[LojaDB]) -> None:
+    def __lista_preenchida(self, lista: list[LojaDB]) -> None:
         mensagem = """
 Lista de Lojas
 
 """
-        lista_lojas = '\n'.join([f"\t - [{loja.id}] {loja.nome} | Endereço: {loja.endereco}" for loja in list])
+        lista_lojas = '\n'.join(
+            [f"\t - [{loja.id}] {loja.nome} | Endereço: {loja.endereco}" for loja in list])
 
         print(mensagem + lista_lojas)
 
