@@ -1,18 +1,17 @@
 import os
 from .listar_view_interface import ListarView
-from src.controllers.listar_controller.listar_loja_controller import ListarLojaController
 from src.models.entities.loja_db_entity import LojaDB
 from typing import List
 
-class ListarLojasView(ListarView): 
+class ListarLojasView(ListarView):
     def listar(self, list:List[LojaDB]):
         if len(list) > 0:
             self._lista_preenchida(list=list)
             return
-        
+
         self._lista_vazia()
         return
-    
+
     def _lista_vazia(self) -> None:
         os.system('cls||clear')
         mensagem = """
