@@ -10,7 +10,7 @@ from typing import List
 from peewee import DoesNotExist, IntegrityError
 
 from ..entities.gerente_entity import Gerente
-from ..entities.usuario_db_entity import UsuarioBD
+from ..entities_db.usuario_db_entity import UsuarioBD
 from ..excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
@@ -118,7 +118,7 @@ class GerenteRepositorio:
 
     def get_one_gerente(self, id:int) -> UsuarioBD:
             try:
-                gerente = UsuarioBD.get(UsuarioBD.id == id, 
+                gerente = UsuarioBD.get(UsuarioBD.id == id,
                                                                 UsuarioBD.user_type == "GERENTE",)
             except UsuarioBD.DoesNotExist:
                 print(f"Gerente com ID {id} não encontrado.")
