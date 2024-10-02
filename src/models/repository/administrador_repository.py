@@ -1,10 +1,3 @@
-"""
-Módulo que define o repositório para gerenciar objetos do tipo Administrador.
-
-Este módulo contém a classe `AdministradorRepositorio`, que oferece métodos
-para registrar, remover e acessar instâncias de `Administrador`.
-"""
-
 from typing import List
 
 from peewee import DoesNotExist, IntegrityError
@@ -20,39 +13,10 @@ from ..excecoes import (
 
 
 class AdministradorRepositorio:
-    """
-    Classe que gerencia o repositório de administradores.
-
-    Esta classe oferece métodos para registrar, remover e acessar administradores
-    dentro do sistema.
-
-    Métodos:
-    - registrar_administrador: Registra um novo administrador no repositório.
-    - remover_administrador: Remove um administrador do repositório com base no ID fornecido.
-    - pegar_repositorio: Retorna a lista atual de administradores no repositório.
-    """
-
     def __init__(self) -> None:
-        """
-        Inicializa um novo repositório de administradores.
-        """
+        pass
 
     def registrar_administrador(self, administrador: Administrador) -> None:
-        """
-        Registra um novo administrador no repositório.
-
-        Este método cria uma nova entrada na base de dados para o administrador
-        fornecido. Se ocorrer um erro de integridade ou outro erro inesperado,
-        uma exceção será lançada.
-
-        Args:
-            administrador (Administrador): Objeto do tipo `Administrador` a ser adicionado.
-
-        Levanta:
-            Exception: Se ocorrer um erro de integridade ao registrar o administrador
-            ou um erro inesperado.
-        """
-
         try:
             UsuarioBD.create(
                 nome=administrador.nome,
@@ -69,27 +33,6 @@ class AdministradorRepositorio:
             raise UsuarioRegistroError(f"Erro inesperado ao registrar administrador: { str(e)}") from None
 
     def editar_administrador(self, novo_administrador:dict) -> None:
-        """
-        Edita as informações de um administrador no repositório.
-
-        Este método atualiza as informações de um administrador existente com base
-        nos dados fornecidos no dicionário `novo_administrador`. Somente os campos
-        presentes no dicionário serão atualizados, mantendo os valores anteriores
-        para os campos não informados.
-
-        Args:
-            novo_administrador (dict): Dicionário contendo os novos dados do administrador.
-                                       Deve incluir o campo 'id' para identificar o administrador
-                                       a ser editado, e pode conter os campos 'Nome', 'Email' e
-                                       'Username' para atualização.
-
-        Returns:
-            dict: Dicionário com os dados atualizados do administrador.
-
-        Levanta:
-            UsuarioIntegridadeError: Se ocorrer um erro de integridade ao tentar editar o administrador.
-            UsuarioRegistroError: Se ocorrer qualquer outro erro inesperado ao editar o administrador.
-        """
         try:
             administrador = UsuarioBD.get(UsuarioBD.id == int(novo_administrador.get('id')))
             update_data = {
@@ -110,21 +53,6 @@ class AdministradorRepositorio:
             raise UsuarioRegistroError(f"Erro inesperado ao editar administrador: { str(e)}") from None
 
     def remover_administrador(self, _id: str) -> None:
-        """
-        Remove um administrador do repositório com base no ID fornecido.
-
-        Este método tenta encontrar o administrador pelo ID e, se encontrado,
-        remove-o do repositório. Se o administrador não for encontrado ou ocorrer
-        um erro inesperado, uma exceção será lançada.
-
-        Args:
-            _id (str): ID do administrador a ser removido.
-
-        Levanta:
-            Exception: Se o administrador com o ID fornecido não for encontrado
-            ou se ocorrer um erro inesperado ao remover o administrador.
-        """
-
         try:
             usuario = UsuarioBD.get_by_id(_id)
             usuario.delete_instance()
@@ -134,19 +62,6 @@ class AdministradorRepositorio:
             raise UsuarioErroInesperado(f"Erro inesperado ao remover administrador: {str(e)}") from None
 
     def pegar_repositorio(self) -> List[UsuarioBD]:
-        """
-        Retorna a lista atual de administradores no repositório.
-
-        Este método consulta o banco de dados e retorna uma lista de objetos `Administrador`
-        que representam os administradores armazenados no repositório.
-
-        Returns:
-            List[Administrador]: Lista de objetos `Administrador`.
-
-        Levanta:
-            Exception: Se ocorrer um erro ao acessar o banco de dados.
-        """
-
         try:
             lista_administradores = UsuarioBD.select().where(UsuarioBD.user_type == "ADMINISTRADOR")
         except Exception as e:
@@ -157,7 +72,7 @@ class AdministradorRepositorio:
 
     def get_one_administrador(self, id:int) -> UsuarioBD:
         try:
-            administrador = UsuarioBD.get(UsuarioBD.id == id, 
+            administrador = UsuarioBD.get(UsuarioBD.id == id,
                                                              UsuarioBD.user_type == "ADMINISTRADOR",)
         except UsuarioBD.DoesNotExist:
             print(f"Administrador com ID {id} não encontrado.")

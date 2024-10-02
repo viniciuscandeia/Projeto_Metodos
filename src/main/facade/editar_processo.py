@@ -12,7 +12,7 @@ retorna o comando escolhido.
 """
 
 from ...views.editar_views.editar_view import editar_view
-from ..constructor.processo import Processo
+from ..facade.processo import Processo
 
 def editar_processo():
     """
@@ -32,9 +32,9 @@ class EditarProcessoLoja(Processo):
         mensagem = """
         Editar Loja
 
-        * 1 - Editar Lojas como adm 
-        * 2 - Editar uma loja como gerente 
-        * 3 - Buscar uma loja como gerente 
+        * 1 - Editar Lojas como adm
+        * 2 - Editar uma loja como gerente
+        * 3 - Buscar uma loja como gerente
         * Voltar - 9
             """
 
@@ -42,4 +42,4 @@ class EditarProcessoLoja(Processo):
         comando = input("Comando: ")
 
         return comando
-    
+

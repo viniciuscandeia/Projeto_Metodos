@@ -13,42 +13,42 @@ Funções:
 import sys
 
 
-from .constructor.adicionar_constructor.adicionar_adm_constructor import (
-    adicionar_adm_constructor,
+from .facade.adicionar_facade.adicionar_adm_facade import (
+    adicionar_adm_facade,
 )
-from .constructor.adicionar_constructor.adicionar_gerente_constructor import (
-    adicionar_gerente_constructor,
+from .facade.adicionar_facade.adicionar_gerente_facade import (
+    adicionar_gerente_facade,
 )
-from .constructor.adicionar_constructor.adicionar_vendedor_constructor import (
-    adicionar_vendedor_constructor,
+from .facade.adicionar_facade.adicionar_vendedor_facade import (
+    adicionar_vendedor_facade,
 )
-from .constructor.editar_constructor.editar_adm_constructor import (
-    editar_adm_constructor,
+from .facade.editar_facade.editar_adm_facade import (
+    editar_adm_facade,
 )
-from .constructor.adicionar_processo import adicionar_processo
-from .constructor.introducao_processo import introducao_processo
-from .constructor.listar_constructor.listar_adm_constructor import (
-    listar_adm_constructor,
+from .facade.adicionar_processo import adicionar_processo
+from .facade.introducao_processo import introducao_processo
+from .facade.listar_facade.listar_adm_facade import (
+    listar_adm_facade,
 )
-from .constructor.listar_constructor.listar_gerente_constructor import (
-    listar_gerente_constructor,
+from .facade.listar_facade.listar_gerente_facade import (
+    listar_gerente_facade,
 )
-from .constructor.listar_constructor.listar_vendedor_constructor import (
-    listar_vendedor_constructor,
+from .facade.listar_facade.listar_vendedor_facade import (
+    listar_vendedor_facade,
 )
-from .constructor.loja_constructor import (
-    loja_constructor,
+from .facade.loja_facade import (
+    loja_facade,
 )
 import os
-from .constructor.listar_processo import listar_processo, ListarProcessoLoja
-from .constructor.editar_processo import editar_processo, EditarProcessoLoja
+from .facade.listar_processo import listar_processo, ListarProcessoLoja
+from .facade.editar_processo import editar_processo, EditarProcessoLoja
 from ..controllers.relatorios.relatorio import Relatorio
 from ..controllers.relatorios.relatorio_html import RelatorioHTML
 from ..controllers.relatorios.relatorio_pdf import RelatorioPdf
 from ..models.inicializar_db import inicializar_database
-from .constructor.listar_processo import ListarProcessoLoja
-from .constructor.process_helpers import processo_helpers
-from .constructor.excluir_processo import ExcluirProcessoLoja
+from .facade.listar_processo import ListarProcessoLoja
+from .facade.process_helpers import processo_helpers
+from .facade.excluir_processo import ExcluirProcessoLoja
 from src.models.entities.loja_db_entity import LojaDB
 from src.lib.notificator_api import NotificatorApi
 from src.adapters.database_adapter_notificator_api import database_adapter_notificator_api
@@ -142,11 +142,11 @@ def start() -> None:
                     retorno = adicionar_processo()
                     match retorno:
                         case "1":
-                            adicionar_adm_constructor()
+                            adicionar_adm_facade()
                         case "2":
-                            adicionar_gerente_constructor()
+                            adicionar_gerente_facade()
                         case "3":
-                            adicionar_vendedor_constructor()
+                            adicionar_vendedor_facade()
                         case "9":
                             break
                         case _:
@@ -158,11 +158,11 @@ def start() -> None:
                     retorno = listar_processo()
                     match retorno:
                         case "1":
-                            listar_adm_constructor()
+                            listar_adm_facade()
                         case "2":
-                            listar_gerente_constructor()
+                            listar_gerente_facade()
                         case "3":
-                            listar_vendedor_constructor()
+                            listar_vendedor_facade()
                         case "9":
                             break
                         case _:
@@ -172,7 +172,7 @@ def start() -> None:
                     retorno = editar_processo()
                     match retorno:
                         case "1":
-                            editar_adm_constructor()
+                            editar_adm_facade()
                         case "9":
                             break
                         case _:
@@ -191,7 +191,7 @@ def start() -> None:
                        break
 
                    if nova_loja:
-                       loja_constructor.registrar_loja(id_admnistrador=id_administrador, loja=nova_loja)
+                       loja_facade.registrar_loja(id_admnistrador=id_administrador, loja=nova_loja)
                        break
             case "5":
                 while True:
@@ -201,7 +201,7 @@ def start() -> None:
                             id_adm = processo_helpers.getIdUsuario()
 
                             if(id_adm):
-                                loja_constructor.listar_adm(id_adm=id_adm)
+                                loja_facade.listar_adm(id_adm=id_adm)
                         case "2":
                             id_adm = processo_helpers.getIdUsuario()
 
@@ -214,7 +214,7 @@ def start() -> None:
                                 break
 
 
-                            loja_constructor.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
+                            loja_facade.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
                         case "3":
                             id_gerente = processo_helpers.getIdUsuario()
 
@@ -226,7 +226,7 @@ def start() -> None:
                             if id_loja == None:
                                 break
 
-                            loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+                            loja_facade.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
 
                         case _:
                             break
@@ -247,12 +247,12 @@ def start() -> None:
                                 break
 
 
-                            loja = loja_constructor.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
+                            loja = loja_facade.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
-                                loja_constructor.editar_loja_adm(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+                                loja_facade.editar_loja_adm(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
 
                         case "2":
                             id_loja = processo_helpers.getIdLoja()
@@ -266,12 +266,12 @@ def start() -> None:
                                 break
 
 
-                            loja = loja_constructor.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
+                            loja = loja_facade.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
-                                loja_constructor.editar_loja_gerente(id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
+                                loja_facade.editar_loja_gerente(id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
                         case _:
                             print('Comando Invalido')
                             break
@@ -292,7 +292,7 @@ def start() -> None:
                             if id_loja == None:
                                 break
 
-                            loja_constructor.excluir_loja(id_administrador=id_adm, id_loja=id_loja)
+                            loja_facade.excluir_loja(id_administrador=id_adm, id_loja=id_loja)
                         case "9":
                             break
             case "9":
