@@ -6,7 +6,7 @@ from ..models.excecoes import (
     UsuarioRegistroError,
 )
 from ..models.repository.gerente_repository import gerente_repositorio
-from ..models.entities.usuario_db_entity import UsuarioBD
+from ..models.entities_db.usuario_db_entity import UsuarioBD
 
 from ..lib.validar_inputs import ValidarInputs
 
