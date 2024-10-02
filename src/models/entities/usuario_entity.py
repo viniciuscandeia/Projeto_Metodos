@@ -4,14 +4,8 @@ Este módulo define a classe Usuario, que representa um usuário com nome, usern
 
 
 class Usuario:
-    """
-    Classe que representa um usuário do sistema.
 
-    Esta classe serve como base para diferentes tipos de usuários no sistema, armazenando
-    informações comuns como nome, username, email e senha.
-    """
-
-    def __init__(self, nome, username, email, senha,):
+    def __init__(self, nome, username, email, senha):
         """
         Inicializa um novo objeto Usuario.
 
@@ -30,10 +24,4 @@ class Usuario:
         self.senha = senha
 
     def __str__(self) -> str:
-        """
-        Retorna uma string representando o objeto Usuario.
-
-        :return: String formatada com nome e email.
-        :rtype: str
-        """
         return f"Nome: {self.nome}, Email: {self.email}"

@@ -15,6 +15,8 @@ Funções:
 
 from .database import database_memoria, database_persistente
 from .entities.usuario_db_entity import UsuarioBD
+from .entities.loja_db_entity import LojaDB
+from .entities.notification_db_entity import NotificationDB
 
 
 def inicializar_database(usar_memoria: bool):
@@ -36,10 +38,10 @@ def inicializar_database(usar_memoria: bool):
 
     if usar_memoria:
         database_memoria.connect()
-        database_memoria.create_tables([UsuarioBD])
+        database_memoria.create_tables([UsuarioBD, LojaDB, NotificationDB])
     else:
         database_persistente.connect()
-        database_persistente.create_tables([UsuarioBD])
+        database_persistente.create_tables([UsuarioBD, LojaDB, NotificationDB])
 
     # UsuarioBD._meta.database.connect()
     # UsuarioBD._meta.database.create_tables([UsuarioBD])

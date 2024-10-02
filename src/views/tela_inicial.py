@@ -5,7 +5,6 @@ Contém a função `tela_inicial` que apresenta o menu principal do sistema ao u
 retorna o comando selecionado.
 """
 
-import os
 
 
 def tela_inicial():
@@ -16,14 +15,17 @@ def tela_inicial():
     :rtype: str
     """
 
-    os.system("cls||clear")
 
     mensagem = """
 Sistema Cadastral
 
-* Cadastrar Usuario - 1
-* Listar Usuario - 2
-* Editar Usuario - 3
+1 - Cadastrar Usuario
+2 - Listar Usuario
+3 - Editar Usuario
+4 - Adcionar Loja 
+5 - Listar Lojas
+6 - Editar Lojas
+7 - Excluir Lojas
 * Sair - 9
     """
 
