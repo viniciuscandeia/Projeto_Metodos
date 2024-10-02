@@ -1,6 +1,6 @@
 import os
 from .listar_view_interface import ListarView
-from src.models.entities.loja_db_entity import LojaDB
+from src.models.entities_db.loja_db_entity import LojaDB
 from typing import List
 
 class ListarLojasView(ListarView):

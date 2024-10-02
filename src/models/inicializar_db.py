@@ -14,9 +14,9 @@ Funções:
 """
 
 from .database import database_memoria, database_persistente
-from .entities.usuario_db_entity import UsuarioBD
-from .entities.loja_db_entity import LojaDB
-from .entities.notification_db_entity import NotificationDB
+from .entities_db.usuario_db_entity import UsuarioBD
+from .entities_db.loja_db_entity import LojaDB
+from .entities_db.notification_db_entity import NotificationDB
 
 
 def inicializar_database(usar_memoria: bool):
