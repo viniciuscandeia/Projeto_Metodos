@@ -7,7 +7,6 @@ informando que a lista está vazia.
 """
 
 import os
-from typing import List
 
 from ...models.entities.administrador_entity import Administrador
 from ...models.repository.administrador_repository import adm_repositorio
@@ -31,7 +30,7 @@ class ListarAdministradoresView:
 
         os.system("cls||clear")
 
-        repositorio: List[Administrador] = adm_repositorio.pegar_repositorio()
+        repositorio: list[Administrador] = adm_repositorio.pegar_repositorio()
 
         mensagem = """
 Lista de Administradores

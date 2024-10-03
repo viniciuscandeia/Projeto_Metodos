@@ -1,5 +1,5 @@
 
-def editar_view():
+def editar_usuario_view():
     mensagem = """
 Editar Usuario
 

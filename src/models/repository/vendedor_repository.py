@@ -5,8 +5,6 @@ Este módulo contém a classe `VendedorRepositorio`, que oferece métodos
 para registrar, remover e acessar instâncias de `Vendedor`.
 """
 
-from typing import List
-
 from peewee import DoesNotExist, IntegrityError
 
 from ..entities_db.usuario_db_entity import UsuarioBD
@@ -92,7 +90,7 @@ class VendedorRepositorio:
             raise UsuarioErroInesperado(f"Erro inesperado ao remover vendedor: {str(e)}") from None
 
 
-    def pegar_repositorio(self) -> List[Vendedor]:
+    def pegar_repositorio(self) -> list[Vendedor]:
         """
         Retorna a lista atual de vendedores no repositório.
 

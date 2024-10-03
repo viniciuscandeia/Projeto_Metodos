@@ -12,16 +12,11 @@ Funções:
 
 import sys
 
-from .facade.adicionar_processo import adicionar_processo
 from .facade.introducao_processo import introducao_processo
 from .facade.loja_facade import loja_facade
 import os
-from .facade.listar_processo import listar_processo, ListarProcessoLoja
-from .facade.editar_processo import editar_processo, EditarProcessoLoja
 from ..models.inicializar_db import inicializar_database
-from .facade.listar_processo import ListarProcessoLoja
 from .facade.process_helpers import processo_helpers
-from .facade.excluir_processo import ExcluirProcessoLoja
 
 from .facade.usuarios_facade import UsuariosFacade
 
@@ -55,7 +50,7 @@ def start() -> None:
             case "1":  # Cadastrar
 
                 while True:
-                    retorno = adicionar_processo()
+                    retorno = usuario_facade.escolher_usuario_adicionar_usuario()
                     match retorno:
                         case "1":
                             usuario_facade.adicionar_administrador()
@@ -71,7 +66,7 @@ def start() -> None:
             case "2":
 
                 while True:
-                    retorno = listar_processo()
+                    retorno = usuario_facade.selecionar_usuario_listar_loja()
                     match retorno:
                         case "1":
                             usuario_facade.listar_administrador()
@@ -85,7 +80,7 @@ def start() -> None:
                             print("Comando invalido!")
             case "3":
                 while True:
-                    retorno = editar_processo()
+                    retorno = usuario_facade.selecionar_usuario_edicao_usuario()
                     match retorno:
                         case "1":
                             usuario_facade.editar_administrador()
@@ -112,7 +107,7 @@ def start() -> None:
                         break
             case "5":
                 while True:
-                    retorno = ListarProcessoLoja.executar()
+                    retorno = usuario_facade.selecionar_usuario_edicao_loja
                     match retorno:
                         case "1":
                             id_adm = processo_helpers.getIdUsuario()
@@ -150,7 +145,7 @@ def start() -> None:
                             break
             case "6":
                 while True:
-                    retorno = EditarProcessoLoja.executar()
+                    retorno = usuario_facade.selecionar_usuario_edicao_loja()
 
                     match retorno:
                         case "1":
@@ -198,7 +193,7 @@ def start() -> None:
 
             case "7":
                 while True:
-                    comando = ExcluirProcessoLoja.executar()
+                    comando = usuario_facade.selecionar_usuario_excluir_loja
 
                     match comando:
                         case "1":
