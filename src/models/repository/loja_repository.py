@@ -10,7 +10,7 @@ class LojaRepository:
         self.adm_repositorio = adm_repositorio
         self.gerente_repositorio = gerente_repositorio
 
-    def get_loja_adm(self, id_adm: int, id_loja: int):
+    def get_loja_adm(self, id_adm: int, id_loja: int)->Loja:
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
@@ -40,7 +40,7 @@ class LojaRepository:
         return loja
 
 
-    def registrar_loja(self, id_administrador:int, loja: Loja)->LojaDB:
+    def registrar_loja(self, id_administrador:int, loja: Loja)->None:
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_administrador)
 
@@ -57,10 +57,9 @@ class LojaRepository:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao registrar loja: { str(e)}") from None
 
-        return loja
 
 
-    def listar_lojas_adm(self,id_adm:int):
+    def listar_lojas_adm(self,id_adm:int)->list:
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
@@ -75,7 +74,7 @@ class LojaRepository:
             return []
 
 
-    def editar_loja_administrador(self, id_adm:int, id_loja:int, nova_loja:dict):
+    def editar_loja_administrador(self, id_adm:int, id_loja:int, nova_loja:dict)->LojaDB:
         try:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
@@ -96,7 +95,7 @@ class LojaRepository:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao editar loja: { str(e)}") from None
 
-    def editar_loja_gerente(self, id_gerente:int, id_loja:int, nova_loja:dict):
+    def editar_loja_gerente(self, id_gerente:int, id_loja:int, nova_loja:dict)->LojaDB:
         try:
             usuario = self.gerente_repositorio.get_one_gerente(id_gerente)
             loja = self.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
@@ -118,7 +117,7 @@ class LojaRepository:
             # Captura qualquer outra exceção não esperada
             raise LojaRegistroError(f"Erro inesperado ao editar loja: { str(e)}") from None
 
-    def excluir_loja(self, id_loja:int, id_adm):
+    def excluir_loja(self, id_loja:int, id_adm:int)->Loja:
         try:
             loja = self.get_loja_adm(id_loja=id_loja,id_adm=id_adm)
 
