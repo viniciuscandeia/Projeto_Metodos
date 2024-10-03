@@ -9,7 +9,7 @@ class NotificationRepository():
         self.gerente_repositorio = gerente_repositorio
         self.adm_repositorio = adm_repositorio
 
-    def send(self, notification:Notification):
+    def send(self, notification:Notification)->None:
         try:
             user_adm = self.adm_repositorio.get_one_administrador(id=notification.from_user_id)
 
@@ -22,7 +22,7 @@ class NotificationRepository():
         except Exception as e:
             raise NotificacaoNaoEnviada(f"Noficacao nao enviada: {e}")
 
-    def receive(self, id_loja: int, id_usuario:int):
+    def receive(self, id_loja: int, id_usuario:int)->NotificationDB:
         try:
             user_gerente = self.gerente_repositorio.get_one_gerente(id=id_usuario)
 

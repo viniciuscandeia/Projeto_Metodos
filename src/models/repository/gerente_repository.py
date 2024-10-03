@@ -93,7 +93,7 @@ class GerenteRepositorio:
             raise UsuarioErroInesperado(f"Erro inesperado ao remover gerente: {str(e)}") from None
 
 
-    def pegar_repositorio(self) -> List[Gerente]:
+    def pegar_repositorio(self) -> list[Gerente]:
         """
         Retorna a lista atual de gerentes no repositório.
 
@@ -116,12 +116,12 @@ class GerenteRepositorio:
         return lista_gerentes
 
 
-    def get_one_gerente(self, id:int) -> UsuarioBD:
+    def get_one_gerente(self, _id:int) -> UsuarioBD:
             try:
-                gerente = UsuarioBD.get(UsuarioBD.id == id,
+                gerente = UsuarioBD.get(UsuarioBD.id == _id,
                                                                 UsuarioBD.user_type == "GERENTE",)
             except UsuarioBD.DoesNotExist:
-                print(f"Gerente com ID {id} não encontrado.")
+                print(f"Gerente com ID {_id} não encontrado.")
                 return None
             except Exception as e:
                 print(f"Erro ao acessar o repositório de Gerentes: {str(e)}")
