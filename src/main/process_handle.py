@@ -18,20 +18,10 @@ from .facade.loja_facade import loja_facade
 import os
 from .facade.listar_processo import listar_processo, ListarProcessoLoja
 from .facade.editar_processo import editar_processo, EditarProcessoLoja
-from ..controllers.relatorios.relatorio import Relatorio
-from ..controllers.relatorios.relatorio_html import RelatorioHTML
-from ..controllers.relatorios.relatorio_pdf import RelatorioPdf
 from ..models.inicializar_db import inicializar_database
 from .facade.listar_processo import ListarProcessoLoja
 from .facade.process_helpers import processo_helpers
 from .facade.excluir_processo import ExcluirProcessoLoja
-from src.models.entities_db.loja_db_entity import LojaDB
-from src.lib.notificator_api import NotificatorApi
-from src.adapters.database_adapter_notificator_api import database_adapter_notificator_api
-from src.adapters.firebase_adapter_notificator_api import firebase_adapter_notificator_api
-from ..models.repository.administrador_repository import AdministradorRepositorio
-from ..models.repository.gerente_repository import GerenteRepositorio
-from ..models.repository.vendedor_repository import VendedorRepositorio
 
 from .facade.usuarios_facade import UsuariosFacade
 
