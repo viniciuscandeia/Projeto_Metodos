@@ -10,7 +10,7 @@ import os
 from typing import List
 
 from ...models.entities.vendedor_entity import Vendedor
-from ...models.repository.vendedor_repository import vendedor_repositorio
+from ...singletons.vendedor_repository_singleton import VendedorRepositorySingleton
 
 
 class ListarVendedoresView:
@@ -21,6 +21,9 @@ class ListarVendedoresView:
     seja quando a lista está preenchida ou quando está vazia.
     """
 
+    def __init__(self):
+        self.vendedor_repositorio = VendedorRepositorySingleton().getInstance()
+
     def lista_preenchida(self) -> None:
         """
         Exibe a lista de vendedores quando a mesma não está vazia.
@@ -30,8 +33,8 @@ class ListarVendedoresView:
         """
 
         os.system("cls||clear")
-
-        repositorio: List[Vendedor] = vendedor_repositorio.pegar_repositorio()
+        #TODO: View nao pode acessar repositorio direto
+        repositorio: List[Vendedor] = self.vendedor_repositorio.pegar_repositorio()
 
         mensagem = """
 Lista de Vendedores

@@ -34,7 +34,6 @@ class EditarProcessoLoja(Processo):
 
         * 1 - Editar Lojas como adm
         * 2 - Editar uma loja como gerente
-        * 3 - Buscar uma loja como gerente
         * Voltar - 9
             """
 

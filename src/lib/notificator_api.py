@@ -4,7 +4,9 @@ class NotificatorApi(ABC):
     def __init__(self) -> None:
         pass
 
-    def send(id_loja, id_adm, mensagem):
+    def send(id_loja:int, id_adm:int, mensagem:str):
+        print('Enviando notificação')
         pass
     def receive(id_loja, id_usuario):
-        pass  
+        print('Recebendo notificações')
+        pass

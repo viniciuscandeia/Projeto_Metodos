@@ -26,7 +26,9 @@ Sistema Cadastral
 5 - Listar Lojas
 6 - Editar Lojas
 7 - Excluir Lojas
-* Sair - 9
+8 - Ver Notificacoes
+9 - Gerar Relatorio
+* Sair - 10
     """
 
     print(mensagem)

@@ -10,10 +10,12 @@ import os
 from typing import List
 
 from ...models.entities.gerente_entity import Gerente
-from ...models.repository.gerente_repository import gerente_repositorio
+from ...singletons.gerente_repository_singleton import GerenteRepositorySingleton
 
 
 class ListarGerentesView:
+    def __init__(self):
+        self.gerente_repositorio = GerenteRepositorySingleton().getInstance()
     """
     Classe de interface para listar gerentes do sistema.
 
@@ -31,7 +33,8 @@ class ListarGerentesView:
 
         os.system("cls||clear")
 
-        repositorio: List[Gerente] = gerente_repositorio.pegar_repositorio()
+        #TODO: isso ta errado, uma view n pode acessar direto uma instancia do repositorio
+        repositorio: List[Gerente] = self.gerente_repositorio.pegar_repositorio()
 
         mensagem = """
 Lista de Gerentes

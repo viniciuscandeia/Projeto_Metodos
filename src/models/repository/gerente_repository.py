@@ -128,4 +128,4 @@ class GerenteRepositorio:
                 return None
             return gerente
 
-gerente_repositorio = GerenteRepositorio()
+
