@@ -1,20 +1,19 @@
 from src.lib.notificator_api import NotificatorApi
 from src.models.entities.notification_entity import Notification
-from src.models.repository.notification_repository import NotificationRepository
-from src.models.repository.gerente_repository import GerenteRepositorio
-from src.models.repository.administrador_repository import AdministradorRepositorio
+from src.singletons.notification_repository_singleton import NotificationRepositorySingleton
+
 
 class DatabaseAdapterNotificatorApi(NotificatorApi):
-    def __init__(self, notification_repository:NotificationRepository) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.notification_repository = notification_repository
+        self.notification_repository = NotificationRepositorySingleton().getInstance()
 
     
-    def send(self, id_loja, id_adm, mensagem):
+    def send(self, id_loja:int, id_adm:int, mensagem:str):
         try:
             notificacao = Notification(from_user_id=id_adm, to_loja_id=id_loja, mensagem=mensagem)
             self.notification_repository.send(notification=notificacao)
-            notificacao
+            return notificacao
         except Exception as error:  
             print(f'Erro ao enviar notificacao: {error}')
 
@@ -31,6 +30,3 @@ class DatabaseAdapterNotificatorApi(NotificatorApi):
         except Exception as error:
             print(f'Erro ao receber notificacoes: {error}')
         
-database_adapter_notificator_api = DatabaseAdapterNotificatorApi(notification_repository=
-                                                                 NotificationRepository(gerente_repositorio=GerenteRepositorio(), 
-                                                                                        adm_repositorio=AdministradorRepositorio()))

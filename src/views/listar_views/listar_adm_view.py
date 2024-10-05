@@ -10,10 +10,12 @@ import os
 from typing import List
 
 from ...models.entities.administrador_entity import Administrador
-from ...models.repository.administrador_repository import adm_repositorio
+from ...singletons.adm_repository_singleton import AdmRepositorySingleton
 
 
 class ListarAdministradoresView:
+    def __init__(self):
+        self.adm_repositorio = AdmRepositorySingleton().getInstance()
     """
     Classe de interface para listar administradores do sistema.
 
@@ -31,7 +33,7 @@ class ListarAdministradoresView:
 
         os.system("cls||clear")
 
-        repositorio: List[Administrador] = adm_repositorio.pegar_repositorio()
+        repositorio: List[Administrador] = self.adm_repositorio.pegar_repositorio()
 
         mensagem = """
 Lista de Administradores
