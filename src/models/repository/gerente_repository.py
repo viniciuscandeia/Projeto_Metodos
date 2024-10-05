@@ -5,11 +5,9 @@ Este módulo contém a classe `GerenteRepositorio`, que oferece métodos
 para registrar, remover e acessar instâncias de `Gerente`.
 """
 
-from typing import List
-
 from peewee import DoesNotExist, IntegrityError
 
-from ..entities.gerente_entity import Gerente
+from ..entities.usuario_entity import Usuario
 from ..entities_db.usuario_db_entity import UsuarioBD
 from ..excecoes import (
     UsuarioErroInesperado,
@@ -17,83 +15,40 @@ from ..excecoes import (
     UsuarioNaoEncontrado,
     UsuarioRegistroError,
 )
+from .usuario_repository import UsuarioRepository
 
 
-class GerenteRepositorio:
-    """
-    Classe que gerencia o repositório de gerentes.
-
-    Esta classe oferece métodos para registrar, remover e acessar gerentes
-    dentro do sistema.
-
-    Métodos:
-    - registrar_gerente: Registra um novo gerente no repositório.
-    - remover_gerente: Remove um gerente do repositório com base no ID fornecido.
-    - pegar_repositorio: Retorna a lista atual de gerentes no repositório.
-    """
-
-    def __init__(self) -> None:
-        """
-        Inicializa o repositório de gerentes como uma lista vazia.
-        """
-
-    def registrar_gerente(self, gerente: Gerente) -> None:
-        """
-        Registra um novo gerente no repositório.
-
-        Este método cria uma nova entrada na base de dados para o gerente
-        fornecido. Se ocorrer um erro de integridade ou outro erro inesperado,
-        uma exceção será lançada.
-
-        Args:
-            gerente (Gerente): Objeto do tipo `Gerente` a ser adicionado.
-
-        Levanta:
-            Exception: Se ocorrer um erro de integridade ao registrar o gerente
-            ou um erro inesperado.
-        """
-
+class GerenteRepositorio(UsuarioRepository):
+    def registrar_usuario(self, usuario: Usuario) -> None:
         try:
             UsuarioBD.create(
-                nome=gerente.nome,
-                email=gerente.email,
-                senha=gerente.senha,
+                nome=usuario.nome,
+                email=usuario.email,
+                senha=usuario.senha,
                 user_type="GERENTE",
-                username=gerente.username,
+                username=usuario.username,
             )
         except IntegrityError as e:
             # Mensagem de erro mais específica para integridade dos dados
-            raise UsuarioIntegridadeError(f"Erro ao registrar gerente: { str(e)}") from None
+            raise UsuarioIntegridadeError(
+                f"Erro ao registrar usuario: {str(e)}") from None
         except Exception as e:
             # Captura qualquer outra exceção não esperada
-            raise UsuarioRegistroError(f"Erro inesperado ao registrar gerente: { str(e)}") from None
+            raise UsuarioRegistroError(
+                f"Erro inesperado ao registrar gerente: {str(e)}") from None
 
-
-    def remover_gerente(self, _id: str) -> None:
-        """
-        Remove um gerente do repositório com base no ID fornecido.
-
-        Este método tenta encontrar o gerente pelo ID e, se encontrado,
-        remove-o do repositório. Se o gerente não for encontrado ou ocorrer
-        um erro inesperado, uma exceção será lançada.
-
-        Args:
-            _id (str): ID do gerente a ser removido.
-
-        Levanta:
-            Exception: Se o gerente com o ID fornecido não for encontrado
-            ou se ocorrer um erro inesperado ao remover o gerente.
-        """
+    def remover_usuario(self, _id: str) -> None:
         try:
             usuario = UsuarioBD.get_by_id(_id)
             usuario.delete_instance()
         except DoesNotExist:
-            raise UsuarioNaoEncontrado(f"Gerente com ID {_id} não encontrado.") from None
+            raise UsuarioNaoEncontrado(
+                f"Gerente com ID {_id} não encontrado.") from None
         except Exception as e:
-            raise UsuarioErroInesperado(f"Erro inesperado ao remover gerente: {str(e)}") from None
+            raise UsuarioErroInesperado(
+                f"Erro inesperado ao remover gerente: {str(e)}") from None
 
-
-    def pegar_repositorio(self) -> List[Gerente]:
+    def pegar_repositorio(self) -> list[Usuario]:
         """
         Retorna a lista atual de gerentes no repositório.
 
@@ -115,17 +70,16 @@ class GerenteRepositorio:
             return []
         return lista_gerentes
 
-
-    def get_one_gerente(self, id:int) -> UsuarioBD:
-            try:
-                gerente = UsuarioBD.get(UsuarioBD.id == id,
-                                                                UsuarioBD.user_type == "GERENTE",)
-            except UsuarioBD.DoesNotExist:
-                print(f"Gerente com ID {id} não encontrado.")
-                return None
-            except Exception as e:
-                print(f"Erro ao acessar o repositório de Gerentes: {str(e)}")
-                return None
-            return gerente
+    def get_one_usuario(self, _id: int):
+        try:
+            usuario = UsuarioBD.get(UsuarioBD.id == _id,
+                                    UsuarioBD.user_type == "GERENTE",)
+        except UsuarioBD.DoesNotExist:
+            print(f"Gerente com ID {_id} não encontrado.")
+            return None
+        except Exception as e:
+            print(f"Erro ao acessar o repositório de Gerentes: {str(e)}")
+            return None
+        return usuario
 
 gerente_repositorio = GerenteRepositorio()

@@ -14,7 +14,8 @@ class LojaController:
 
     def registrarLoja(self, id_administrador: int, loja: Loja) -> bool:
         try:
-            return self.lojaRepository.registrar_loja(loja=loja, id_administrador=id_administrador)
+            self.lojaRepository.registrar_loja(loja=loja, id_administrador=id_administrador)
+            return True
         except Exception as e:
             raise Exception(str(e)) from None
 
