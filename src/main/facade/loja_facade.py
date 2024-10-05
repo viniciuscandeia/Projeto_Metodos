@@ -5,14 +5,15 @@ from src.models.entities.loja_entity import Loja
 
 from ...controllers.loja_controller import LojaController
 
+
 class LojaFacade:
-    def __init__(self,gerenteRepository:GerenteRepositorio, administradorRepository:AdministradorRepositorio) -> None:
+    def __init__(self, gerenteRepository: GerenteRepositorio, administradorRepository: AdministradorRepositorio) -> None:
         super().__init__()
         self.listar_loja_view = ListarLojasView()
         self.loja_controller = LojaController(administradorRepository=administradorRepository,
                                               gerenteRepository=gerenteRepository)
 
-    def registrar_loja(self, id_admnistrador:int, loja:Loja):
+    def registrar_loja(self, id_admnistrador: int, loja: Loja):
         try:
             created = self.loja_controller.registrarLoja(
                 id_administrador=id_admnistrador, loja=loja)
@@ -21,7 +22,7 @@ class LojaFacade:
         except Exception as error:
             print(error)
 
-    def listar_adm(self, id_adm:int):
+    def listar_adm(self, id_adm: int):
         try:
             list = self.loja_controller.list_lojas_adm(id_adm=id_adm)
 
@@ -29,17 +30,17 @@ class LojaFacade:
         except Exception as error:
             print(error)
 
-    def get_loja_adm(self, id_adm:int, id_loja:int):
-         try:
+    def get_loja_adm(self, id_adm: int, id_loja: int):
+        try:
             list = self.loja_controller.get_loja_adm(
                 id_adm=id_adm, id_loja=id_loja)
 
             self.listar_loja_view.listar([list])
             return list
-         except Exception as error:
+        except Exception as error:
             print(error)
 
-    def get_loja_gerente(self, id_gerente:int, id_loja:int):
+    def get_loja_gerente(self, id_gerente: int, id_loja: int):
         try:
             list = self.loja_controller.get_loja_gerente(
                 id_gerente=id_gerente, id_loja=id_loja)
@@ -49,7 +50,7 @@ class LojaFacade:
         except Exception as error:
             print(error)
 
-    def editar_loja_adm(self, id_adm:int, id_loja:int, nova_loja:dict):
+    def editar_loja_adm(self, id_adm: int, id_loja: int, nova_loja: dict):
         try:
             item = self.loja_controller.editar_loja_adm(
                 id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
@@ -59,7 +60,7 @@ class LojaFacade:
         except Exception as error:
             print(error)
 
-    def editar_loja_gerente(self, id_gerente:int, id_loja:int, nova_loja:dict):
+    def editar_loja_gerente(self, id_gerente: int, id_loja: int, nova_loja: dict):
         try:
             item = self.loja_controller.editar_loja_gerente(
                 id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
@@ -80,5 +81,6 @@ class LojaFacade:
         except Exception as error:
             print(error)
 
+
 loja_facade = LojaFacade(administradorRepository=AdministradorRepositorio(),
-                                                gerenteRepository=GerenteRepositorio(),)
+                         gerenteRepository=GerenteRepositorio())
