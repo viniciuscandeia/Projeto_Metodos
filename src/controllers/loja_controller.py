@@ -1,16 +1,16 @@
+from ..adapters.database_adapter_notificator_api import DatabaseAdapterNotificatorApi
+from ..lib.notificator_api import NotificatorApi
 from ..models.entities.loja_entity import Loja
-from ..models.repository.loja_repository import LojaRepository
-from ..models.repository.gerente_repository import GerenteRepositorio
-from ..models.repository.administrador_repository import AdministradorRepositorio
 from ..models.entities_db.loja_db_entity import LojaDB
+from ..singletons.loja_repository_singleton import LojaRepositorySingleton
+from ..singletons.notification_repository_singleton import NotificationRepositorySingleton
 
 
 class LojaController:
 
-    def __init__(self, administradorRepository: AdministradorRepositorio,
-                 gerenteRepository: GerenteRepositorio) -> None:
-        self.lojaRepository = LojaRepository(
-            adm_repositorio=administradorRepository, gerente_repositorio=gerenteRepository)
+    def __init__(self) -> None:
+        self.lojaRepository = LojaRepositorySingleton().getInstance()
+        self.notificatorApi = DatabaseAdapterNotificatorApi()
 
     def registrarLoja(self, id_administrador: int, loja: Loja) -> bool:
         try:
@@ -21,7 +21,11 @@ class LojaController:
 
     def editar_loja_adm(self, id_adm: int, id_loja, nova_loja: dict):
         try:
-            return self.lojaRepository.editar_loja_administrador(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+            edited_loja = self.lojaRepository.editar_loja_administrador(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+            if edited_loja:
+                self.notificatorApi.send(id_loja=id_loja, id_adm=id_adm, mensagem=f"Loja com id {id_loja} foi editada pelo adm de id {id_adm}")
+
+                return edited_loja
         except Exception as e:
             raise Exception(str(e)) from None
 

@@ -211,8 +211,29 @@ def start() -> None:
                                 id_administrador=id_adm, id_loja=id_loja)
                         case "9":
                             break
-            case "9":
+            case "8":
+                while True:
+                    comando = ListarNotifications.executar()
+
+                    match comando:
+                        case "1":
+                            id_gerente = processo_helpers.getIdUsuario()
+
+                            if id_gerente == None:
+                                break
+
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja == None:
+                                break
+
+                            gerente_facade.get_notifications(id_loja=id_loja, id_gerente=id_gerente)
+                        case "9":
+                            break
+            case '9':
+                adm_facade.gerar_relatorio()
+
+            case "10":
                 sys.exit()
-                break
             case _:
                 print("Comando invalido!")

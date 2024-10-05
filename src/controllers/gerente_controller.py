@@ -1,3 +1,5 @@
+from ..adapters.database_adapter_notificator_api import DatabaseAdapterNotificatorApi
+from ..lib.notificator_api import NotificatorApi
 from ..models.entities.gerente_entity import Gerente
 from ..models.excecoes import (
     UsuarioErroInesperado,
@@ -5,12 +7,16 @@ from ..models.excecoes import (
     UsuarioNaoEncontrado,
     UsuarioRegistroError,
 )
-from ..models.repository.gerente_repository import gerente_repositorio
 from ..models.entities_db.usuario_db_entity import UsuarioBD
 
 from ..lib.validar_inputs import ValidarInputs
+from ..singletons.gerente_repository_singleton import GerenteRepositorySingleton
+
 
 class GerenteController:
+    def __init__(self):
+        self.gerente_repositorio = GerenteRepositorySingleton().getInstance()
+        self.notification_api = DatabaseAdapterNotificatorApi()
 
     def adicionar(self, novo_usuario: dict) -> dict:
         try:
@@ -79,7 +85,7 @@ class GerenteController:
         objeto_gerente = Gerente(nome, username, email, senha, _id_loja)
 
         try:
-            gerente_repositorio.registrar_gerente(objeto_gerente)
+            self.gerente_repositorio.registrar_gerente(objeto_gerente)
         except (
             UsuarioIntegridadeError,
             UsuarioRegistroError,
@@ -89,7 +95,13 @@ class GerenteController:
             raise Exception(str(erro)) from None
 
     def listar(self) -> bool:
-        repositorio: list[UsuarioBD] = gerente_repositorio.pegar_repositorio()
+        repositorio: list[UsuarioBD] = self.gerente_repositorio.pegar_repositorio()
         if repositorio:
             return True
         return False
+
+    def listar_notificacoes(self, id_loja:int, id_gerente:int):
+        try:
+            self.notification_api.receive(id_loja=id_loja, id_usuario=id_gerente)
+        except Exception as error:
+            print(error)

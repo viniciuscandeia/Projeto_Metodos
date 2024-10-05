@@ -82,5 +82,3 @@ class AdministradorRepositorio:
             return None
         return administrador
 
-
-adm_repositorio = AdministradorRepositorio()

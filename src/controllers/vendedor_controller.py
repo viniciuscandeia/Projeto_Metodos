@@ -6,10 +6,13 @@ from ..models.excecoes import (
     UsuarioNaoEncontrado,
     UsuarioRegistroError,
 )
-from ..models.repository.vendedor_repository import vendedor_repositorio
 from ..lib.validar_inputs import ValidarInputs
+from ..singletons.vendedor_repository_singleton import VendedorRepositorySingleton
+
 
 class VendedorController:
+    def __init__(self):
+        self.vendedor_repositorio = VendedorRepositorySingleton().getInstance()
 
     def adicionar(self, novo_usuario: dict) -> dict:
         try:
@@ -77,7 +80,7 @@ class VendedorController:
         objeto_vendedor = Vendedor(nome, username, email, senha, _id_loja)
 
         try:
-            vendedor_repositorio.registrar_vendedor(objeto_vendedor)
+            self.vendedor_repositorio.registrar_vendedor(objeto_vendedor)
         except (
             UsuarioIntegridadeError,
             UsuarioRegistroError,
@@ -87,7 +90,7 @@ class VendedorController:
             raise Exception(str(erro)) from None
 
     def listar(self) -> bool:
-        repositorio: list[Vendedor] = vendedor_repositorio.pegar_repositorio()
+        repositorio: list[Vendedor] = self.vendedor_repositorio.pegar_repositorio()
         if repositorio:
             return True
         return False
