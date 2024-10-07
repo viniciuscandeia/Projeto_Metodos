@@ -2,16 +2,13 @@ from ..entities_db.loja_db_entity import LojaDB
 from ..entities.loja_entity import Loja
 from ..excecoes import LojaIntegridadeError, LojaRegistroError, LojaExclusaoError, UsuarioNaoAdministrador
 from peewee import IntegrityError
-from ..repository.administrador_repository import AdministradorRepositorio
-from ..repository.gerente_repository import GerenteRepositorio
-from ...singletons.adm_repository_singleton import AdmRepositorySingleton
-from ...singletons.gerente_repository_singleton import GerenteRepositorySingleton
+from  ...factory.persistencia_factory import PersistenciaFactory
 
 
 class LojaRepository:
     def __init__(self) -> None:
-        self.gerente_repositorio = GerenteRepositorySingleton().getInstance()
-        self.adm_repositorio = AdmRepositorySingleton().getInstance()
+        self.gerente_repositorio = PersistenciaFactory.criar_persistencia('gerente_db')
+        self.adm_repositorio = PersistenciaFactory.criar_persistencia('adm_db')
 
     def get_loja_adm(self, id_adm: int, id_loja: int)->Loja:
         try:

@@ -7,12 +7,13 @@ from ..models.excecoes import (
     UsuarioRegistroError,
 )
 from ..lib.validar_inputs import ValidarInputs
-from ..singletons.vendedor_repository_singleton import VendedorRepositorySingleton
+from ..factory.persistencia_factory import PersistenciaFactory
 
 
 class VendedorController:
     def __init__(self):
-        self.vendedor_repositorio = VendedorRepositorySingleton().getInstance()
+        self.vendedor_repositorio = PersistenciaFactory.criar_persistencia(
+            'vendedor_db')
 
     def adicionar(self, novo_usuario: dict) -> dict:
         try:

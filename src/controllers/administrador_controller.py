@@ -10,15 +10,12 @@ from ..models.excecoes import (
 from ..models.entities.administrador_entity import Administrador
 from ..models.entities_db.usuario_db_entity import UsuarioBD
 from ..lib.validar_inputs import ValidarInputs
-from ..singletons.adm_repository_singleton import AdmRepositorySingleton
-from ..singletons.gerente_repository_singleton import GerenteRepositorySingleton
-from ..singletons.vendedor_repository_singleton import VendedorRepositorySingleton
+from ..factory.persistencia_factory import PersistenciaFactory
 
 
 class AdministradorController:
     def __init__(self):
-        self.adm_repositorio = AdmRepositorySingleton().getInstance()
-
+        self.adm_repositorio = PersistenciaFactory.criar_persistencia('adm_db')
 
     def adicionar(self, novo_usuario: dict) -> dict:
         try:
@@ -76,7 +73,6 @@ class AdministradorController:
         except ValueError as erro:
             raise ValueError(str(erro)) from None
 
-
     def _criar_entidade(self, novo_usuario: dict) -> None:
         nome: str = novo_usuario["Nome"]
         email: str = novo_usuario["Email"]
@@ -114,12 +110,10 @@ class AdministradorController:
 
     def enviar_relatorio(self):
         try:
-            relatorio = RelatorioPdf(adm_repositorio=AdmRepositorySingleton().getInstance(),
-                          gerente_repositorio=GerenteRepositorySingleton().getInstance(),
-                          vendedores_repositorio=VendedorRepositorySingleton().getInstance())
+            relatorio = RelatorioPdf(adm_repositorio=PersistenciaFactory.criar_persistencia('adm_db'),
+                                     gerente_repositorio=PersistenciaFactory.criar_persistencia(
+                                         'gerente_db'),
+                                     vendedores_repositorio=PersistenciaFactory.criar_persistencia('vendedor_db'))
             relatorio.gerar_relatorio()
-        except Exception  as e:
+        except Exception as e:
             raise e
-
-
-

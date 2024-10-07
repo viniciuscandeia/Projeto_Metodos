@@ -10,12 +10,13 @@ from ..models.excecoes import (
 from ..models.entities_db.usuario_db_entity import UsuarioBD
 
 from ..lib.validar_inputs import ValidarInputs
-from ..singletons.gerente_repository_singleton import GerenteRepositorySingleton
+from ..factory.persistencia_factory import PersistenciaFactory
 
 
 class GerenteController:
     def __init__(self):
-        self.gerente_repositorio = GerenteRepositorySingleton().getInstance()
+        self.gerente_repositorio = PersistenciaFactory.criar_persistencia(
+            'gerente_db')
         self.notification_api = DatabaseAdapterNotificatorApi()
 
     def adicionar(self, novo_usuario: dict) -> dict:
@@ -100,8 +101,9 @@ class GerenteController:
             return True
         return False
 
-    def listar_notificacoes(self, id_loja:int, id_gerente:int):
+    def listar_notificacoes(self, id_loja: int, id_gerente: int):
         try:
-            self.notification_api.receive(id_loja=id_loja, id_usuario=id_gerente)
+            self.notification_api.receive(
+                id_loja=id_loja, id_usuario=id_gerente)
         except Exception as error:
             print(error)

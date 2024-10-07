@@ -1,6 +1,7 @@
 from typing import Dict
 import re
 
+
 class ValidarInputs:
     @classmethod
     def validar_nome(cls, novo_usuario: Dict) -> None:
@@ -32,7 +33,6 @@ class ValidarInputs:
 
         if (len(novo_usuario['Username']) > 12):
             raise ValueError("O campo 'username' tem mais de 12 caracteres")
-
 
     @classmethod
     def validar_email(cls, novo_usuario: Dict) -> None:

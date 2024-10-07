@@ -14,16 +14,19 @@ class LojaController:
 
     def registrarLoja(self, id_administrador: int, loja: Loja) -> bool:
         try:
-            self.lojaRepository.registrar_loja(loja=loja, id_administrador=id_administrador)
+            self.lojaRepository.registrar_loja(
+                loja=loja, id_administrador=id_administrador)
             return True
         except Exception as e:
             raise Exception(str(e)) from None
 
     def editar_loja_adm(self, id_adm: int, id_loja, nova_loja: dict):
         try:
-            edited_loja = self.lojaRepository.editar_loja_administrador(id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+            edited_loja = self.lojaRepository.editar_loja_administrador(
+                id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
             if edited_loja:
-                self.notificatorApi.send(id_loja=id_loja, id_adm=id_adm, mensagem=f"Loja com id {id_loja} foi editada pelo adm de id {id_adm}")
+                self.notificatorApi.send(id_loja=id_loja, id_adm=id_adm, mensagem=f"Loja com id {
+                                         id_loja} foi editada pelo adm de id {id_adm}")
 
                 return edited_loja
         except Exception as e:
