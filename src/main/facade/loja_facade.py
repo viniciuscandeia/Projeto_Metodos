@@ -7,11 +7,10 @@ from ...controllers.loja_controller import LojaController
 
 
 class LojaFacade:
-    def __init__(self, gerenteRepository: GerenteRepositorio, administradorRepository: AdministradorRepositorio) -> None:
+    def __init__(self) -> None:
         super().__init__()
         self.listar_loja_view = ListarLojasView()
-        self.loja_controller = LojaController(administradorRepository=administradorRepository,
-                                              gerenteRepository=gerenteRepository)
+        self.loja_controller = LojaController()
 
     def registrar_loja(self, id_admnistrador: int, loja: Loja):
         try:
@@ -81,6 +80,4 @@ class LojaFacade:
         except Exception as error:
             print(error)
 
-
-loja_facade = LojaFacade(administradorRepository=AdministradorRepositorio(),
-                         gerenteRepository=GerenteRepositorio())
+loja_facade = LojaFacade()

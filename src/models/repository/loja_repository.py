@@ -2,13 +2,13 @@ from ..entities_db.loja_db_entity import LojaDB
 from ..entities.loja_entity import Loja
 from ..excecoes import LojaIntegridadeError, LojaRegistroError, LojaExclusaoError, UsuarioNaoAdministrador
 from peewee import IntegrityError
-from ..repository.administrador_repository import AdministradorRepositorio
-from ..repository.gerente_repository import GerenteRepositorio
+from  ...factory.persistencia_factory import PersistenciaFactory
+
 
 class LojaRepository:
-    def __init__(self, adm_repositorio:AdministradorRepositorio, gerente_repositorio: GerenteRepositorio) -> None:
-        self.adm_repositorio = adm_repositorio
-        self.gerente_repositorio = gerente_repositorio
+    def __init__(self) -> None:
+        self.gerente_repositorio = PersistenciaFactory.criar_persistencia('gerente_db')
+        self.adm_repositorio = PersistenciaFactory.criar_persistencia('adm_db')
 
     def get_loja_adm(self, id_adm: int, id_loja: int)->Loja:
         try:
@@ -79,7 +79,7 @@ class LojaRepository:
             usuario = self.adm_repositorio.get_one_administrador(id_adm)
 
             if usuario:
-                loja = self.get_loja_adm(id_adm==id_adm, id_loja=id_loja)
+                loja = self.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
                 nova_loja_data = {
                     'nome': nova_loja.get('Nome') if nova_loja.get('Nome') else loja.nome,
                     'endereco': nova_loja.get('Endereco') if nova_loja.get('Endereco') else loja.endereco
@@ -99,8 +99,8 @@ class LojaRepository:
         try:
             usuario = self.gerente_repositorio.get_one_gerente(id_gerente)
             loja = self.get_loja_gerente(id_gerente=id_gerente, id_loja=id_loja)
-            #TODO:VERIFICAR SE A LOJA PERTENCE AO USUARIO
 
+            #TODO:VERIFICAR SE A LOJA PERTENCE AO USUARIO
             if usuario is not None:
                 nova_loja_data = {
                     'nome': nova_loja.get('Nome') if nova_loja.get('Nome') else loja.nome,

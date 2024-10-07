@@ -4,10 +4,12 @@ from ...controllers.gerente_controller import GerenteController
 from ...controllers.administrador_controller import AdministradorController
 
 from ...views.usuario_views import UsuarioViews
-from ...models.repository.administrador_repository import adm_repositorio
-from ...models.repository.gerente_repository import gerente_repositorio
-from ...models.repository.vendedor_repository import vendedor_repositorio
 
+from ...factory.persistencia_factory import PersistenciaFactory
+
+from ...adapters.database_adapter_notificator_api import DatabaseAdapterNotificatorApi
+from ...lib.notificator_api import NotificatorApi
+from ...views.notification_view import NotificationsView
 
 class UsuariosFacade:
 
@@ -40,17 +42,20 @@ class UsuariosFacade:
         resposta = self.gerente_controller.adicionar(novo_gerente_informacoes)
 
         if resposta["Sucesso"]:
-            self.usuario_views.adicionar_usuario_sucesso(resposta["Mensagem"], 'Gerente')
+            self.usuario_views.adicionar_usuario_sucesso(
+                resposta["Mensagem"], 'Gerente')
         else:
             self.usuario_views.adicionar_usuario_falha(resposta["ERROR"])
 
     def adicionar_vendedor(self):
 
         novo_vendedor_informacoes = self.usuario_views.adicionar_vendedor_view()
-        resposta = self.vendedor_controller.adicionar(novo_vendedor_informacoes)
+        resposta = self.vendedor_controller.adicionar(
+            novo_vendedor_informacoes)
 
         if resposta["Sucesso"]:
-            self.usuario_views.adicionar_usuario_sucesso(resposta["Mensagem"], 'Vendedor')
+            self.usuario_views.adicionar_usuario_sucesso(
+                resposta["Mensagem"], 'Vendedor')
         else:
             self.usuario_views.adicionar_usuario_falha(resposta["ERROR"])
 
@@ -69,7 +74,8 @@ class UsuariosFacade:
         resposta: bool = self.adm_controller.listar()
 
         if resposta:
-            self.usuario_views.lista_preenchida(adm_repositorio, 'administrador')
+            self.usuario_views.lista_preenchida(
+                PersistenciaFactory.criar_persistencia('adm_db'), 'administrador')
         else:
             self.usuario_views.lista_vazia('administrador')
 
@@ -78,7 +84,8 @@ class UsuariosFacade:
         resposta: bool = self.gerente_controller.listar()
 
         if resposta:
-            self.usuario_views.lista_preenchida(gerente_repositorio, 'gerente')
+            self.usuario_views.lista_preenchida(
+                PersistenciaFactory.criar_persistencia('gerente_db'), 'gerente')
         else:
             self.usuario_views.lista_vazia('gerente')
 
@@ -87,7 +94,8 @@ class UsuariosFacade:
         resposta: bool = self.vendedor_controller.listar()
 
         if resposta:
-            self.usuario_views.lista_preenchida(vendedor_repositorio, 'vendedor')
+            self.usuario_views.lista_preenchida(
+                PersistenciaFactory.criar_persistencia('vendedor_db'), 'vendedor')
         else:
             self.usuario_views.lista_vazia('vendedor')
 
@@ -106,3 +114,32 @@ class UsuariosFacade:
     def selecionar_usuario_excluir_loja(self):
         comando = self.selecionar_usuario_excluir_loja()
         return comando
+
+    def adm_gerar_relatorio(self):
+        try:
+            self.adm_controller.enviar_relatorio()
+        except Exception as e:
+            print(e)
+
+    def gerente_gerar_relatorio(self):
+        try:
+            self.gerente_controller.enviar_relatorio()
+        except Exception as e:
+            print(e)
+
+    def vendedor_gerar_relatorio(self):
+        try:
+            self.vendedor_controller.enviar_relatorio()
+        except Exception as e:
+            print(e)
+
+    def gerente_receber_notificacao(self, id_loja: int, id_gerente: int):
+        self.notificator_api = DatabaseAdapterNotificatorApi()
+        try:
+            notifications = self.notificator_api.receive(
+                id_loja=id_loja, id_usuario=id_gerente)
+
+            if notifications and len(notifications) > 0:
+                NotificationsView().listar(notifications)
+        except Exception as e:
+            print(e)

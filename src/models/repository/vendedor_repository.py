@@ -114,4 +114,3 @@ class VendedorRepositorio:
         return lista_vendedores
 
 
-vendedor_repositorio = VendedorRepositorio()

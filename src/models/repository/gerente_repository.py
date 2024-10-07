@@ -82,4 +82,4 @@ class GerenteRepositorio(UsuarioRepository):
             return None
         return usuario
 
-gerente_repositorio = GerenteRepositorio()
+

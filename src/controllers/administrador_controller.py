@@ -1,4 +1,5 @@
-from ..models.repository.administrador_repository import adm_repositorio
+from src.controllers.relatorios.relatorio_pdf import Relatorio, RelatorioPdf
+from .relatorios.relatorio_html import RelatorioHTML
 from ..models.excecoes import (
     UsuarioErroInesperado,
     UsuarioIntegridadeError,
@@ -9,8 +10,12 @@ from ..models.excecoes import (
 from ..models.entities.administrador_entity import Administrador
 from ..models.entities_db.usuario_db_entity import UsuarioBD
 from ..lib.validar_inputs import ValidarInputs
+from ..factory.persistencia_factory import PersistenciaFactory
+
 
 class AdministradorController:
+    def __init__(self):
+        self.adm_repositorio = PersistenciaFactory.criar_persistencia('adm_db')
 
     def adicionar(self, novo_usuario: dict) -> dict:
         try:
@@ -68,7 +73,6 @@ class AdministradorController:
         except ValueError as erro:
             raise ValueError(str(erro)) from None
 
-
     def _criar_entidade(self, novo_usuario: dict) -> None:
         nome: str = novo_usuario["Nome"]
         email: str = novo_usuario["Email"]
@@ -78,7 +82,7 @@ class AdministradorController:
         objeto_adm = Administrador(nome, username, email, senha)
 
         try:
-            adm_repositorio.registrar_administrador(objeto_adm)
+            self.adm_repositorio.registrar_administrador(objeto_adm)
         except (
             UsuarioIntegridadeError,
             UsuarioRegistroError,
@@ -89,7 +93,7 @@ class AdministradorController:
 
     def _editar_entidade(self, administrador_editado: dict) -> None:
         try:
-            adm_repositorio.editar_administrador(administrador_editado)
+            self.adm_repositorio.editar_administrador(administrador_editado)
         except (
             UsuarioIntegridadeError,
             UsuarioRegistroError,
@@ -99,8 +103,17 @@ class AdministradorController:
             raise Exception(str(erro)) from None
 
     def listar(self) -> bool:
-        repositorio: list[UsuarioBD] = adm_repositorio.pegar_repositorio()
+        repositorio: list[UsuarioBD] = self.adm_repositorio.pegar_repositorio()
         if repositorio:
             return True
         return False
 
+    def enviar_relatorio(self):
+        try:
+            relatorio = RelatorioPdf(adm_repositorio=PersistenciaFactory.criar_persistencia('adm_db'),
+                                     gerente_repositorio=PersistenciaFactory.criar_persistencia(
+                                         'gerente_db'),
+                                     vendedores_repositorio=PersistenciaFactory.criar_persistencia('vendedor_db'))
+            relatorio.gerar_relatorio()
+        except Exception as e:
+            raise e

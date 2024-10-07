@@ -10,15 +10,15 @@ Funções:
 - start: Inicializa o sistema e gerencia o fluxo principal do programa.
 """
 
+import os
 import sys
 
+from ..models.inicializar_db import inicializar_database
 from .facade.introducao_processo import introducao_processo
 from .facade.loja_facade import loja_facade
-import os
-from ..models.inicializar_db import inicializar_database
 from .facade.process_helpers import processo_helpers
-
 from .facade.usuarios_facade import UsuariosFacade
+from .facade.notifications_facade import NotificationsFacade
 
 USAR_MEMORIA = False
 
@@ -42,6 +42,7 @@ def start() -> None:
     os.system("cls||clear")
 
     usuario_facade = UsuariosFacade()
+    notifications_facade = NotificationsFacade()
 
     while True:
         comando = introducao_processo()
@@ -103,16 +104,17 @@ def start() -> None:
 
                     if nova_loja:
                         loja_facade.registrar_loja(
-                            id_admnistrador=id_administrador, loja=nova_loja)
+                            id_admnistrador=id_administrador, loja=nova_loja
+                        )
                         break
             case "5":
                 while True:
-                    retorno = usuario_facade.selecionar_usuario_edicao_loja
+                    retorno = usuario_facade.selecionar_usuario_edicao_loja()
                     match retorno:
                         case "1":
                             id_adm = processo_helpers.getIdUsuario()
 
-                            if (id_adm):
+                            if id_adm:
                                 loja_facade.listar_adm(id_adm=id_adm)
                         case "2":
                             id_adm = processo_helpers.getIdUsuario()
@@ -125,8 +127,7 @@ def start() -> None:
                             if id_loja is None:
                                 break
 
-                            loja_facade.get_loja_adm(
-                                id_adm=id_adm, id_loja=id_loja)
+                            loja_facade.get_loja_adm(id_adm=id_adm, id_loja=id_loja)
                         case "3":
                             id_gerente = processo_helpers.getIdUsuario()
 
@@ -139,7 +140,8 @@ def start() -> None:
                                 break
 
                             loja_facade.get_loja_gerente(
-                                id_gerente=id_gerente, id_loja=id_loja)
+                                id_gerente=id_gerente, id_loja=id_loja
+                            )
 
                         case _:
                             break
@@ -160,13 +162,15 @@ def start() -> None:
                                 break
 
                             loja = loja_facade.get_loja_adm(
-                                id_adm=id_adm, id_loja=id_loja)
+                                id_adm=id_adm, id_loja=id_loja
+                            )
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
                                 loja_facade.editar_loja_adm(
-                                    id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja)
+                                    id_adm=id_adm, id_loja=id_loja, nova_loja=nova_loja
+                                )
 
                         case "2":
                             id_loja = processo_helpers.getIdLoja()
@@ -180,20 +184,24 @@ def start() -> None:
                                 break
 
                             loja = loja_facade.get_loja_gerente(
-                                id_gerente=id_gerente, id_loja=id_loja)
+                                id_gerente=id_gerente, id_loja=id_loja
+                            )
 
                             if loja:
                                 nova_loja = processo_helpers.getDataToEditLoja()
 
                                 loja_facade.editar_loja_gerente(
-                                    id_gerente=id_gerente, id_loja=id_loja, nova_loja=nova_loja)
+                                    id_gerente=id_gerente,
+                                    id_loja=id_loja,
+                                    nova_loja=nova_loja,
+                                )
                         case _:
-                            print('Comando Invalido')
+                            print("Comando Invalido")
                             break
 
             case "7":
                 while True:
-                    comando = usuario_facade.selecionar_usuario_excluir_loja
+                    comando = usuario_facade.selecionar_usuario_excluir_loja()
 
                     match comando:
                         case "1":
@@ -208,11 +216,33 @@ def start() -> None:
                                 break
 
                             loja_facade.excluir_loja(
-                                id_administrador=id_adm, id_loja=id_loja)
+                                id_administrador=id_adm, id_loja=id_loja
+                            )
+                        case "9":
+                            break
+            case "8":
+                while True:
+                    comando = notifications_facade.procurar_notificacoes_loja()
+
+                    match comando:
+                        case "1":
+                            id_gerente = processo_helpers.getIdUsuario()
+
+                            if id_gerente is None:
+                                break
+
+                            id_loja = processo_helpers.getIdLoja()
+
+                            if id_loja is None:
+                                break
+
+                            usuario_facade.gerente_receber_notificacao(id_loja, id_gerente)
+
                         case "9":
                             break
             case "9":
+                usuario_facade.adm_gerar_relatorio()
+            case "10":
                 sys.exit()
-                break
             case _:
                 print("Comando invalido!")
